@@ -19,6 +19,8 @@ spring:
       location: $(java.io.tmpdir)
   thymeleaf:
     enabled: false
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
 
 mybatis:
   type-aliases-package: com.petmily.mapperInterface
