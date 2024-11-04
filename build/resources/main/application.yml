@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: petmilyFinalFinalRealFinal
+  datasource:
+    url: jdbc:mysql://localhost:3306/petmily?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    username: team119
+    password: 12345!
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2MB
+      max-file-size: 200MB
+      max-request-size: 215MB
+      location: $(java.io.tmpdir)
+  thymeleaf:
+    enabled: false
+
+mybatis:
+  type-aliases-package: com.petmily.mapperInterface
+  mapper-locations: classpath:/mapper/*.xml
