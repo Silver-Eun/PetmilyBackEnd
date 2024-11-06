@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.petmily.PetmilyFinalFinalRealFinalApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-11-06T14:19:20" hostname="DESKTOP-DA30OQ0" time="0.565">
+<testsuite name="com.petmily.PetmilyFinalFinalRealFinalApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-11-06T15:14:27" hostname="DESKTOP-DA30OQ0" time="0.491">
   <properties/>
-  <testcase name="contextLoads()" classname="com.petmily.PetmilyFinalFinalRealFinalApplicationTests" time="0.565"/>
-  <system-out><![CDATA[23:19:16.557 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.petmily.PetmilyFinalFinalRealFinalApplicationTests]: PetmilyFinalFinalRealFinalApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-23:19:16.721 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.petmily.PetmilyFinalFinalRealFinalApplication for test class com.petmily.PetmilyFinalFinalRealFinalApplicationTests
+  <testcase name="contextLoads()" classname="com.petmily.PetmilyFinalFinalRealFinalApplicationTests" time="0.491"/>
+  <system-out><![CDATA[00:14:23.691 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.petmily.PetmilyFinalFinalRealFinalApplicationTests]: PetmilyFinalFinalRealFinalApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+00:14:23.787 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.petmily.PetmilyFinalFinalRealFinalApplication for test class com.petmily.PetmilyFinalFinalRealFinalApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -14,21 +14,25 @@
 
  :: Spring Boot ::                (v3.3.5)
 
-2024-11-06T23:19:17.281+09:00  INFO 25396 --- [petmilyFinalFinalRealFinal] [    Test worker] tmilyFinalFinalRealFinalApplicationTests : Starting PetmilyFinalFinalRealFinalApplicationTests using Java 17.0.10 with PID 25396 (started by h22sa in D:\petmilyreal)
-2024-11-06T23:19:17.281+09:00  INFO 25396 --- [petmilyFinalFinalRealFinal] [    Test worker] tmilyFinalFinalRealFinalApplicationTests : No active profile set, falling back to 1 default profile: "default"
-2024-11-06T23:19:17.931+09:00  INFO 25396 --- [petmilyFinalFinalRealFinal] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-11-06T23:19:17.951+09:00  INFO 25396 --- [petmilyFinalFinalRealFinal] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 0 JPA repository interfaces.
-2024-11-06T23:19:18.321+09:00  INFO 25396 --- [petmilyFinalFinalRealFinal] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2024-11-06T23:19:18.471+09:00  INFO 25396 --- [petmilyFinalFinalRealFinal] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3cc9632d
-2024-11-06T23:19:18.471+09:00  INFO 25396 --- [petmilyFinalFinalRealFinal] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2024-11-06T23:19:18.511+09:00  INFO 25396 --- [petmilyFinalFinalRealFinal] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-11-06T23:19:18.571+09:00  INFO 25396 --- [petmilyFinalFinalRealFinal] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2024-11-06T23:19:18.621+09:00  INFO 25396 --- [petmilyFinalFinalRealFinal] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2024-11-06T23:19:18.894+09:00  INFO 25396 --- [petmilyFinalFinalRealFinal] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-11-06T23:19:19.281+09:00  INFO 25396 --- [petmilyFinalFinalRealFinal] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2024-11-06T23:19:19.281+09:00  INFO 25396 --- [petmilyFinalFinalRealFinal] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-11-06T23:19:19.821+09:00  WARN 25396 --- [petmilyFinalFinalRealFinal] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2024-11-06T23:19:20.251+09:00  INFO 25396 --- [petmilyFinalFinalRealFinal] [    Test worker] tmilyFinalFinalRealFinalApplicationTests : Started PetmilyFinalFinalRealFinalApplicationTests in 3.325 seconds (process running for 5.465)
+2024-11-07T00:14:24.260+09:00  INFO 15172 --- [petmilyFinalFinalRealFinal] [    Test worker] tmilyFinalFinalRealFinalApplicationTests : Starting PetmilyFinalFinalRealFinalApplicationTests using Java 17.0.10 with PID 15172 (started by h22sa in D:\petmilyreal)
+2024-11-07T00:14:24.262+09:00  INFO 15172 --- [petmilyFinalFinalRealFinal] [    Test worker] tmilyFinalFinalRealFinalApplicationTests : No active profile set, falling back to 1 default profile: "default"
+2024-11-07T00:14:25.009+09:00  INFO 15172 --- [petmilyFinalFinalRealFinal] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-07T00:14:25.036+09:00  INFO 15172 --- [petmilyFinalFinalRealFinal] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15 ms. Found 0 JPA repository interfaces.
+2024-11-07T00:14:25.477+09:00  INFO 15172 --- [petmilyFinalFinalRealFinal] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-11-07T00:14:25.644+09:00  INFO 15172 --- [petmilyFinalFinalRealFinal] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@798cf6d2
+2024-11-07T00:14:25.647+09:00  INFO 15172 --- [petmilyFinalFinalRealFinal] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-11-07T00:14:25.695+09:00  INFO 15172 --- [petmilyFinalFinalRealFinal] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-07T00:14:25.752+09:00  INFO 15172 --- [petmilyFinalFinalRealFinal] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-11-07T00:14:25.795+09:00  INFO 15172 --- [petmilyFinalFinalRealFinal] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-11-07T00:14:26.112+09:00  INFO 15172 --- [petmilyFinalFinalRealFinal] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-07T00:14:26.182+09:00  WARN 15172 --- [petmilyFinalFinalRealFinal] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-11-07T00:14:26.183+09:00  WARN 15172 --- [petmilyFinalFinalRealFinal] [    Test worker] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2024-11-07T00:14:26.440+09:00  INFO 15172 --- [petmilyFinalFinalRealFinal] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-07T00:14:26.445+09:00  INFO 15172 --- [petmilyFinalFinalRealFinal] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-07T00:14:26.933+09:00  WARN 15172 --- [petmilyFinalFinalRealFinal] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-07T00:14:26.955+09:00  INFO 15172 --- [petmilyFinalFinalRealFinal] [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2024-11-07T00:14:27.224+09:00  WARN 15172 --- [petmilyFinalFinalRealFinal] [    Test worker] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2024-11-07T00:14:27.348+09:00  INFO 15172 --- [petmilyFinalFinalRealFinal] [    Test worker] tmilyFinalFinalRealFinalApplicationTests : Started PetmilyFinalFinalRealFinalApplicationTests in 3.383 seconds (process running for 4.667)
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
