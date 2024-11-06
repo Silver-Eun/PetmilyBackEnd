@@ -20,15 +20,10 @@ spring:
       max-file-size: 200MB
       max-request-size: 215MB
       location: $(java.io.tmpdir)
-  thymeleaf:
-    enabled: false
+#  thymeleaf:
+#    enabled: false
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
-
-# JSP TLD 경고 확인
-logging:
-  level:
-    org.apache.jasper.servlet.TldScanner: DEBUG
 
 # mybatis 설정
 mybatis:

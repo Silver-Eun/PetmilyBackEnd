@@ -7,18 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
 	@GetMapping(value = "/home")
-	public void home() {
-	}
-	
-	@GetMapping("/carttestform")
-	public String CartTestForm() {
-
-		return "/cartTestForm";
+	public String homePage() {
+		return "index";
 	}
 	
 	@GetMapping("/userform")
 	public String userform() {
 
 		return "/user/Userform" ;
-	}//userform
+	}
 }
