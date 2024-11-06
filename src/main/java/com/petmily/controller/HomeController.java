@@ -8,12 +8,11 @@ public class HomeController {
 
 	@GetMapping(value = "/home")
 	public String homePage() {
-		return "index";
+		return "home";
 	}
 	
 	@GetMapping("/userform")
 	public String userform() {
-
 		return "/user/Userform" ;
 	}
 }
