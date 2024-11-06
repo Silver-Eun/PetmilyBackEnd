@@ -1,15 +1,18 @@
 spring:
   application:
     name: petmilyFinalFinalRealFinal
+  # DB 설정
   datasource:
-    url: jdbc:mysql://localhost:3306/petmily?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
-    username: team119
-    password: 12345!
+    url: jdbc:mysql://${DB_URL}:${DB_PORT}/${DB_NAME}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
+  # jsp 경로 설정
   mvc:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
+  # 파일 업로드 설정
   servlet:
     multipart:
       enabled: true
@@ -19,7 +22,15 @@ spring:
       location: $(java.io.tmpdir)
   thymeleaf:
     enabled: false
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
 
+# JSP TLD 경고 확인
+logging:
+  level:
+    org.apache.jasper.servlet.TldScanner: DEBUG
+
+# mybatis 설정
 mybatis:
   type-aliases-package: com.petmily.mapperInterface
   mapper-locations: classpath:/mapper/*.xml
