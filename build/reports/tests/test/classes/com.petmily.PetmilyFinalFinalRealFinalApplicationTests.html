@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.696s</div>
+<div class="counter">0.580s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,7 +79,7 @@
 </thead>
 <tr>
 <td class="success">contextLoads()</td>
-<td class="success">0.696s</td>
+<td class="success">0.580s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -87,8 +87,8 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>20:00:28.918 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.petmily.PetmilyFinalFinalRealFinalApplicationTests]: PetmilyFinalFinalRealFinalApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-20:00:29.298 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.petmily.PetmilyFinalFinalRealFinalApplication for test class com.petmily.PetmilyFinalFinalRealFinalApplicationTests
+<pre>21:10:05.660 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.petmily.PetmilyFinalFinalRealFinalApplicationTests]: PetmilyFinalFinalRealFinalApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:10:05.748 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.petmily.PetmilyFinalFinalRealFinalApplication for test class com.petmily.PetmilyFinalFinalRealFinalApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -99,25 +99,25 @@
 
  :: Spring Boot ::                (v3.3.5)
 
-2024-11-07T20:00:30.098+09:00  INFO 15992 --- [petmilyFinalFinalRealFinal] [    Test worker] tmilyFinalFinalRealFinalApplicationTests : Starting PetmilyFinalFinalRealFinalApplicationTests using Java 17.0.10 with PID 15992 (started by h22sa in D:\petmilyreal)
-2024-11-07T20:00:30.098+09:00  INFO 15992 --- [petmilyFinalFinalRealFinal] [    Test worker] tmilyFinalFinalRealFinalApplicationTests : No active profile set, falling back to 1 default profile: &quot;default&quot;
-2024-11-07T20:00:30.978+09:00  INFO 15992 --- [petmilyFinalFinalRealFinal] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-11-07T20:00:30.988+09:00  INFO 15992 --- [petmilyFinalFinalRealFinal] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 10 ms. Found 0 JPA repository interfaces.
-2024-11-07T20:00:31.411+09:00  INFO 15992 --- [petmilyFinalFinalRealFinal] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2024-11-07T20:00:31.948+09:00  INFO 15992 --- [petmilyFinalFinalRealFinal] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@582a3b19
-2024-11-07T20:00:31.951+09:00  INFO 15992 --- [petmilyFinalFinalRealFinal] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2024-11-07T20:00:31.998+09:00  INFO 15992 --- [petmilyFinalFinalRealFinal] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-11-07T20:00:32.070+09:00  INFO 15992 --- [petmilyFinalFinalRealFinal] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2024-11-07T20:00:32.110+09:00  INFO 15992 --- [petmilyFinalFinalRealFinal] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2024-11-07T20:00:32.470+09:00  INFO 15992 --- [petmilyFinalFinalRealFinal] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-11-07T20:00:32.601+09:00  WARN 15992 --- [petmilyFinalFinalRealFinal] [    Test worker] o.h.e.j.e.i.JdbcEnvironmentInitiator     : HHH000339: Could not obtain connection metadata: java.sql.SQLSyntaxErrorException: Unknown column 'RESERVED' in 'where clause'
-2024-11-07T20:00:32.618+09:00  WARN 15992 --- [petmilyFinalFinalRealFinal] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2024-11-07T20:00:32.618+09:00  WARN 15992 --- [petmilyFinalFinalRealFinal] [    Test worker] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2024-11-07T20:00:32.928+09:00  INFO 15992 --- [petmilyFinalFinalRealFinal] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2024-11-07T20:00:32.928+09:00  INFO 15992 --- [petmilyFinalFinalRealFinal] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-11-07T20:00:33.429+09:00  WARN 15992 --- [petmilyFinalFinalRealFinal] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2024-11-07T20:00:33.453+09:00  INFO 15992 --- [petmilyFinalFinalRealFinal] [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2024-11-07T20:00:33.878+09:00  INFO 15992 --- [petmilyFinalFinalRealFinal] [    Test worker] tmilyFinalFinalRealFinalApplicationTests : Started PetmilyFinalFinalRealFinalApplicationTests in 4.373 seconds (process running for 6.205)
+2024-11-07T21:10:06.130+09:00  INFO 13156 --- [petmilyFinalFinalRealFinal] [    Test worker] tmilyFinalFinalRealFinalApplicationTests : Starting PetmilyFinalFinalRealFinalApplicationTests using Java 17.0.10 with PID 13156 (started by h22sa in D:\petmilyreal)
+2024-11-07T21:10:06.131+09:00  INFO 13156 --- [petmilyFinalFinalRealFinal] [    Test worker] tmilyFinalFinalRealFinalApplicationTests : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2024-11-07T21:10:06.772+09:00  INFO 13156 --- [petmilyFinalFinalRealFinal] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-07T21:10:06.788+09:00  INFO 13156 --- [petmilyFinalFinalRealFinal] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 0 JPA repository interfaces.
+2024-11-07T21:10:07.152+09:00  INFO 13156 --- [petmilyFinalFinalRealFinal] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-11-07T21:10:07.678+09:00  INFO 13156 --- [petmilyFinalFinalRealFinal] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7ac5b4c
+2024-11-07T21:10:07.680+09:00  INFO 13156 --- [petmilyFinalFinalRealFinal] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-11-07T21:10:07.721+09:00  INFO 13156 --- [petmilyFinalFinalRealFinal] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-07T21:10:07.768+09:00  INFO 13156 --- [petmilyFinalFinalRealFinal] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-11-07T21:10:07.803+09:00  INFO 13156 --- [petmilyFinalFinalRealFinal] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-11-07T21:10:08.064+09:00  INFO 13156 --- [petmilyFinalFinalRealFinal] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-07T21:10:08.177+09:00  WARN 13156 --- [petmilyFinalFinalRealFinal] [    Test worker] o.h.e.j.e.i.JdbcEnvironmentInitiator     : HHH000339: Could not obtain connection metadata: java.sql.SQLSyntaxErrorException: Unknown column 'RESERVED' in 'where clause'
+2024-11-07T21:10:08.193+09:00  WARN 13156 --- [petmilyFinalFinalRealFinal] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-11-07T21:10:08.194+09:00  WARN 13156 --- [petmilyFinalFinalRealFinal] [    Test worker] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2024-11-07T21:10:08.455+09:00  INFO 13156 --- [petmilyFinalFinalRealFinal] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-07T21:10:08.460+09:00  INFO 13156 --- [petmilyFinalFinalRealFinal] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-07T21:10:08.945+09:00  WARN 13156 --- [petmilyFinalFinalRealFinal] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-07T21:10:08.966+09:00  INFO 13156 --- [petmilyFinalFinalRealFinal] [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-11-07T21:10:09.380+09:00  INFO 13156 --- [petmilyFinalFinalRealFinal] [    Test worker] tmilyFinalFinalRealFinalApplicationTests : Started PetmilyFinalFinalRealFinalApplicationTests in 3.497 seconds (process running for 4.63)
 </pre>
 </span>
 </div>
@@ -129,7 +129,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.10.2</a> at 2024. 11. 7. 오후 8:00:34</p>
+<a href="http://www.gradle.org">Gradle 8.10.2</a> at 2024. 11. 7. 오후 9:10:10</p>
 </div>
 </div>
 </body>

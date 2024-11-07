@@ -3,9 +3,12 @@ spring:
     name: petmilyFinalFinalRealFinal
   # DB 설정
   datasource:
-    url: jdbc:mysql://${DB_URL}:${DB_PORT}/${DB_NAME}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+#    url: jdbc:mysql://${DB_URL}:${DB_PORT}/${DB_NAME}
+#    username: ${DB_USERNAME}
+#    password: ${DB_PASSWORD}
+    url: jdbc:mysql://svc.sel5.cloudtype.app:30204/petmily
+    username: root
+    password: mysql
     driver-class-name: com.mysql.cj.jdbc.Driver
   # jsp 경로 설정
   mvc:
@@ -21,8 +24,8 @@ spring:
       max-request-size: 215MB
       location: $(java.io.tmpdir)
   # JSP 사용을 위해 타임리프 차단
-  thymeleaf:
-    enabled: false
+#  thymeleaf:
+#    enabled: false
   # JPA 설정
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
