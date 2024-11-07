@@ -24,8 +24,8 @@ spring:
       max-request-size: 215MB
       location: $(java.io.tmpdir)
   # JSP 사용을 위해 타임리프 차단
-#  thymeleaf:
-#    enabled: false
+  thymeleaf:
+    enabled: false
   # JPA 설정
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
