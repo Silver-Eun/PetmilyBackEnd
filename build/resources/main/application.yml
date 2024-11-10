@@ -8,10 +8,10 @@ spring:
     password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   # jsp 경로 설정
-  mvc:
-    view:
-      prefix: /WEB-INF/views/
-      suffix: .jsp
+#  mvc:
+#    view:
+#      prefix: /WEB-INF/views/
+#      suffix: .jsp
   # 파일 업로드 설정
   servlet:
     multipart:
@@ -21,8 +21,8 @@ spring:
       max-request-size: 215MB
       location: $(java.io.tmpdir)
   # JSP 사용을 위해 타임리프 차단
-  thymeleaf:
-    enabled: false
+#  thymeleaf:
+#    enabled: false
   # JPA 설정
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
