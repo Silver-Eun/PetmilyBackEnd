@@ -32,3 +32,22 @@ jobs:
           echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
           docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ vars.APP_NAME }}:${{ github.ref_name }} .
           docker push ${{ secrets.DOCKER_USERNAME }}/${{ vars.APP_NAME }}:${{ github.ref_name }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Server Login and Docker Image pull and run
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: ${{ secrets.SERVER_PORT }}
+          script: |
+            echo "h22sang is best!!" >> test.txt
+            echo ${{ secrets.SERVER_PASSWORD }} | sudo -S docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+            echo ${{ secrets.SERVER_PASSWORD }} | sudo -S docker stop ${{ vars.APP_NAME }}
+            echo ${{ secrets.SERVER_PASSWORD }} | sudo -S docker rm -f ${{ vars.APP_NAME }}
+            echo ${{ secrets.SERVER_PASSWORD }} | sudo -S docker pull ${{ secrets.DOCKER_USERNAME }}/${{ vars.APP_NAME }}:main
