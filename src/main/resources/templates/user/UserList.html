@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Petmily Administrator Page</title>
+    <link rel="stylesheet" type="text/css" href="/javascript/myStyle.css">
+    <script src="/javascript/update.js"></script>
+</head>
+<body>
+<h2>** UserList **</h2>
+<hr>
+<div th:if="${message != null}">
+    => <span th:text="${message}"></span><br>
+    <hr>
+</div>
+
+<table border="1" style="width: 100%; text-align: center">
+    <tr bgcolor="skyblue">
+        <th>user_id</th>
+        <th>user_password</th>
+        <th>user_name</th>
+        <th>user_email</th>
+        <th>user_birthday</th>
+        <th>user_phone</th>
+        <th>zipcode</th>
+        <th>addr</th>
+        <th>addr_detail</th>
+        <th>수정</th>
+        <th>Delete</th>
+    </tr>
+    <tr th:if="${banana == null}">
+        <td colspan="11">출력할 Data가 1건도 없습니다 ~~</td>
+    </tr>
+    <tr th:each="s : ${banana}">
+        <td th:text="${s.user_id}"></td>
+        <td th:text="${s.user_password}"></td>
+        <td th:text="${s.user_name}"></td>
+        <td th:text="${s.user_email}"></td>
+        <td th:text="${s.user_birthday}"></td>
+        <td th:text="${s.user_phone}"></td>
+        <td th:text="${s.zipcode}"></td>
+        <td th:text="${s.addr}"></td>
+        <td th:text="${s.addr_detail}"></td>
+        <td>
+            <span class="textlink" th:onclick="'Userupdate(' + ${s.user_id} + ')'" th:id="${s.user_id}">update</span>
+        </td>
+        <td>
+            <span class="textlink" th:onclick="'UserDelete(' + ${s.user_id} + ')'" th:id="${s.user_id}">Delete</span>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

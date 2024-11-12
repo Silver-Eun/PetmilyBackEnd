@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Petmily Administrator Page</title>
+</head>
+<body>
+<h2>[주문상세 페이지]</h2>
+<table style="text-align: center">
+    <tr th:if="${apple != null}" height="40">
+        <th bgcolor="Thistle">주문번호</th>
+        <td th:text="${apple.order_key}"></td>
+    </tr>
+    <tr th:if="${requestScope.apple != null}" height="40">
+        <th bgcolor="Thistle">배송상태</th>
+        <td th:text="${apple.delivery_status}"></td>
+    </tr>
+    <tr th:if="${apple == null or #lists.isEmpty(apple)}">
+        <td colspan="3">주문 내역이 없습니다</td>
+    </tr>
+</table>
+</body>
+</html>

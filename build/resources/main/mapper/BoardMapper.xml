@@ -6,18 +6,18 @@
 	<!-- NOTICE LIST -->
 	<select id="getNoticeList" resultType="com.petmily.domain.NoticeDTO">
 		SELECT *
-		FROM NOTICE
+		FROM notice
 		WHERE (#{searchPeriod} IS NULL OR
-		    CASE 
-		        WHEN 'week' = #{searchPeriod} THEN NOTICE_REGDATE >= DATE_SUB(NOW(), INTERVAL 1 WEEK)
-		        WHEN 'month' = #{searchPeriod} THEN NOTICE_REGDATE >= DATE_SUB(NOW(), INTERVAL 1 MONTH)	
-		        WHEN 'firstQuarter' = #{searchPeriod} THEN NOTICE_REGDATE >= DATE_SUB(NOW(), INTERVAL 3 MONTH)
+		    CASE
+		        WHEN 'week' = #{searchPeriod} THEN notice_regdate >= DATE_SUB(NOW(), INTERVAL 1 WEEK)
+		        WHEN 'month' = #{searchPeriod} THEN notice_regdate >= DATE_SUB(NOW(), INTERVAL 1 MONTH)
+		        WHEN 'firstQuarter' = #{searchPeriod} THEN notice_regdate >= DATE_SUB(NOW(), INTERVAL 3 MONTH)
 		        ELSE 1=1
 		    END)
 		AND (#{searchCriteria} IS NULL OR
-		    CASE 
-		        WHEN 'subject' = #{searchCriteria} THEN LOWER(NOTICE_TITLE) LIKE CONCAT('%', LOWER(#{searchWord}), '%')
-		        WHEN 'content' = #{searchCriteria} THEN LOWER(NOTICE_CONTENT) LIKE CONCAT('%', LOWER(#{searchWord}), '%')
+		    CASE
+		        WHEN 'subject' = #{searchCriteria} THEN LOWER(notice_title) LIKE CONCAT('%', LOWER(#{searchWord}), '%')
+		        WHEN 'content' = #{searchCriteria} THEN LOWER(notice_content) LIKE CONCAT('%', LOWER(#{searchWord}), '%')
 		        ELSE 1=1
 		    END)
 		ORDER BY NOTICE_REGDATE DESC;
@@ -25,39 +25,37 @@
 
 	<select id="getNoticePagedList"
 		resultType="com.petmily.domain.NoticeDTO">
-		SELECT * FROM NOTICE
-		ORDER BY NOTICE_ID DESC
-		LIMIT #{sno},
-		#{rowsPerPage}
+		SELECT * FROM notice
+		ORDER BY notice_id DESC
+		LIMIT #{sno}, #{rowsPerPage}
 	</select>
 
 	<select id="noticeTotalCount" resultType="int">
-		SELECT COUNT(*) FROM
-		NOTICE
+		SELECT COUNT(*) FROM notice
 	</select>
 
 
 	<!-- INQUIRY LIST -->
 	<select id="getInquiryList" resultType="com.petmily.domain.InquiryDTO">
-		SELECT INQUIRY.*, 
-		(SELECT P.PRODUCT_NAME 
-	     FROM PRODUCT P 
-	     WHERE P.PRODUCT_ID = INQUIRY.PRODUCT_ID) AS PRODUCT_NAME
+		SELECT INQUIRY.*,
+		(SELECT P.product_name
+	     FROM product P
+	     WHERE P.product_id = INQUIRY.product_id) AS product_name
 		FROM INQUIRY
 		WHERE (#{searchCheck} IS NULL OR
-		    CASE 
+		    CASE
 		        WHEN 'complete' = #{searchCheck} THEN ANSWER_CONTENT IS NOT NULL
 		        WHEN 'ongoing' = #{searchCheck} THEN ANSWER_CONTENT IS NULL
 		        ELSE 1=1
 		    END)
 		AND (#{searchCriteria} IS NULL OR
-		    CASE 
+		    CASE
 		        WHEN 'subject' = #{searchCriteria} THEN LOWER(INQUIRY_TITLE) LIKE CONCAT('%', LOWER(#{searchWord}), '%')
 		        WHEN 'content' = #{searchCriteria} THEN LOWER(INQUIRY_CONTENT) LIKE CONCAT('%', LOWER(#{searchWord}), '%')
 		        WHEN 'writer' = #{searchCriteria} THEN LOWER(INQUIRY_WRITER) LIKE CONCAT('%', LOWER(#{searchWord}), '%')
 		        WHEN 'product' = #{searchCriteria} THEN LOWER(
-		        (	SELECT P.PRODUCT_NAME 
-	     			FROM PRODUCT P 
+		        (	SELECT P.PRODUCT_NAME
+	     			FROM PRODUCT P
 	     			WHERE P.PRODUCT_ID = INQUIRY.PRODUCT_ID)
 	     		) 	LIKE CONCAT('%', LOWER(#{searchWord}), '%')
 		        ELSE 1=1
@@ -79,28 +77,28 @@
 		SELECT COUNT(*) FROM
 		INQUIRY
 	</select>
-	
+
 	<insert id="insertInquiry">
-		INSERT INTO INQUIRY (INQUIRY_TITLE, PRODUCT_ID, INQUIRY_WRITER, INQUIRY_CONTENT) VALUES
+		INSERT INTO inquiry (INQUIRY_TITLE, PRODUCT_ID, INQUIRY_WRITER, INQUIRY_CONTENT) VALUES
 		(#{inquiry_title},#{product_id}, #{inquiry_writer}, #{inquiry_content})
 	</insert>
 
 
 	<!-- REVIEW LIST -->
-	
+
 	<select id="getReviewList" resultType="com.petmily.domain.ReviewDTO">
 		SELECT REVIEW.*, P.PRODUCT_NAME, P.PRODUCT_MAINIMAGEPATH
 	    FROM REVIEW
-	    LEFT JOIN PRODUCT P ON P.PRODUCT_ID = REVIEW.PRODUCT_ID
+	    LEFT JOIN product P ON P.PRODUCT_ID = REVIEW.PRODUCT_ID
 		WHERE (#{searchPeriod} IS NULL OR
-		    CASE 
+		    CASE
 		        WHEN 'week' = #{searchPeriod} THEN REVIEW_REGDATE >= DATE_SUB(NOW(), INTERVAL 1 WEEK)
 		        WHEN 'month' = #{searchPeriod} THEN REVIEW_REGDATE >= DATE_SUB(NOW(), INTERVAL 1 MONTH)
 		        WHEN 'firstQuarter' = #{searchPeriod} THEN REVIEW_REGDATE >= DATE_SUB(NOW(), INTERVAL 3 MONTH)
 		        ELSE 1=1
 		    END)
 		AND (#{searchCriteria} IS NULL OR
-		    CASE 
+		    CASE
 		        WHEN 'subject' = #{searchCriteria} THEN LOWER(REVIEW_TITLE) LIKE CONCAT('%', LOWER(#{searchWord}), '%')
 		        WHEN 'content' = #{searchCriteria} THEN LOWER(REVIEW_CONTENT) LIKE CONCAT('%', LOWER(#{searchWord}), '%')
 		        WHEN 'writer' = #{searchCriteria} THEN LOWER(REVIEW_WRITER) LIKE CONCAT('%', LOWER(#{searchWord}), '%')
@@ -112,24 +110,23 @@
 	<select id="getReviewPagedList"
 		resultType="com.petmily.domain.ReviewDTO">
 		SELECT *,
-		(SELECT P.PRODUCT_NAME FROM PRODUCT P WHERE P.PRODUCT_ID = REVIEW.PRODUCT_ID) AS PRODUCT_NAME 
-		FROM REVIEW
+		(SELECT P.PRODUCT_NAME FROM PRODUCT P WHERE P.PRODUCT_ID = REVIEW.PRODUCT_ID) AS PRODUCT_NAME
+		FROM review
 		ORDER BY REVIEW_ID DESC
 		LIMIT #{sno},
 		#{rowsPerPage}
 	</select>
 
 	<select id="reviewTotalCount" resultType="int">
-		SELECT COUNT(*) FROM
-		REVIEW
+		SELECT COUNT(*) FROM review
 	</select>
 
 	<!-- FAQ LIST -->
 	<select id="getFaqList" resultType="com.petmily.domain.FaqDTO">
 		SELECT *
-		FROM FAQ
+		FROM faq
 		WHERE (#{searchType} IS NULL OR
-		    CASE 
+		    CASE
 		        WHEN 'delivery' = #{searchType} THEN QUESTION_TYPE = '결제/배송'
 		        WHEN 'join' = #{searchType} THEN QUESTION_TYPE = '회원가입/정보'
 		        WHEN 'refund' = #{searchType} THEN QUESTION_TYPE = '교환/환불'
@@ -137,7 +134,7 @@
 		        ELSE 1=1
 		    END)
 		AND (#{searchCriteria} IS NULL OR
-		    CASE 
+		    CASE
 		        WHEN 'subject' = #{searchCriteria} THEN LOWER(FAQ_TITLE) LIKE CONCAT('%', LOWER(#{searchWord}), '%')
 		        WHEN 'content' = #{searchCriteria} THEN LOWER(FAQ_CONTENT) LIKE CONCAT('%', LOWER(#{searchWord}), '%')
 		        WHEN 'writer' = #{searchCriteria} THEN LOWER(FAQ_WRITER) LIKE CONCAT('%', LOWER(#{searchWord}), '%')
@@ -148,15 +145,13 @@
 
 	<select id="getFaqPagedList"
 		resultType="com.petmily.domain.FaqDTO">
-		SELECT * FROM FAQ
+		SELECT * FROM faq
 		ORDER BY FAQ_ID DESC
-		LIMIT #{sno},
-		#{rowsPerPage}
+		LIMIT #{sno}, #{rowsPerPage}
 	</select>
 
 	<select id="faqTotalCount" resultType="int">
-		SELECT COUNT(*) FROM
-		FAQ
+		SELECT COUNT(*) FROM faq
 	</select>
 	<!-- BOADR LIST END -->
 
@@ -165,24 +160,24 @@
 
 	<select id="getNotice"
 		resultType="com.petmily.domain.NoticeDTO">
-		SELECT * FROM NOTICE WHERE NOTICE_ID = #{notice_id}
+		SELECT * FROM notice WHERE NOTICE_ID = #{notice_id}
 	</select>
 
 	<update id="updateNotice">
-		UPDATE NOTICE
+		UPDATE notice
 		SET NOTICE_TITLE = #{notice_title},
 		NOTICE_CONTENT = #{notice_content}
 		WHERE NOTICE_ID = #{notice_id}
 	</update>
 
 	<insert id="insertNotice">
-		INSERT INTO NOTICE (NOTICE_TITLE, NOTICE_WRITER
+		INSERT INTO notice (NOTICE_TITLE, NOTICE_WRITER
 		,NOTICE_CONTENT) VALUES
 		(#{notice_title},#{notice_writer},#{notice_content})
 	</insert>
 
 	<delete id="deleteNotice">
-		DELETE FROM NOTICE WHERE NOTICE_ID = #{notice_id}
+		DELETE FROM notice WHERE NOTICE_ID = #{notice_id}
 	</delete>
 
 	<!-- NOTICE CRUD END -->
@@ -192,25 +187,25 @@
 
 	<select id="getInquiry"
 		resultType="com.petmily.domain.InquiryDTO">
-		SELECT INQUIRY.*, 
-		(SELECT P.PRODUCT_NAME FROM PRODUCT P WHERE P.PRODUCT_ID = INQUIRY.PRODUCT_ID) AS PRODUCT_NAME 
-		FROM INQUIRY 
+		SELECT inquiry.*,
+		(SELECT P.PRODUCT_NAME FROM PRODUCT P WHERE P.PRODUCT_ID = INQUIRY.PRODUCT_ID) AS PRODUCT_NAME
+		FROM INQUIRY
 		WHERE INQUIRY_ID = #{inquiry_id}
 	</select>
 
 	<update id="updateInquiry">
-		UPDATE INQUIRY SET ANSWER_CONTENT =
+		UPDATE inquiry SET ANSWER_CONTENT =
 		#{answer_content}, ANSWER_REGDATE = CURRENT_TIMESTAMP WHERE INQUIRY_ID
 		= #{inquiry_id}
 	</update>
 
 	<update id="updateBoardInquiry">
-		UPDATE INQUIRY SET INQUIRY_TITLE = #{inquiry_title}, PRODUCT_ID = #{product_id}, INQUIRY_CONTENT = #{inquiry_content}
+		UPDATE inquiry SET INQUIRY_TITLE = #{inquiry_title}, PRODUCT_ID = #{product_id}, INQUIRY_CONTENT = #{inquiry_content}
 		WHERE INQUIRY_ID = #{inquiry_id}
 	</update>
-	
+
 	<delete id="deleteInquiry">
-		DELETE FROM INQUIRY WHERE INQUIRY_ID = #{inquiry_id}
+		DELETE FROM inquiry WHERE INQUIRY_ID = #{inquiry_id}
 	</delete>
 
 	<!-- INQUIRY CRUD END -->
@@ -220,11 +215,11 @@
 
 	<select id="getFaq"
 		resultType="com.petmily.domain.FaqDTO">
-		SELECT * FROM FAQ WHERE FAQ_ID = #{faq_id}
+		SELECT * FROM faq WHERE FAQ_ID = #{faq_id}
 	</select>
 
 	<update id="updateFaq">
-		UPDATE FAQ
+		UPDATE faq
 		SET FAQ_TITLE = #{faq_title}, QUESTION_TYPE
 		= #{question_type},
 		FAQ_CONTENT = #{faq_content}, FAQ_REGDATE =
@@ -233,21 +228,21 @@
 	</update>
 
 	<insert id="insertFaq">
-		INSERT INTO FAQ (FAQ_TITLE, FAQ_WRITER ,QUESTION_TYPE,
+		INSERT INTO faq (FAQ_TITLE, FAQ_WRITER ,QUESTION_TYPE,
 		FAQ_CONTENT) VALUES (#{faq_title},'펫밀리',#{question_type},#{faq_content})
 	</insert>
 
 	<delete id="deleteFaq">
-		DELETE FROM FAQ WHERE FAQ_ID = #{faq_id}
+		DELETE FROM faq WHERE FAQ_ID = #{faq_id}
 	</delete>
 
 	<!-- FAQ CRUD END -->
 
 
 	<!-- REVIEW CRUD -->
-	
+
 	<insert id="insertReview">
-		INSERT INTO REVIEW (REVIEW_TITLE, PRODUCT_ID, REVIEW_WRITER, REVIEW_POINT, REVIEW_CONTENT, REVIEW_IMAGE1, REVIEW_IMAGE2, ORDER_KEY) VALUES
+		INSERT INTO review (REVIEW_TITLE, PRODUCT_ID, REVIEW_WRITER, REVIEW_POINT, REVIEW_CONTENT, REVIEW_IMAGE1, REVIEW_IMAGE2, ORDER_KEY) VALUES
 		(#{review_title},#{product_id},#{review_writer},#{review_point}, #{review_content}, #{review_image1}, #{review_image2}, #{order_key})
 	</insert>
 
@@ -255,13 +250,13 @@
 		resultType="com.petmily.domain.ReviewDTO">
 		SELECT R.*, P.PRODUCT_NAME, P.PRODUCT_MAINIMAGEPATH,
     		CASE WHEN EXISTS (SELECT 1 FROM REVIEW_REPLY RR WHERE RR.REVIEW_ID = R.REVIEW_ID) THEN true ELSE false END AS REPLY_CHECK
-		FROM REVIEW R
-		LEFT JOIN PRODUCT P ON P.PRODUCT_ID = R.PRODUCT_ID 
+		FROM review R
+		LEFT JOIN PRODUCT P ON P.PRODUCT_ID = R.PRODUCT_ID
 		WHERE R.REVIEW_ID = #{review_id}
 	</select>
 
 	<update id="updateReview">
-		UPDATE REVIEW
+		UPDATE review
 		SET REVIEW_TITLE = #{review_title},
 		REVIEW_POINT = #{review_point},
 		REVIEW_CONTENT = #{review_content},
@@ -271,11 +266,11 @@
 	</update>
 
 	<delete id="deleteReview">
-		DELETE FROM REVIEW WHERE REVIEW_ID = #{review_id}
+		DELETE FROM review WHERE REVIEW_ID = #{review_id}
 	</delete>
-	
+
 	<update id="updateBoardReview">
-		UPDATE REVIEW SET REVIEW_TITLE = #{review_title}, PRODUCT_ID = #{product_id}, REVIEW_POINT = #{review_point}, 
+		UPDATE review SET REVIEW_TITLE = #{review_title}, PRODUCT_ID = #{product_id}, REVIEW_POINT = #{review_point},
 		REVIEW_CONTENT = #{review_content}, REVIEW_IMAGE1 = #{review_image1}, REVIEW_IMAGE2 = #{review_image2}
 		WHERE REVIEW_ID = #{review_id}
 	</update>
@@ -287,67 +282,67 @@
 		ON R.REVIEW_ID = RR.REVIEW_ID
 		WHERE R.REVIEW_ID = #{review_id};
 	</select>
-	
+
 	<insert id="insertReply">
-		INSERT INTO REVIEW_REPLY (REVIEW_ID, REPLY_WRITER, REPLY_CONTENT) VALUES
+		INSERT INTO review_reply (REVIEW_ID, REPLY_WRITER, REPLY_CONTENT) VALUES
 		(#{review_id},#{reply_writer},#{reply_content})
 	</insert>
-	
+
 	<delete id="deleteReply">
-		DELETE FROM REVIEW_REPLY WHERE REPLY_ID = #{reply_id}
+		DELETE FROM review_reply WHERE REPLY_ID = #{reply_id}
 	</delete>
-	
+
 
 	<!-- REVIEW CRUD END -->
-	
-	
-	
+
+
+
 	<select id="getAllProducts" resultType="com.petmily.domain.ProductDTO">
 		select * from product
 	</select>
-	
+
 	<select id="getProductByKind" resultType="com.petmily.domain.ProductDTO">
 	    SELECT *
-		FROM PRODUCT
-		WHERE 
-		    CASE 
+		FROM product
+		WHERE
+		    CASE
 		        WHEN #{kind} = 'all' THEN 1=1
 		        ELSE PRODUCT_KIND = #{kind}
 		    END;
 	</select>
-	
+
 	<select id="getProductByCategory" resultType="com.petmily.domain.ProductDTO">
-		SELECT * FROM PRODUCT WHERE PRODUCT_KIND = #{kind} AND PRODUCT_CATEGORY = #{category}
+		SELECT * FROM product WHERE PRODUCT_KIND = #{kind} AND PRODUCT_CATEGORY = #{category}
 	</select>
-	
+
 	<select id="getProduct" resultType="com.petmily.domain.ProductDTO">
 		select * from product where product_name like CONCAT('%', LOWER(#{name}), '%')
 	</select>
-	
+
 	<update id="updateNoticeCount">
-		UPDATE NOTICE SET NOTICE_COUNT = NOTICE_COUNT + 1 WHERE NOTICE_ID = #{notice_id}
+		UPDATE notice SET NOTICE_COUNT = NOTICE_COUNT + 1 WHERE NOTICE_ID = #{notice_id}
 	</update>
 	<update id="updateInquiryCount">
-		UPDATE INQUIRY SET INQUIRY_COUNT = INQUIRY_COUNT + 1 WHERE INQUIRY_ID = #{inquiry_id}
+		UPDATE inquiry SET INQUIRY_COUNT = INQUIRY_COUNT + 1 WHERE INQUIRY_ID = #{inquiry_id}
 	</update>
 	<update id="updateReviewCount">
-		UPDATE REVIEW SET REVIEW_COUNT = REVIEW_COUNT + 1 WHERE REVIEW_ID = #{review_id}
+		UPDATE review SET REVIEW_COUNT = REVIEW_COUNT + 1 WHERE REVIEW_ID = #{review_id}
 	</update>
 	<update id="updateFaqCount">
-		UPDATE FAQ SET FAQ_COUNT = FAQ_COUNT + 1 WHERE FAQ_ID = #{faq_id}
+		UPDATE faq SET FAQ_COUNT = FAQ_COUNT + 1 WHERE FAQ_ID = #{faq_id}
 	</update>
-	
+
 	<select id ="getEmail" resultType="com.petmily.domain.UserDTO">
 		SELECT * FROM USER WHERE USER_NAME = #{inquiry_writer}
 	</select>
-	
+
 	<select id="getProductByUser" resultType="com.petmily.domain.OrderProductByUserDTO">
 		SELECT P.PRODUCT_ID, P.PRODUCT_NAME, OP.ORDER_DATE, OP.USER_ID, OP.ORDER_KEY
-		FROM PRODUCT P 
-		LEFT JOIN ORDER_DETAIL OD 
-			ON P.PRODUCT_ID = OD.PRODUCT_ID 
-		LEFT JOIN ORDER_PRODUCT OP 
-			ON OD.ORDER_KEY = OP.ORDER_KEY 
+		FROM product P
+		LEFT JOIN ORDER_DETAIL OD
+			ON P.PRODUCT_ID = OD.PRODUCT_ID
+		LEFT JOIN ORDER_PRODUCT OP
+			ON OD.ORDER_KEY = OP.ORDER_KEY
 		WHERE OP.USER_ID = #{userName}
 			AND OP.ORDER_DATE BETWEEN DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND DATE_ADD(CURDATE(), INTERVAL 1 DAY)
 			AND OD.DELIVERY_STATUS = '배송완료'
@@ -355,16 +350,16 @@
 	</select>
 
 	<update id="updateStatus">
-		UPDATE ORDER_DETAIL AS OD
+		UPDATE order_detail AS OD
 		INNER JOIN ORDER_PRODUCT AS OP ON OD.ORDER_KEY = OP.ORDER_KEY
 		SET OD.PRODUCT_REVIEW = TRUE
 		WHERE OP.USER_ID = #{user_id} AND OD.ORDER_KEY = #{order_key} AND OD.PRODUCT_ID = #{product_id}
 	</update>
-	
+
 	<update id="updateStatusDelete">
-		UPDATE ORDER_DETAIL AS OD
-		INNER JOIN ORDER_PRODUCT AS OP ON OD.ORDER_KEY = OP.ORDER_KEY
-		SET OD.PRODUCT_REVIEW = FALSE
+		UPDATE order_detail AS OD
+		INNER JOIN order_product AS OP ON OD.ORDER_KEY = OP.ORDER_KEY
+		SET OD.product_review = FALSE
 		WHERE OP.USER_ID = #{user_id} AND OD.ORDER_KEY = #{order_key} AND OD.PRODUCT_ID = #{product_id}
 	</update>
 

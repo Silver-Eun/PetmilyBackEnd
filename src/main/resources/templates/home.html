@@ -1,39 +1,40 @@
-<html>
+<!DOCTYPE html>
+<html lang="KO">
 <head>
-    <title>Administrator Page</title>
-    <link rel="stylesheet" type="text/css" href="/resources/style/style.css"/>
+    <title>Petmily Administrator Page</title>
+    <link rel="stylesheet" type="text/css" href="/style/style.css"/>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/resources/javascript/notice.js"></script>
-    <script src="/resources/javascript/inquiry.js"></script>
-    <script src="/resources/javascript/faq.js"></script>
-    <script src="/resources/javascript/review.js"></script>
-    <script src="/resources/javascript/cart.js"></script>
-    <script src="/resources/javascript/orderProduct.js"></script>
-    <script src="/resources/javascript/orderDetail.js"></script>
-    <script src="/resources/javascript/productList.js"></script>
-    <script src="/resources/javascript/productInsert.js"></script>
-    <script src="/resources/javascript/productUpdate.js"></script>
-    <script src="/resources/javascript/productDelete.js"></script>
+    <script src="/javascript/notice.js"></script>
+    <script src="/javascript/inquiry.js"></script>
+    <script src="/javascript/faq.js"></script>
+    <script src="/javascript/review.js"></script>
+    <script src="/javascript/cart.js"></script>
+    <script src="/javascript/orderProduct.js"></script>
+    <script src="/javascript/orderDetail.js"></script>
+    <script src="/javascript/productList.js"></script>
+    <script src="/javascript/productInsert.js"></script>
+    <script src="/javascript/productUpdate.js"></script>
+    <script src="/javascript/productDelete.js"></script>
 </head>
-    <body>
-        <h1>관리자페이지</h1>
-        <table id="mainTable">
-            <tr>
-                <th><a href="/userform">USER</a></th>
-                <th><a onclick="pTableListf()">PRODUCT</a></th>
-                <th><a onclick="cartForm()">ORDER</a></th>
-                <th><a onclick="noticePagingList('/board/noticePagingList')">BOARD</a></th>
-                <!-- <th><a onclick="noticeList()">BOARD</a></th> -->
-            </tr>
-        </table>
-        <hr>
-        <div id="newPage"></div>
-        <div id="pTableListArea"></div>
-        <div id="insertTableArea"></div>
-        <div id="resultArea1"></div>
-        <div id="resultArea2"></div>
-        &nbsp;
-        <a href="/home">[Home]</a>&nbsp;
-        <a onclick="location.href='http://localhost:3000/'">[Petmily]</a>&nbsp;
-    </body>
+<body>
+<h1><a href="/home">관리자페이지</a></h1>
+<table id="mainTable">
+    <tr>
+        <th><a href="/userform">USER</a></th>
+        <th><a onclick="pTableListf()">PRODUCT</a></th>
+        <th><a onclick="cartForm()">ORDER</a></th>
+        <th><a onclick="noticePagingList('/board/noticePagingList')">BOARD</a></th>
+        <!-- <th><a onclick="noticeList()">BOARD</a></th> -->
+    </tr>
+</table>
+<hr>
+<div id="newPage"></div>
+<div id="pTableListArea"></div>
+<div id="insertTableArea"></div>
+<div id="resultArea1"></div>
+<div id="resultArea2"></div>
+&nbsp;
+<a href="/home">[Home]</a>&nbsp;
+<a onclick="location.href='http://localhost:3000/'">[Petmily]</a>&nbsp;
+</body>
 </html>

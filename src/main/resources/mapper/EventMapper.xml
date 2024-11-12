@@ -17,13 +17,13 @@
 	</insert>
 	
 	<update id="update">
-		UPDATE EVENT
+		UPDATE event
 		SET event_name=#{event_name}, event_description=#{event_description}, event_start=#{event_start}, event_end=#{event_end}, event_imagepath=#{event_imagepath}
 		where event_id=#{event_id}
 	</update>
 	
 	<delete id="delete">
-		DELETE FROM EVENT WHERE event_id=#{event_id}
+		DELETE FROM event WHERE event_id=#{event_id}
 	</delete>
 	
 </mapper>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Petmily Administrator Page</title>
+    <link rel="stylesheet" type="text/css" href="/style/style.css">
+</head>
+<body>
+<h2>[장바구니 목록 페이지]</h2>
+<hr>
+<table border="1" style="width: 100%; text-align: center">
+    <tr bgcolor="skyblue">
+        <th>회원아이디</th>
+        <th>상품명</th>
+        <th>수량</th>
+        <th>삭제</th>
+    </tr>
+    <tr th:if="${banana == null or #lists.isEmpty(banana)}">
+        <td colspan="4">장바구니가 비어있습니다</td>
+    </tr>
+    <tr th:each="s : ${banana}">
+        <td th:text="${s.user_id}"></td>
+        <td th:text="${s.product_id}"></td>
+        <td th:text="${s.product_cnt}"></td>
+        <td>
+            <span class="textlink" th:attr="data-user-id=${s.user_id}, data-product-id=${s.product_id}"
+                  onclick="cDelete(this.dataset.userId, this.dataset.productId)">삭제</span>
+        </td>
+    </tr>
+</table>
+<hr>
+<!-- 페이지네이션 -->
+<div align="center">
+    <!-- Prev -->
+    <span th:if="${pageMaker.prev && pageMaker.spageNo > 1}">
+            <a th:attr="data-query=${pageMaker.makeQuery(1)}" onclick="cartPageList(this.dataset.query)">맨앞</a>&nbsp;
+            <a th:attr="data-query=${pageMaker.makeQuery(pageMaker.spageNo - 1)}"
+               onclick="cartPageList(this.dataset.query)">&LT;</a>&nbsp;&nbsp;
+        </span>
+    <span th:if="${!(pageMaker.prev && pageMaker.spageNo > 1)}">
+            <font color="Gray">맨앞&nbsp;&LT;&nbsp;&nbsp;</font>
+        </span>
+
+    <!-- 페이지 번호 -->
+    <span th:each="i : ${#numbers.sequence(pageMaker.spageNo, pageMaker.epageNo)}">
+            <span th:if="${i == pageMaker.cri.currPage}">
+                <font color="Orange" size="5"><b th:text="${i}"></b></font>&nbsp;
+            </span>
+            <span th:if="${i != pageMaker.cri.currPage}">
+                <a th:attr="data-query=${pageMaker.makeQuery(i)}" onclick="cartPageList(this.dataset.query)"
+                   th:text="${i}"></a>&nbsp;
+            </span>
+        </span>
+
+    <!-- LastPage -->
+    <span th:if="${pageMaker.next && pageMaker.epageNo < pageMaker.totalPages}">
+            <a th:attr="data-query=${pageMaker.makeQuery(pageMaker.epageNo + 1)}"
+               onclick="cartPageList(this.dataset.query)">&GT;</a>&nbsp;
+            <a th:attr="data-query=${pageMaker.makeQuery(pageMaker.totalPages)}"
+               onclick="cartPageList(this.dataset.query)">맨뒤</a>
+        </span>
+    <span th:if="${!(pageMaker.next && pageMaker.epageNo < pageMaker.totalPages)}">
+            <font color="Gray">&GT;&nbsp;맨뒤</font>
+        </span>
+</div>
+</body>
+</html>

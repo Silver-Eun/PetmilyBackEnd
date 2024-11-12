@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="KO" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Petmily Administrator Page</title>
+</head>
+<body>
+<h2>[장바구니 추가 페이지]</h2>
+<form action="cartJoin" method="post" enctype="multipart/form-data" id="cartform">
+    <table border="1" style="width: 100%; text-align: center">
+        <tr height="40">
+            <td bgcolor="Linen">회원아이디</td>
+            <td><input type="text" name="user_id" placeholder="회원아이디" size="20"></td>
+        </tr>
+        <tr height="40">
+            <td bgcolor="Linen">상품아이디</td>
+            <td><input type="number" name="product_id" placeholder="상품아이디" size="20"></td>
+        </tr>
+        <tr height="40">
+            <td bgcolor="Linen">각상품수량</td>
+            <td><input type="number" name="product_cnt" placeholder="각상품수량" value="1" size="20"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit"  class="textlink" onclick="cartInsert()" value="장바구니 담기">
+                <input type="reset" value="취소">
+            </td>
+        </tr>
+    </table>
+</form>
+<div th:if="${message != null}">
+    <hr>
+    <span th:text="${message}"></span><br>
+</div>
+</body>
+</html>

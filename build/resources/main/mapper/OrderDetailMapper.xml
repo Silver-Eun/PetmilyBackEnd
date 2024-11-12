@@ -94,6 +94,5 @@
 	<select id="criTotalCount" resultType="int">
 		select count(*) from order_detail
 	</select>
-	
 	<!-- ******************************************************* -->
 </mapper>  

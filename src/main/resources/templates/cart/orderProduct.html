@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Petmily Administrator Page</title>
+	<link rel="stylesheet" type="text/css" href="/style/style.css">
+</head>
+<body>
+<h2>[주문내역 목록 페이지]</h2>
+<hr>
+<table border="1" style="width: 100%; text-align: center">
+	<tr bgcolor="skyblue">
+		<th>주문번호</th>
+		<th>회원아이디</th>
+		<th>총결제금액</th>
+		<th>주문날짜</th>
+		<th>결제방법</th>
+		<th>받는분성함</th>
+		<th>받는분이메일</th>
+		<th>받는분전화번호</th>
+		<th>우편번호</th>
+		<th>받는분주소</th>
+		<th>상세주소</th>
+		<th>배송요청사항</th>
+		<th>삭제</th>
+	</tr>
+	<tr th:each="s : ${banana}">
+		<td><span class="textlink" data-order-key="${s.order_key}" onclick="opDetail(this.getAttribute('data-order-key'))" th:text="${s.order_key}"></span></td>
+		<td th:text="${s.user_id}"></td>
+		<td th:text="${s.order_total_price}"></td>
+		<td th:text="${#dates.format(s.order_date, 'yyyy-MM-dd')}"></td>
+		<td th:text="${s.pay_method}"></td>
+		<td th:text="${s.order_name}"></td>
+		<td th:text="${s.order_email}"></td>
+		<td th:text="${s.order_tel}"></td>
+		<td th:text="${s.order_zipcode}"></td>
+		<td th:text="${s.order_addr}"></td>
+		<td th:text="${s.order_addr_detail}"></td>
+		<td th:text="${s.order_req}"></td>
+		<td><span class="textlink" th:attr="data-order-key=${s.order_key}" onclick="opDelete(this.dataset.orderKey)" th:text="'삭제'"></span></td>
+	</tr>
+	<tr th:if="${#lists.isEmpty(banana)}">
+		<td colspan="13">주문내역이 비어있습니다</td>
+	</tr>
+</table>
+<hr>
+<!-- 페이지네이션 -->
+<div align="center">
+	<!-- Prev -->
+	<span th:if="${pageMaker.prev && pageMaker.spageNo > 1}">
+		<a data-page="1" onclick="orderProduct(this.getAttribute('data-page'))" th:text="'맨앞'"></a>&nbsp;
+		<a data-page="${pageMaker.spageNo - 1}" onclick="orderProduct(this.getAttribute('data-page'))" th:text="'&LT;'"></a>&nbsp;&nbsp;
+	</span>
+	<span th:if="${!(pageMaker.prev && pageMaker.spageNo > 1)}">
+		<font color="Gray">맨앞&nbsp;&LT;&nbsp;&nbsp;</font>
+	</span>
+
+	<!-- 페이지 번호 -->
+	<span th:each="i : ${#numbers.sequence(pageMaker.spageNo, pageMaker.epageNo)}">
+		<span th:if="${i == pageMaker.cri.currPage}">
+			<font color="Orange" size="5"><b th:text="${i}"></b></font>&nbsp;
+		</span>
+		<span th:if="${i != pageMaker.cri.currPage}">
+			<a data-page="${i}" onclick="orderProduct(this.getAttribute('data-page'))" th:text="${i}"></a>&nbsp;
+		</span>
+	</span>
+
+	<!-- LastPage -->
+	<span th:if="${pageMaker.next && pageMaker.epageNo > 0}">
+		&nbsp;<a data-page="${pageMaker.epageNo + 1}" onclick="orderProduct(this.getAttribute('data-page'))" th:text="'&GT;'"></a>
+		&nbsp;<a data-page="${pageMaker.lastPageNo}" onclick="orderProduct(this.getAttribute('data-page'))" th:text="'맨뒤'"></a>
+	</span>
+	<span th:if="${!(pageMaker.next && pageMaker.epageNo > 0)}">
+		<font color="Gray">&GT;&nbsp;맨뒤</font>
+	</span>
+</div>
+</body>
+</html>
