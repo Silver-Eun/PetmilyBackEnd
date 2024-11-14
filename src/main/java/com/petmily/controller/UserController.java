@@ -29,7 +29,7 @@ public class UserController {
     public String Loginf(Model model) {
         model.addAttribute("banana", service.selectList());
         log.info("Loginf성공");
-        return "/user/Loginf";
+        return "user/Loginf";
     }
 
     @GetMapping(value = "/logout")

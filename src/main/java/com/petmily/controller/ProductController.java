@@ -152,7 +152,7 @@ public class ProductController {
 		model.addAttribute("pageMaker", pageMaker);
 		
 		log.info("** productList 성공 **");
-		return "/product/product";
+		return "product/product";
 	}
 
 	@GetMapping("/pInsertForm")
