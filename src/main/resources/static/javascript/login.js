@@ -4,7 +4,6 @@ function Loginf() {
     let url = "/user/Loginf";
     axios.get(url
     ).then(response => {
-
         document.getElementById('resultArea1').innerHTML = response.data;
     }).catch(err => {
         alert("** response 실패 => " + err.message);

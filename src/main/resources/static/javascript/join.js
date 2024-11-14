@@ -4,7 +4,6 @@ function Joinf() {
 	let url = "/user/Joinf";
 	axios.get(url
 	).then(response => {
-
 		document.getElementById('resultArea1').innerHTML = response.data;
 	}).catch(err => {
 		alert("** response 실패 => " + err.message);
