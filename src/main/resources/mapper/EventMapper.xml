@@ -4,26 +4,26 @@
 <mapper namespace="com.petmily.mapperInterface.EventMapper">
 	
 	<select id="selectList" resultType="com.petmily.domain.EventDTO">
-		select * from EVENT
+		select * from event
 	</select>
 	
 	<select id="selectOne" resultType="com.petmily.domain.EventDTO">
-		select * from EVENT where event_id=#{event_id}
+		select * from event where event_id=#{event_id}
 	</select>
 	
 	<insert id="insert">
-		INSERT INTO EVENT(event_name, event_description, event_start, event_end, event_imagepath)
-		VALUE (#{event_name}, #{event_description}, #{event_start}, #{event_end}, #{event_imagepath})
+		insert into event(event_name, event_description, event_start, event_end, event_imagepath)
+		value (#{event_name}, #{event_description}, #{event_start}, #{event_end}, #{event_imagepath})
 	</insert>
 	
 	<update id="update">
-		UPDATE event
-		SET event_name=#{event_name}, event_description=#{event_description}, event_start=#{event_start}, event_end=#{event_end}, event_imagepath=#{event_imagepath}
+		update event
+		set event_name=#{event_name}, event_description=#{event_description}, event_start=#{event_start}, event_end=#{event_end}, event_imagepath=#{event_imagepath}
 		where event_id=#{event_id}
 	</update>
 	
 	<delete id="delete">
-		DELETE FROM event WHERE event_id=#{event_id}
+		delete from event where event_id=#{event_id}
 	</delete>
 	
 </mapper>

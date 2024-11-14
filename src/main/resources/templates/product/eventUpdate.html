@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Petmily Administrator Page</title>
+</head>
+<body>
+<h2>Event Table Update</h2>
+<hr>
+<form action="/product/eupdate" method="post" enctype="multipart/form-data">
+    <table>
+        <tr th:if="${etable != null}">
+            <th>EVENT_ID</th>
+            <td><input type="text" name="event_id" th:value="${etable.event_id}" readonly></td>
+        </tr>
+        <tr th:if="${etable != null}">
+            <th>EVENT_NAME</th>
+            <td><input type="text" name="event_name" th:value="${etable.event_name}"></td>
+        </tr>
+        <tr th:if="${etable != null}">
+            <th>EVENT_DESCRIPTION</th>
+            <td><input type="text" name="event_description" th:value="${etable.event_description}"></td>
+        </tr>
+        <tr th:if="${etable != null}">
+            <th>EVENT_START</th>
+            <td><input type="date" name="event_start" th:value="${#dates.format(etable.event_start, 'yyyy-MM-dd')}"></td>
+        </tr>
+        <tr th:if="${etable != null}">
+            <th>EVENT_END</th>
+            <td><input type="date" name="event_end" th:value="${#dates.format(etable.event_end, 'yyyy-MM-dd')}"></td>
+        </tr>
+        <tr th:if="${etable != null}">
+            <th>EVENT_IMAGEPATH</th>
+            <td>
+                <input type="hidden" name="event_imagepath" th:value="${etable.event_imagepath}" readonly><br>
+                <input type="file" name="uploadfilef" id="uploadfilef">
+            </td>
+        </tr>
+        <tr th:if="${etable != null}">
+            <th></th>
+            <td>
+                <input type="submit" value="수정">
+                &nbsp;&nbsp;&nbsp;
+                <input type="reset" value="취소">
+            </td>
+        </tr>
+        <tr th:if="${etable == null}">
+            <td colspan="2">수정할 이벤트가 존재하지 않습니다</td>
+        </tr>
+    </table>
+</form>
+<hr>
+</body>
+</html>

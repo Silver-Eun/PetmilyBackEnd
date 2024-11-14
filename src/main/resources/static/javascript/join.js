@@ -33,9 +33,9 @@ function Join() {
         alert(`** response.data:${response.data}`);
         location.reload(); // 화면 새로고침
     }).catch(err => {
-        if (err.response.status == '502') alert("~~ 입력 오류!! 다시하세요 ~~");
-        else alert("~~ 시스템 오류, 잠시후 다시하세요 => " + err.message);
+        if (err.response.status === '502') alert("입력 오류!! 다시하세요");
+        else alert("시스템 오류, 잠시후 다시하세요 => " + err.message);
     });
 
-    document.getElementById('resultArea1').innerHTML = "";
+    document.getElementById('newPage').innerHTML = "";
 }

@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Petmily Administrator Page</title>
-    <link rel="stylesheet" type="text/css" href="/javascript/myStyle.css">
     <script src="/javascript/update.js"></script>
 </head>
 <body>
-<h2>** UserList **</h2>
+<h2>[회원 목록]</h2>
 <hr>
 <div th:if="${message != null}">
     => <span th:text="${message}"></span><br>
@@ -28,8 +27,8 @@
         <th>수정</th>
         <th>Delete</th>
     </tr>
-    <tr th:if="${banana == null}">
-        <td colspan="11">출력할 Data가 1건도 없습니다 ~~</td>
+    <tr th:if="${banana == null or #lists.isEmpty(banana)}">
+        <td colspan="11">회원이 없습니다</td>
     </tr>
     <tr th:each="s : ${banana}">
         <td th:text="${s.user_id}"></td>
@@ -42,10 +41,10 @@
         <td th:text="${s.addr}"></td>
         <td th:text="${s.addr_detail}"></td>
         <td>
-            <span class="textlink" th:onclick="'Userupdate(' + ${s.user_id} + ')'" th:id="${s.user_id}">update</span>
+            <span class="textlink" th:attr="data-user-id=${s.user_id}" onclick="Userupdate(this.dataset.userId)">update</span>
         </td>
         <td>
-            <span class="textlink" th:onclick="'UserDelete(' + ${s.user_id} + ')'" th:id="${s.user_id}">Delete</span>
+            <span class="textlink" th:attr="data-user-id=${s.user_id}" onclick="UserDelete(this.dataset.userId)">delete</span>
         </td>
     </tr>
 </table>

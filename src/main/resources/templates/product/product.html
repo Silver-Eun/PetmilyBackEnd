@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Petmily Administrator Page</title>
+</head>
+<body>
+<h2>Product Table List</h2>
+&nbsp;<a class="addData" onclick="pInsertTable()">테이블 데이터 추가</a>&nbsp;
+<hr>
+<div id="searchBar">
+    <select name="searchType" id="searchType" onchange="keywordClear()">
+        <option value="all">전체</option>
+        <option value="product_name">Name</option>
+        <option value="product_id">ID</option>
+        <option value="product_description">Content</option>
+    </select>
+    <input type="text" name="keyword" id="keyword" th:value="${pageMaker.cri.keyword}">
+    <button id="searchBtn" onclick="searchPDB()">Search</button>
+</div>
+<br>
+<table border="1">
+    <tr>
+        <th>Delete</th>
+        <th>Update</th>
+        <th>PRODUCT_ID</th>
+        <th>PROMOTION_ID</th>
+        <th>PRODUCT_KIND</th>
+        <th>PRODUCT_CATEGORY</th>
+        <th>PRODUCT_NAME</th>
+        <th>PRODUCT_DESCRIPTION</th>
+        <th>PRODUCT_PRICE</th>
+        <th>PRODUCT_STOCK</th>
+        <th>PRODUCT_SALES</th>
+        <th>PRODUCT_REGDATE</th>
+        <th>PRODUCT_MAINIMAGEPATH</th>
+        <th>PRODUCT_DETAILIMAGEPATH</th>
+        <th>PRODUCT_RATING</th>
+        <th>PRODUCT_ORIGIN</th>
+    </tr>
+    <tr th:each="s : ${ptable}" th:if="${ptable != null}">
+        <td><a th:onclick="'pDelete(' + ${s.product_id} + ')'">삭제</a></td>
+        <td><a th:onclick="'pUpdate(' + ${s.product_id} + ')'">수정</a></td>
+        <td><a th:onclick="'showImages(' + ${s.product_id} + ')'" th:text="${s.product_id}">Product ID</a></td>
+        <td th:text="${s.promotion_id}">Promotion ID</td>
+        <td th:text="${s.product_kind}">Kind</td>
+        <td th:text="${s.product_category}">Category</td>
+        <td th:text="${s.product_name}">Name</td>
+        <td th:text="${s.product_description}">Description</td>
+        <td th:text="${s.product_price}">Price</td>
+        <td th:text="${s.product_stock}">Stock</td>
+        <td th:text="${s.product_sales}">Sales</td>
+        <td th:text="${#dates.format(s.product_regdate, 'yyyy-MM-dd')}">Regdate</td>
+        <td><img alt="MyImage" th:src="@{/uploadImages/{image}(image=${s.product_mainimagepath})}" width="60"
+                 height="40"></td>
+        <td><img alt="MyImage" th:src="@{/uploadImages/{image}(image=${s.product_detailimagepath})}" width="60"
+                 height="40"></td>
+        <td th:text="${s.product_rating}">Rating</td>
+        <td th:text="${s.product_origin}">Origin</td>
+    </tr>
+    <tr th:if="${ptable == null}">
+        <td colspan="16">출력할 Data가 1건도 없습니다 ~~</td>
+    </tr>
+</table>
+
+<!-- Pagination -->
+<div style="text-align:center;">
+    <!-- First Page -->
+    <a th:attr="onclick='productf(\'/product/productList?currPage=1&rowsPerPage=' + ${pageMaker.cri.rowsPerPage} + '\')'">FP</a>&nbsp;
+
+    <!-- Page Numbers -->
+    <span th:each="i : ${#numbers.sequence(pageMaker.spageNo, pageMaker.epageNo)}">
+        <span th:if="${i == pageMaker.cri.currPage}">
+            <font color="Orange" size="5"><b th:text="${i}">Page</b></font>&nbsp;
+        </span>
+        <a th:if="${i != pageMaker.cri.currPage}"
+           th:attr="onclick='productf(\'/product/productList' + ${pageMaker.makeQuery(i)} + '\')'"
+           th:text="${i}">Page</a>&nbsp;
+    </span>
+
+    <!-- Last Page -->
+    <a th:attr="onclick='productf(\'/product/productList?currPage=' + ${pageMaker.lastPageNo} + '&rowsPerPage=' + ${pageMaker.cri.rowsPerPage} + '\')'">LP</a>
+</div>
+
+<hr>
+</body>
+</html>

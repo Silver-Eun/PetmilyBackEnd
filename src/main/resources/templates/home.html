@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="KO">
+<html lang="KO" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Petmily Administrator Page</title>
     <link rel="stylesheet" type="text/css" href="/style/style.css"/>
+    <script src="/javascript/jquery-3.2.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/javascript/notice.js"></script>
     <script src="/javascript/inquiry.js"></script>
@@ -15,12 +16,19 @@
     <script src="/javascript/productInsert.js"></script>
     <script src="/javascript/productUpdate.js"></script>
     <script src="/javascript/productDelete.js"></script>
+    <script src="/javascript/userform.js"></script>
+    <script src="/javascript/login.js"></script>
+    <script src="/javascript/join.js"></script>
+    <script src="/javascript/findid.js"></script>
+    <script src="/javascript/findpw.js"></script>
+    <script src="/javascript/userList.js"></script>
+    <script src="/javascript/update.js"></script>
 </head>
 <body>
 <h1><a href="/home">관리자페이지</a></h1>
 <table id="mainTable">
     <tr>
-        <th><a href="/userform">USER</a></th>
+        <th><a onclick="userForm()">USER</a></th>
         <th><a onclick="pTableListf()">PRODUCT</a></th>
         <th><a onclick="cartForm()">ORDER</a></th>
         <th><a onclick="noticePagingList('/board/noticePagingList')">BOARD</a></th>
@@ -28,7 +36,8 @@
     </tr>
 </table>
 <hr>
-<div id="newPage"></div>
+<div id="newPage" th:data-login-id="${session.loginID != null ? session.loginID : ''}"
+     th:data-login-name="${session.loginName != null ? session.loginName : ''}"></div>
 <div id="pTableListArea"></div>
 <div id="insertTableArea"></div>
 <div id="resultArea1"></div>

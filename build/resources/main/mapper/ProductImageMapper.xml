@@ -4,37 +4,37 @@
 <mapper namespace="com.petmily.mapperInterface.ProductImageMapper">
 	
 	<select id="selectList" resultType="com.petmily.domain.ProductImageDTO">
-		SELECT pi.*, p.product_name 
-		FROM PRODUCT_IMAGE AS pi
-		JOIN PRODUCT AS p
-		ON pi.product_id = p.product_id
+		select pi.*, p.product_name
+		from product_image as pi
+		join product as p
+		on pi.product_id = p.product_id
 	</select>
 	
 	<select id="selectListByID" resultType="com.petmily.domain.ProductImageDTO">
-		SELECT pi.*, p.product_name 
-		FROM PRODUCT_IMAGE AS pi
-		JOIN PRODUCT AS p
-		ON pi.product_id = p.product_id
-		WHERE pi.product_id=#{product_id}
+		select pi.*, p.product_name
+		from product_image as pi
+		join product as p
+		on pi.product_id = p.product_id
+		where pi.product_id=#{product_id}
 	</select>
 	
 	<select id="selectOne" resultType="com.petmily.domain.ProductImageDTO">
-		select * from PRODUCT_IMAGE where pimage_id=#{pimage_id}
+		select * from product_image where pimage_id=#{pimage_id}
 	</select>
 	
 	<insert id="insert">
-		INSERT INTO PRODUCT_IMAGE(product_id, product_imagepath, product_value1)
-		VALUE (#{product_id}, #{product_imagepath}, #{product_value1})
+		insert into product_image(product_id, product_imagepath, product_value1)
+		value (#{product_id}, #{product_imagepath}, #{product_value1})
 	</insert>
 	
 	<update id="update">
-		UPDATE PRODUCT_IMAGE
-		SET product_imagepath=#{product_imagepath}, product_value1=#{product_value1}
+		update product_image
+		set product_imagepath=#{product_imagepath}, product_value1=#{product_value1}
 		where pimage_id=#{pimage_id}
 	</update>
 	
 	<delete id="delete">
-		DELETE FROM PRODUCT_IMAGE WHERE pimage_id=#{pimage_id}
+		delete from product_image where pimage_id=#{pimage_id}
 	</delete>
 	
 	<sql id="search">
@@ -56,7 +56,7 @@
 	</sql>
 	
 	<select id="searchCri" resultType="com.petmily.domain.ProductImageDTO">
-		select * from PRODUCT_IMAGE
+		select * from product_image
 			where ( pimage_id>0 <include refid="search"></include>
 			ORDER BY pimage_id DESC
 			limit #{sno}, #{rowsPerPage}
@@ -71,7 +71,7 @@
 	</select>
 	
 	<select id="searchTotalCount" resultType="int">
-		select count(*) from PRODUCT_IMAGE
+		select count(*) from product_image
 			where ( pimage_id>0 <include refid="search"></include>
 	</select>
 	

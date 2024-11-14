@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="KO" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Petmily Administrator Page</title>
+</head>
+<body>
+<form action="/product/pmpinsert" method="Post" enctype="multipart/form-data">
+    <table border="1">
+        <tr>
+            <th>Insert</th>
+            <th>PROMOTION_ID (PK, 1~9 : 프로모션 상품 / 10 : 일반 상품)</th>
+            <th>PROMOTION_NAME</th>
+            <th>PROMOTION_IMAGE</th>
+            <th>PROMOTION_START (NOT NULL)</th>
+            <th>PROMOTION_END (NOT NULL)</th>
+            <th>PROMOTION_DISCOUNT (DEFAULT 0)</th>
+            <th>PROMOTION_VALUE1</th>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="추가">&nbsp;&nbsp;&nbsp;
+                <input type="reset" value="취소">
+            </td>
+            <td><input type="text" name="promotion_id" value=""></td>
+            <td><input type="text" name="promotion_name" value=""></td>
+            <td><input type="file" name="uploadfilef" id="uploadfilef"></td>
+            <td><input type="date" name="promotion_start" value=""></td>
+            <td><input type="date" name="promotion_end" value=""></td>
+            <td><input type="text" name="promotion_discount" value="0"></td>
+            <td><input type="text" name="promotion_value1" value=""></td>
+        </tr>
+    </table>
+</form>
+<hr>
+</body>
+</html>
