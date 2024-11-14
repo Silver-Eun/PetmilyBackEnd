@@ -8,9 +8,6 @@ ENV TOMCAT_VERSION=9.0.82
 ARG JAR_FILE=build/libs/*.jar
 COPY ${JAR_FILE} /test.jar
 
-# JSP 파일 복사 (src/main/webapp 디렉토리 내 모든 파일을 컨테이너의 /app/src/main/webapp으로 복사)
-# COPY src/main/webapp/WEB-INF/views /usr/src/main/webapp/WEB-INF/views
-
 # 타임존 설정 (선택 사항)
 ENV TZ=Asia/Seoul
 
