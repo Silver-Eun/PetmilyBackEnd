@@ -53,13 +53,11 @@ function productf(url) {
 	let myurl = "";
 	
 	if(!url) {
-		myurl = "/product/productList";
+		myurl = "product/productList";
 	}
 	else {
 		myurl = url;
 	}
-	
-	// let url = "/product/productList";
 	
 	axios.get(
 		myurl
@@ -84,13 +82,11 @@ function pImagef(url) {
 	let myurl = "";
 	
 	if(!url) {
-		myurl = "/product/pImageList";
+		myurl = "product/pImageList";
 	}
 	else {
 		myurl = url;
 	}
-	
-	// let url = "/product/pImageList";
 	
 	axios.get(
 		myurl
@@ -112,7 +108,7 @@ function eventf() {
 	document.getElementById('resultArea2').innerHTML="";
 	document.getElementById('newPage').innerHTML="";
 	
-	let url = "/product/eventList";
+	let url = "product/eventList";
 	
 	axios.get(
 		url
@@ -134,7 +130,7 @@ function showImages(id) {
 	document.getElementById('resultArea2').innerHTML="";
 	document.getElementById('newPage').innerHTML="";
 	
-	let url = "/product/pImageList/" + id;
+	let url = "product/pImageList/" + id;
 	
 	axios.get(
 		url
@@ -152,7 +148,7 @@ function showImages(id) {
 function searchPDB() {
     let searchType = document.getElementById('searchType').value;
     let keyword = document.getElementById('keyword').value;
-    let url = '/product/productList?currPage=1&searchType=' + searchType + '&keyword=' + keyword;
+    let url = 'product/productList?currPage=1&searchType=' + searchType + '&keyword=' + keyword;
     
     productf(url);
 }
@@ -160,7 +156,7 @@ function searchPDB() {
 function searchPIDB() {
     let searchType = document.getElementById('searchType').value;
     let keyword = document.getElementById('keyword').value;
-    let url = '/product/pImageList?currPage=1&searchType=' + searchType + '&keyword=' + keyword;
+    let url = 'product/pImageList?currPage=1&searchType=' + searchType + '&keyword=' + keyword;
 
     pImagef(url);
 }

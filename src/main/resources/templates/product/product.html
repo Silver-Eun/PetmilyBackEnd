@@ -19,7 +19,7 @@
     <button id="searchBtn" onclick="searchPDB()">Search</button>
 </div>
 <br>
-<table border="1">
+<table border="1" width="100%">
     <tr>
         <th>Delete</th>
         <th>Update</th>
@@ -59,7 +59,7 @@
         <td th:text="${s.product_origin}">Origin</td>
     </tr>
     <tr th:if="${ptable == null}">
-        <td colspan="16">출력할 Data가 1건도 없습니다 ~~</td>
+        <td colspan="16">등록된 상품이 없습니다</td>
     </tr>
 </table>
 

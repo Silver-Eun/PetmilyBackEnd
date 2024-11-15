@@ -21,30 +21,28 @@
         <th>PROMOTION_DISCOUNT</th>
         <th>PROMOTION_VALUE1</th>
     </tr>
-    <c:if test="${not empty requestScope.pmptable}">
-        <c:forEach var="s" items="${requestScope.pmptable}">
+
+    <div th:if="${not #lists.isEmpty(pmptable)}">
+        <th:block th:each="s : ${pmptable}">
             <tr>
-                <td><a onclick="pmpDelete('${s.promotion_id}')" id="${s.promotion_id}">삭제</a></td>
-                <td><a onclick="pmpUpdate('${s.promotion_id}')" id="${s.promotion_id}">수정</a></td>
-                <td>${s.promotion_id}</td>
-                <td>${s.promotion_name}</td>
-                <td><img alt="MyImage" src="/resources/uploadImages/${s.promotion_image}" width="60" height="40"></td>
-                <td>
-                    <fmt:formatDate value="${s.promotion_start}" pattern="yyyy-MM-dd"/>
-                </td>
-                <td>
-                    <fmt:formatDate value="${s.promotion_end}" pattern="yyyy-MM-dd"/>
-                </td>
-                <td>${s.promotion_discount}</td>
-                <td>${s.promotion_value1}</td>
+                <td><a th:onclick="|pmpDelete('${s.promotion_id}')|" th:id="${s.promotion_id}">삭제</a></td>
+                <td><a th:onclick="|pmpUpdate('${s.promotion_id}')|" th:id="${s.promotion_id}">수정</a></td>
+                <td th:text="${s.promotion_id}"></td>
+                <td th:text="${s.promotion_name}"></td>
+                <td><img th:alt="MyImage" th:src="@{/uploadImages/{image}(image=${s.promotion_image})}"
+                         width="60" height="40"></td>
+                <td><span th:text="${#dates.format(s.promotion_start, 'yyyy-MM-dd')}"></span></td>
+                <td><span th:text="${#dates.format(s.promotion_end, 'yyyy-MM-dd')}"></span></td>
+                <td th:text="${s.promotion_discount}"></td>
+                <td th:text="${s.promotion_value1}"></td>
             </tr>
-        </c:forEach>
-    </c:if>
-    <c:if test="${empty requestScope.pmptable}">
+        </th:block>
+    </div>
+    <div th:if="${#lists.isEmpty(pmptable)}">
         <tr>
             <td colspan="7">등록된 상품이 없습니다 ~~</td>
         </tr>
-    </c:if>
+    </div>
 </table>
 <hr>
 </body>

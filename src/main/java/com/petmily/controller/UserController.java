@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("user")
 @Log4j2
 @AllArgsConstructor
 public class UserController {
@@ -60,34 +60,6 @@ public class UserController {
         return "/home";
     }
 
-    //	@PostMapping(value = "/Login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-//	public ResponseEntity<?> login(HttpSession session, @RequestBody UserDTO dto) {
-//	ResponseEntity<UserDTO> result = null;
-//	// 1) password 보관
-//	String password = dto.getUser_password(); 
-//			
-//	// 2) service 처리
-//	dto = service.selectOne(dto);
-//	if ( dto!=null && 
-//				passwordEncoder.matches(password, dto.getUser_password()) ) {	
-//		session.setAttribute("loginID", dto.getUser_id());
-//		session.setAttribute("loginPassword", dto.getUser_password());
-//		// => response 로 전송할 객체생성
-//		//    UserDTO, 빌더 패턴적용
-//		//	  userDTO 의 값 변경을 막기위해 final 을 사용하기도 함.	
-//		final UserDTO userDTO = UserDTO.builder()
-//							.user_id(dto.getUser_id())
-//							.user_password(dto.getUser_password())
-//							.build();
-//		
-//		result = ResponseEntity.status(HttpStatus.OK).body(userDTO);
-//		log.info("** login HttpStatus.OK => "+HttpStatus.OK);
-//	}else {
-//		result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(null);
-//		log.info("** login HttpStatus.BAD_GATEWAY => "+HttpStatus.BAD_GATEWAY);
-//	}
-//	return result;
-//}
     @PostMapping(value = "/Login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> login(HttpSession session, @RequestBody UserDTO dto) {
         ResponseEntity<UserDTO> result = null;
@@ -122,23 +94,6 @@ public class UserController {
         // viewName 생략 -> 요청명이 viewName 이 됨
     }
 
-    //
-//	@PostMapping(value = "/Join")
-//	public ResponseEntity<?> Join(UserDTO dto) throws Exception {
-//
-//		ResponseEntity<?> result = null;
-//		
-//
-//		// => Service 처리
-//		if (service.insert(dto) > 0) {
-//			result = ResponseEntity.status(HttpStatus.OK).body("~~ 회원가입 성공!! 로그인후 이용하세요 ~~");
-//			log.info("** join HttpStatus.OK => " + HttpStatus.OK);
-//		} else {
-//			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("~~ 회원가입 실패!! 다시 하세요 ~~");
-//			log.info("** join HttpStatus.BAD_GATEWAY => " + HttpStatus.BAD_GATEWAY);
-//		}
-//		return result;
-//	}
     @PostMapping(value = "/join")
     public ResponseEntity<String> join(UserDTO dto) {
         try {

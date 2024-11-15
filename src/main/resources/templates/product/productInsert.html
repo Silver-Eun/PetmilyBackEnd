@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="KO" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Petmily Administrator Page</title>
 </head>
 <body>
-<form action="/product/pinsert" method="Post" enctype="multipart/form-data">
+<form action="/product/pinsert" method="post" enctype="multipart/form-data">
     <table border="1">
         <tr>
             <th>Insert</th>
@@ -24,16 +24,17 @@
         </tr>
         <tr>
             <td>
-                <input type="submit" value="추가">&nbsp;&nbsp;&nbsp;
+                <input type="submit" value="추가">
                 <input type="reset" value="취소">
             </td>
             <td>
                 <select name="promotion_id" id="promotion_id">
-                    <c:forEach var="p" items="${requestScope.pmptable}">
-                        <option value="${p.promotion_id}"
-                        <c:if test="${p.promotion_id eq 10}"> selected</c:if>
-                        >${p.promotion_id}: ${p.promotion_name}</option>
-                    </c:forEach>
+                    <option value="" disabled>-- Select Promotion --</option>
+                    <th:block th:each="p : ${pmptable}">
+                        <option th:value="${p.promotion_id}" th:text="${p.promotion_id + ': ' + p.promotion_name}"
+                                th:selected="${p.promotion_id == 10}">
+                        </option>
+                    </th:block>
                 </select>
             </td>
             <td>
@@ -55,14 +56,14 @@
                     <option value="clothesAccessorie">clothesAccessorie</option>
                 </select>
             </td>
-            <td><input type="text" name="product_name" value=""></td>
-            <td><input type="text" name="product_description" value=""></td>
-            <td><input type="text" name="product_price" value=""></td>
+            <td><input type="text" name="product_name"></td>
+            <td><input type="text" name="product_description"></td>
+            <td><input type="text" name="product_price"></td>
             <td><input type="text" name="product_stock" value="100"></td>
             <td><input type="text" name="product_sales" value="0"></td>
-            <td><input type="file" name="uploadfilef" id="uploadfilef"></td>
-            <td><input type="file" name="uploadfilef2" id="uploadfilef2"></td>
-            <td><input type="number" step="0.1" name="product_rating" value="0.0" pattern="\d+(\.\d{1})?"></td>
+            <td><input type="file" name="uploadfilef"></td>
+            <td><input type="file" name="uploadfilef2"></td>
+            <td><input type="number" step="0.1" name="product_rating" value="0.0"></td>
             <td><input type="text" name="product_origin" value="한국"></td>
         </tr>
     </table>
