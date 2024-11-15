@@ -28,7 +28,7 @@ function pmProductf() {
 	document.getElementById('resultArea2').innerHTML="";
 	document.getElementById('newPage').innerHTML="";
 	
-	let url = "/product/pmProductList";
+	let url = "product/pmProductList";
 	
 	axios.get(
 		url

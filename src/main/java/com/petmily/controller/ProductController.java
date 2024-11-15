@@ -39,14 +39,14 @@ public class ProductController {
     public String promotionProduct(Model model) {
         model.addAttribute("pmptable", pmpservice.selectList());
         log.info("** pmProductList 성공 **");
-        return "/product/promotionProduct";
+        return "product/promotionProduct";
     }
 
     @GetMapping("/pmpInsertForm")
     public String pmpInsertForm(Model model) {
         model.addAttribute("pmptable", pmpservice.selectList());
         log.info("** pmpInsertForm 성공 **");
-        return "/product/promotionProductInsert";
+        return "product/promotionProductInsert";
     } // pmpInsertForm
 
     // => Insert Service 처리: POST
@@ -87,7 +87,7 @@ public class ProductController {
         dto.setPromotion_id(id);
         model.addAttribute("pmptable", pmpservice.selectOne(dto));
         log.info("** pmpUpdateForm 성공 **");
-        return "/product/promotionProductUpdate";
+        return "product/promotionProductUpdate";
     } // pUpdateForm
 
     @PostMapping(value = "/pmpupdate")
@@ -154,7 +154,7 @@ public class ProductController {
         model.addAttribute("pmptable", pmpservice.selectList());
         model.addAttribute("ptable", pservice.selectList());
         log.info("** pInsertForm 성공 **");
-        return "/product/productInsert";
+        return "product/productInsert";
     } // pInsertForm
 
     // => Insert Service 처리: POST
@@ -218,7 +218,7 @@ public class ProductController {
         model.addAttribute("pmptable", pmpservice.selectList());
         model.addAttribute("ptable", pservice.selectOne(dto));
         log.info("** pUpdateForm 성공 **");
-        return "/product/productUpdate";
+        return "product/productUpdate";
     } // pUpdateForm
 
     @PostMapping(value = "/pupdate")
@@ -300,21 +300,21 @@ public class ProductController {
         model.addAttribute("pageMaker", pageMaker);
 
         log.info("** pImageList 성공 **");
-        return "/product/productImage";
+        return "product/productImage";
     }
 
     @GetMapping("/pImageList/{ii}")
     public String pImageListID(@PathVariable("ii") int id, Model model) {
         model.addAttribute("pitable", piservice.selectListByID(id));
         log.info("** pImageListID 성공 **");
-        return "/product/productImage";
+        return "product/productImage";
     } // pImageListID
 
     @GetMapping("/piInsertForm")
     public String piInsertForm(Model model) {
         model.addAttribute("pitable", piservice.selectList());
         log.info("** piInsertForm 성공 **");
-        return "/product/productImageInsert";
+        return "product/productImageInsert";
     } // piInsertForm
 
     // => Insert Service 처리: POST
@@ -355,7 +355,7 @@ public class ProductController {
         dto.setPimage_id(id);
         model.addAttribute("pitable", piservice.selectOne(dto));
         log.info("** piUpdateForm 성공 **");
-        return "/product/productImageUpdate";
+        return "product/productImageUpdate";
     } // pUpdateForm
 
     @PostMapping(value = "/piupdate")
@@ -408,14 +408,14 @@ public class ProductController {
     public String eventList(Model model) {
         model.addAttribute("etable", eservice.selectList());
         log.info("** eventList 성공 **");
-        return "/product/event";
+        return "product/event";
     }
 
     @GetMapping("/eInsertForm")
     public String eInsertForm(Model model) {
         model.addAttribute("etable", eservice.selectList());
         log.info("** eInsertForm 성공 **");
-        return "/product/eventInsert";
+        return "product/eventInsert";
     } // eInsertForm
 
     // => Insert Service 처리: POST
@@ -456,7 +456,7 @@ public class ProductController {
         dto.setEvent_id(id);
         model.addAttribute("etable", eservice.selectOne(dto));
         log.info("** eUpdateForm 성공 **");
-        return "/product/eventUpdate";
+        return "product/eventUpdate";
     } // pUpdateForm
 
     @PostMapping(value = "/eupdate")
