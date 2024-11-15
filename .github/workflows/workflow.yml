@@ -46,8 +46,8 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
           script: |
-            echo "h22sang is best!!" >> test.txt
             echo ${{ secrets.SERVER_PASSWORD }} | sudo -S docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
             echo ${{ secrets.SERVER_PASSWORD }} | sudo -S docker stop ${{ vars.APP_NAME }}
             echo ${{ secrets.SERVER_PASSWORD }} | sudo -S docker rm -f ${{ vars.APP_NAME }}
             echo ${{ secrets.SERVER_PASSWORD }} | sudo -S docker pull ${{ secrets.DOCKER_USERNAME }}/${{ vars.APP_NAME }}:main
+            echo ${{ secrets.SERVER_PASSWORD }} | sudo -S docker-compose -f /petmilyreal/docker-compose.yml up -d
