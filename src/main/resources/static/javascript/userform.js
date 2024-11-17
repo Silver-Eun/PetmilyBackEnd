@@ -1,4 +1,5 @@
-// CartForm(장바구니, 주문, 주문상세)
+"use strict"
+
 function userForm() {
     const newPage = document.getElementById('newPage');
     const loginID = newPage.getAttribute('data-login-id');

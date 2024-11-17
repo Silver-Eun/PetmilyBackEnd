@@ -52,42 +52,12 @@ function updateReview() {
 	}
 }
 
-// ) Show Pagination Notice List
-function noticePagingList(url) {
-	axios.get(
-		url
-	).then(response => {
-		document.getElementById('newPage').innerHTML = response.data;
-	}).catch(error => {
-		alert("error message :" + error.message);
-	})
-}
-// ) Show Pagination Inquiry List
-function inquiryPagingList(url) {
-	axios.get(
-		url
-	).then(response => {
-		document.getElementById('newPage').innerHTML = response.data;
-	}).catch(error => {
-		alert("error message :" + error.message);
-	})
-}
 // ) Show Pagination Review List
 function reviewPagingList(url) {
 	axios.get(
 		url
 	).then(response => {
-		document.getElementById('newPage').innerHTML = response.data;
-	}).catch(error => {
-		alert("error message :" + error.message);
-	})
-}
-// ) Show Pagination Faq List
-function faqPagingList(url) {
-	axios.get(
-		url
-	).then(response => {
-		document.getElementById('newPage').innerHTML = response.data;
+		document.getElementById('pTableListArea').innerHTML = response.data;
 	}).catch(error => {
 		alert("error message :" + error.message);
 	})

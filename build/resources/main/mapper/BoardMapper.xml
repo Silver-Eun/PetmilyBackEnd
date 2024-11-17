@@ -37,11 +37,11 @@
 
 	<!-- INQUIRY LIST -->
 	<select id="getInquiryList" resultType="com.petmily.domain.InquiryDTO">
-		SELECT INQUIRY.*,
+		SELECT inquiry.*,
 		(SELECT P.product_name
 	     FROM product P
-	     WHERE P.product_id = INQUIRY.product_id) AS product_name
-		FROM INQUIRY
+	     WHERE P.product_id = inquiry.product_id) AS product_name
+		FROM inquiry
 		WHERE (#{searchCheck} IS NULL OR
 		    CASE
 		        WHEN 'complete' = #{searchCheck} THEN ANSWER_CONTENT IS NOT NULL
@@ -55,8 +55,8 @@
 		        WHEN 'writer' = #{searchCriteria} THEN LOWER(INQUIRY_WRITER) LIKE CONCAT('%', LOWER(#{searchWord}), '%')
 		        WHEN 'product' = #{searchCriteria} THEN LOWER(
 		        (	SELECT P.PRODUCT_NAME
-	     			FROM PRODUCT P
-	     			WHERE P.PRODUCT_ID = INQUIRY.PRODUCT_ID)
+	     			FROM product P
+	     			WHERE P.PRODUCT_ID = inquiry.PRODUCT_ID)
 	     		) 	LIKE CONCAT('%', LOWER(#{searchWord}), '%')
 		        ELSE 1=1
 		    END)
@@ -66,16 +66,15 @@
 	<select id="getInquiryPagedList"
 		resultType="com.petmily.domain.InquiryDTO">
 		SELECT *,
-		(SELECT P.PRODUCT_NAME FROM PRODUCT P WHERE P.PRODUCT_ID = INQUIRY.PRODUCT_ID) AS PRODUCT_NAME
-		FROM INQUIRY
+		(SELECT P.PRODUCT_NAME FROM product P WHERE P.PRODUCT_ID = inquiry.PRODUCT_ID) AS PRODUCT_NAME
+		FROM inquiry
 		ORDER BY INQUIRY_ID DESC
 		LIMIT #{sno},
 		#{rowsPerPage}
 	</select>
 
 	<select id="inquiryTotalCount" resultType="int">
-		SELECT COUNT(*) FROM
-		INQUIRY
+		SELECT COUNT(*) FROM inquiry
 	</select>
 
 	<insert id="insertInquiry">
@@ -87,9 +86,9 @@
 	<!-- REVIEW LIST -->
 
 	<select id="getReviewList" resultType="com.petmily.domain.ReviewDTO">
-		SELECT REVIEW.*, P.PRODUCT_NAME, P.PRODUCT_MAINIMAGEPATH
-	    FROM REVIEW
-	    LEFT JOIN product P ON P.PRODUCT_ID = REVIEW.PRODUCT_ID
+		SELECT review.*, P.PRODUCT_NAME, P.PRODUCT_MAINIMAGEPATH
+	    FROM review
+	    LEFT JOIN product P ON P.PRODUCT_ID = review.PRODUCT_ID
 		WHERE (#{searchPeriod} IS NULL OR
 		    CASE
 		        WHEN 'week' = #{searchPeriod} THEN REVIEW_REGDATE >= DATE_SUB(NOW(), INTERVAL 1 WEEK)
@@ -110,7 +109,7 @@
 	<select id="getReviewPagedList"
 		resultType="com.petmily.domain.ReviewDTO">
 		SELECT *,
-		(SELECT P.PRODUCT_NAME FROM PRODUCT P WHERE P.PRODUCT_ID = REVIEW.PRODUCT_ID) AS PRODUCT_NAME
+		(SELECT P.PRODUCT_NAME FROM product P WHERE P.PRODUCT_ID = review.PRODUCT_ID) AS PRODUCT_NAME
 		FROM review
 		ORDER BY REVIEW_ID DESC
 		LIMIT #{sno},
@@ -189,7 +188,7 @@
 		resultType="com.petmily.domain.InquiryDTO">
 		SELECT inquiry.*,
 		(SELECT P.PRODUCT_NAME FROM PRODUCT P WHERE P.PRODUCT_ID = INQUIRY.PRODUCT_ID) AS PRODUCT_NAME
-		FROM INQUIRY
+		FROM inquiry
 		WHERE INQUIRY_ID = #{inquiry_id}
 	</select>
 
@@ -249,9 +248,9 @@
 	<select id="getReview"
 		resultType="com.petmily.domain.ReviewDTO">
 		SELECT R.*, P.PRODUCT_NAME, P.PRODUCT_MAINIMAGEPATH,
-    		CASE WHEN EXISTS (SELECT 1 FROM REVIEW_REPLY RR WHERE RR.REVIEW_ID = R.REVIEW_ID) THEN true ELSE false END AS REPLY_CHECK
+    		CASE WHEN EXISTS (SELECT 1 FROM review_reply RR WHERE RR.REVIEW_ID = R.REVIEW_ID) THEN true ELSE false END AS REPLY_CHECK
 		FROM review R
-		LEFT JOIN PRODUCT P ON P.PRODUCT_ID = R.PRODUCT_ID
+		LEFT JOIN product P ON P.PRODUCT_ID = R.PRODUCT_ID
 		WHERE R.REVIEW_ID = #{review_id}
 	</select>
 
@@ -278,7 +277,7 @@
 	<select id="getReplyList"
 		resultType="com.petmily.domain.ReviewReplyDTO">
 		SELECT RR.REPLY_ID, RR.REPLY_WRITER, RR.REPLY_CONTENT,RR.REPLY_REGDATE
-		FROM REVIEW R LEFT JOIN REVIEW_REPLY RR
+		FROM review R LEFT JOIN review_reply RR
 		ON R.REVIEW_ID = RR.REVIEW_ID
 		WHERE R.REVIEW_ID = #{review_id};
 	</select>
@@ -333,15 +332,15 @@
 	</update>
 
 	<select id ="getEmail" resultType="com.petmily.domain.UserDTO">
-		SELECT * FROM USER WHERE USER_NAME = #{inquiry_writer}
+		SELECT * FROM user WHERE USER_NAME = #{inquiry_writer}
 	</select>
 
 	<select id="getProductByUser" resultType="com.petmily.domain.OrderProductByUserDTO">
 		SELECT P.PRODUCT_ID, P.PRODUCT_NAME, OP.ORDER_DATE, OP.USER_ID, OP.ORDER_KEY
 		FROM product P
-		LEFT JOIN ORDER_DETAIL OD
+		LEFT JOIN order_detail OD
 			ON P.PRODUCT_ID = OD.PRODUCT_ID
-		LEFT JOIN ORDER_PRODUCT OP
+		LEFT JOIN order_product OP
 			ON OD.ORDER_KEY = OP.ORDER_KEY
 		WHERE OP.USER_ID = #{userName}
 			AND OP.ORDER_DATE BETWEEN DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND DATE_ADD(CURDATE(), INTERVAL 1 DAY)
@@ -364,7 +363,7 @@
 	</update>
 
 	<select id="getReviewTest" resultType="com.petmily.domain.ReviewDTO">
-		SELECT * FROM REVIEW WHERE ORDER_KEY = #{order_key} AND PRODUCT_ID = #{product_id}
+		SELECT * FROM review WHERE ORDER_KEY = #{order_key} AND PRODUCT_ID = #{product_id}
 	</select>
 
 </mapper>

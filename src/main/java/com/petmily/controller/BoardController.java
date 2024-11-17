@@ -24,11 +24,6 @@ public class BoardController {
 	BoardService boardService;
 
 	// --------------------SHOW NOTICE LIST--------------------
-	// Notice List
-//	@GetMapping(value = "/noticeList")
-//	public void noticeList(Model model) {
-//		model.addAttribute("notice", boardService.getNoticeList());
-//	}
 	
 	// Notice Paging List
 	@GetMapping(value = "/noticePagingList")
@@ -45,12 +40,6 @@ public class BoardController {
 	
 	// --------------------SHOW INQUIRY LIST--------------------
 	
-	// Inquiry List
-//	@GetMapping(value = "/inquiryList")
-//	public void inquiryList(Model model) {
-//		model.addAttribute("inquiry", boardService.getInquiryList());
-//	}
-	
 	// Inquiry Paging List
 		@GetMapping(value = "/inquiryPagingList")
 		public void inquiryPagingList(Model model, Criteria cri, PageMaker pageMaker) {
@@ -65,13 +54,7 @@ public class BoardController {
 
 		
 	// --------------------SHOW REVIEW LIST--------------------	
-		
-	// Review List
-//	@GetMapping(value = "/reviewList")
-//	public void reviewList(Model model) {
-//		model.addAttribute("review", boardService.getReviewList());
-//	}
-	
+
 	// Review Paging List
 	@GetMapping(value = "/reviewPagingList")
 	public void reviewPagingList(Model model, Criteria cri, PageMaker pageMaker) {
@@ -87,12 +70,6 @@ public class BoardController {
 	
 	// --------------------SHOW REVIEW LIST--------------------	
 
-	// Faq List
-//	@GetMapping(value = "/faqList")
-//	public void faqList(Model model) {
-//		model.addAttribute("faq", boardService.getFaqList());
-//	}
-	
 	// Faq Paging List
 		@GetMapping(value = "/faqPagingList")
 		public void faqPagingList(Model model, Criteria cri, PageMaker pageMaker) {
