@@ -187,7 +187,7 @@
 	<select id="getInquiry"
 		resultType="com.petmily.domain.InquiryDTO">
 		SELECT inquiry.*,
-		(SELECT P.PRODUCT_NAME FROM PRODUCT P WHERE P.PRODUCT_ID = INQUIRY.PRODUCT_ID) AS PRODUCT_NAME
+		(SELECT P.PRODUCT_NAME FROM product P WHERE P.PRODUCT_ID = inquiry.PRODUCT_ID) AS PRODUCT_NAME
 		FROM inquiry
 		WHERE INQUIRY_ID = #{inquiry_id}
 	</select>
@@ -219,16 +219,14 @@
 
 	<update id="updateFaq">
 		UPDATE faq
-		SET FAQ_TITLE = #{faq_title}, QUESTION_TYPE
-		= #{question_type},
-		FAQ_CONTENT = #{faq_content}, FAQ_REGDATE =
-		CURRENT_TIMESTAMP
+		SET FAQ_TITLE = #{faq_title}, QUESTION_TYPE	= #{question_type},
+		FAQ_CONTENT = #{faq_content}, FAQ_REGDATE =	CURRENT_TIMESTAMP
 		WHERE FAQ_ID = #{faq_id}
 	</update>
 
 	<insert id="insertFaq">
-		INSERT INTO faq (FAQ_TITLE, FAQ_WRITER ,QUESTION_TYPE,
-		FAQ_CONTENT) VALUES (#{faq_title},'펫밀리',#{question_type},#{faq_content})
+		INSERT INTO faq (FAQ_TITLE, FAQ_WRITER ,QUESTION_TYPE, FAQ_CONTENT)
+		VALUES (#{faq_title},'펫밀리',#{question_type},#{faq_content})
 	</insert>
 
 	<delete id="deleteFaq">
@@ -350,7 +348,7 @@
 
 	<update id="updateStatus">
 		UPDATE order_detail AS OD
-		INNER JOIN ORDER_PRODUCT AS OP ON OD.ORDER_KEY = OP.ORDER_KEY
+		INNER JOIN order_product AS OP ON OD.ORDER_KEY = OP.ORDER_KEY
 		SET OD.PRODUCT_REVIEW = TRUE
 		WHERE OP.USER_ID = #{user_id} AND OD.ORDER_KEY = #{order_key} AND OD.PRODUCT_ID = #{product_id}
 	</update>

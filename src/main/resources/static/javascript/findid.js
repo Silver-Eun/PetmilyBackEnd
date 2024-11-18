@@ -1,6 +1,6 @@
 "use strict"
 
-function Findidf() {
+function findidf() {
 
 	let url="/user/Findidf";
 		axios.get(url
@@ -8,7 +8,7 @@ function Findidf() {
 
 		document.getElementById('resultArea1').innerHTML = response.data;
 	}).catch(err => {
-		alert("** response 실패 => " + err.message);
+		alert("아이디 찾기 불러오기 실패 " + err.message);
 	});
 
 	document.getElementById('resultArea2').innerHTML = "";

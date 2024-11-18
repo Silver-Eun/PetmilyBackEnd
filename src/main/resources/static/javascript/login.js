@@ -6,7 +6,7 @@ function Loginf() {
     ).then(response => {
         document.getElementById('resultArea1').innerHTML = response.data;
     }).catch(err => {
-        alert("** response 실패 => " + err.message);
+        alert("로그인 페이지 불러오기 실패 => " + err.message);
     });
 
     document.getElementById('resultArea2').innerHTML = "";
@@ -26,27 +26,26 @@ function Login() {
             const newPage = document.getElementById('newPage');
             newPage.setAttribute('data-login-id', response.data.user_id);
             newPage.setAttribute('data-login-name', response.data.user_name);
-            alert(`** response : id=${response.data.user_id}, password=${response.data.user_password}`);
+            alert(`로그인 되었습니다`);
             location.reload();
         })
         .catch(err => {
-            console.error(`** err.response=${err.response}, err.response.status=${err.response.status}, err.message=${err.message}`);
             if (err.response.status === 401) {
-                alert("~~ id 또는 password 오류!! 다시하세요 ~~");
+                alert("아이디 또는 비밀번호가 일치하지 않습니다.");
             } else {
-                alert("~~ 시스템 오류, 잠시후 다시하세요 => " + err.message);
+                alert("시스템 오류 => " + err.message);
             }
         });
 }
 
 function userLogout() {
     let url = "/user/logout";
-    axios.get(url) // 로그아웃을 처리하는 엔드포인트로 요청을 보냅니다.
+    axios.get(url)
         .then(response => {
-            alert('로그아웃 되었습니다.'); // 로그아웃 성공 시 알림을 표시합니다.
-            location.reload(); // 페이지를 새로고침합니다.
+            alert('로그아웃 되었습니다.');
+            location.reload();
         })
         .catch(error => {
-            console.error('로그아웃 실패:', error); // 로그아웃 실패 시 에러를 콘솔에 출력합니다.
+            alert("로그아웃 실패 => " + err.message);
         });
 }

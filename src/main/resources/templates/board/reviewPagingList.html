@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="KO" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Petmily Administrator Page</title>
@@ -8,7 +8,7 @@
 </head>
 <body>
 <h2>[상품후기 목록 페이지]</h2>
-<br> <br>
+<br><br>
 <table id="boardTable">
     <tr>
         <th>글번호</th>
@@ -20,62 +20,68 @@
         <th>작성일</th>
         <th>삭제</th>
     </tr>
-    <c:if test="${not empty requestScope.review}">
-        <c:forEach var="s" items="${requestScope.review}">
-            <tr>
-                <td>${s.review_id}</td>
-                <td><a onclick="reviewDetail(${s.review_id})">${s.review_title}</a></td>
-                <td>${s.product_name}</td>
-                <td>${s.review_writer}</td>
-                <td>${s.review_point}</td>
-                <td>${s.review_count}</td>
-                <td>${s.review_regdate}</td>
-                <td><a onclick="reviewDelete(${s.review_id})">삭제</a></td>
-            </tr>
-        </c:forEach>
-    </c:if>
-
+    <tr th:each="s : ${review}">
+        <td th:text="${s.review_id}"></td>
+        <td>
+            <a href="javascript:void(0)"
+               th:data-id="${s.review_id}"
+               onclick="reviewDetail(this.getAttribute('data-id'))"
+               th:text="${s.review_title}">
+            </a>
+        </td>
+        <td th:text="${s.product_name}"></td>
+        <td th:text="${s.review_writer}"></td>
+        <td th:text="${s.review_point}"></td>
+        <td th:text="${s.review_count}"></td>
+        <td th:text="${s.review_regdate}"></td>
+        <td>
+            <a href="javascript:void(0)"
+               th:data-id="${s.review_id}"
+               onclick="reviewDelete(this.getAttribute('data-id'))">
+                삭제
+            </a>
+        </td>
+    </tr>
 </table>
+<div style="text-align:center;">
+    <!-- 첫 번째 페이지 -->
+    <span th:if="${pageMaker.prev && pageMaker.spageNo > 1}">
+        <a href="javascript:void(0)"
+           th:attr="data-url='/board/reviewPagingList?currPage=1&amp;rowsPerPage=10'"
+           onclick="reviewPagingList(this.getAttribute('data-url'))">첫 번째 페이지</a>&nbsp;
+    </span>
+    <span th:unless="${pageMaker.prev && pageMaker.spageNo > 1}">
+        <span style="color: gray;">첫 번째 페이지&nbsp;&nbsp;&nbsp;</span>
+    </span>
 
-<!-- -------------비동기 페이지 끝------------- -->
+    <!-- 페이지 번호 -->
+    <span th:if="${pageMaker.spageNo > 0 && pageMaker.epageNo > 0}"
+          th:each="i : ${#numbers.sequence(pageMaker.spageNo, pageMaker.epageNo)}">
+        <span th:if="${i == pageMaker.cri.currPage}">
+            <b style="color: orange; font-size: larger;" th:text="${i}"></b>&nbsp;
+        </span>
+        <a href="javascript:void(0)"
+           th:if="${i != pageMaker.cri.currPage}"
+           th:attr="data-url='/board/reviewPagingList' + ${pageMaker.makeQuery(i)}"
+           onclick="reviewPagingList(this.getAttribute('data-url'))"
+           th:text="${i}"></a>&nbsp;
+    </span>
 
-<!-- Pagination -->
+    <!-- 데이터가 없을 때 -->
+    <span th:unless="${pageMaker.spageNo > 0 && pageMaker.epageNo > 0}">
+        <b style="color: gray;">0</b>
+    </span>
 
-<!-- 첫번째 페이지 이동 -->
-<div style=text-align:center;>
-    <c:choose>
-        <c:when test="${pageMaker.prev && pageMaker.spageNo>1}">
-            <a onclick="reviewPagingList('/board/reviewPagingList?currPage=1&rowsPerPage=10')">첫번째 페이지</a>&nbsp;
-        </c:when>
-
-        <c:otherwise>
-            <font color="Gray">첫번째 페이지&nbsp;&nbsp;&nbsp;</font>
-        </c:otherwise>
-    </c:choose>
-
-    <!-- 페이징 번호 표시 -->
-    <c:forEach begin="${pageMaker.spageNo }" end="${pageMaker.epageNo }"
-               var="i">
-        <c:if test="${i==pageMaker.cri.currPage }">
-            <font color="Orange" size="5"><b>${i }</b></font>&nbsp;
-        </c:if>
-        <c:if test="${i!=pageMaker.cri.currPage }">
-            <a onclick="reviewPagingList('/board/reviewPagingList${pageMaker.makeQuery(i)}')">${i }</a>&nbsp;
-        </c:if>
-    </c:forEach>
-
-
-    <!-- 마지막 페이지 이동 -->
-    <c:choose>
-        <c:when test="${pageMaker.next && pageMaker.epageNo > 0 }">
-            &nbsp; <a
-                onclick="reviewPagingList('/board/reviewPagingList${pageMaker.makeQuery(pageMaker.lastPageNo) }')">마지막
-                                                                                                                   페이지</a>
-        </c:when>
-        <c:otherwise>
-            <font color="Gray">&nbsp;&nbsp;마지막 페이지</font>
-        </c:otherwise>
-    </c:choose>
+    <!-- 마지막 페이지 -->
+    <span th:if="${pageMaker.next && pageMaker.epageNo > 0}">
+        &nbsp;<a href="javascript:void(0)"
+                 th:attr="data-url='/board/reviewPagingList' + ${pageMaker.makeQuery(pageMaker.lastPageNo)}"
+                 onclick="reviewPagingList(this.getAttribute('data-url'))">마지막 페이지</a>
+    </span>
+    <span th:unless="${pageMaker.next && pageMaker.epageNo > 0}">
+        <span style="color: gray;">&nbsp;&nbsp;마지막 페이지</span>
+    </span>
 </div>
+
 </body>
 </html>

@@ -5,11 +5,11 @@
     <title>Petmily Administrator Page</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/javascript/inquiry.js"></script>
+    <link rel="stylesheet" type="text/css" href="/style/style.css" />
 </head>
 <body>
-<!-- -------------비동기 페이지------------- -->
 <div id="newPage">
-    <h2>[공지사항 수정페이지]</h2>
+    <h2>[상품문의 답변 수정페이지]</h2>
     <button id="crud" onclick="history.back()">뒤로</button>
     <button id="crud" onclick="top.window.close()">창닫기</button>
     <br> <br>
@@ -18,23 +18,21 @@
             <tr>
                 <th>답변 내용</th>
                 <td>
-                    <textarea id="answer_content" rows="10" cols="30"></textarea>
-                    <input type="hidden" id="inquiry_writer" value="${requestScope.inquiry.inquiry_writer}"/>
+                    <textarea id="answer_content" name="answer_content" rows="10" cols="30"
+                              th:text="${inquiry.answer_content}"></textarea>
+                    <input type="hidden" id="inquiry_writer" name="inquiry_writer"
+                           th:value="${inquiry.inquiry_writer}"/>
                 </td>
             </tr>
             <tr>
                 <th>답변 작성일</th>
-                <td>${requestScope.inquiry.answer_regdate}</td>
-
+                <td th:text="${inquiry.answer_regdate}"></td>
             </tr>
         </table>
+        <button id="crud" type="button" th:attr="data-inquiry-id=${inquiry.inquiry_id}"
+                onclick="updateInquiryAnswer(this.dataset.inquiryId)">확인
+        </button>
     </form>
-    <button id="crud"
-            onclick="updateInquiryAnswer(${requestScope.inquiry.inquiry_id})">확인
-    </button>
 </div>
-
-<!-- -------------비동기 페이지 끝------------- -->
-
 </body>
 </html>

@@ -1,12 +1,12 @@
 "use strict"
 
-function Findpwf() {
+function findpwf() {
 	let url="/user/Findpwf";
 		axios.get(url
 	).then(response => {
 		document.getElementById('resultArea1').innerHTML = response.data;
 	}).catch(err => {
-		alert("** response 실패 => " + err.message);
+		alert("비밀번호 찾기 불러오기 실패 => " + err.message);
 	});
 
 	document.getElementById('resultArea2').innerHTML = "";
@@ -33,29 +33,55 @@ function findpw() {
         });
 }
 
-/*function newpwf() {
+// 비밀번호 찾기
+function newpwf() {
 
 	let url="/user/newpwf";
 		axios.get(url
 	).then(response => {
 
-		document.getElementById('resultArea2').innerHTML = response.data;
+		document.getElementById('resultArea1').innerHTML = response.data;
 	}).catch(err => {
 		alert("** response 실패 => " + err.message);
 	});
 
-	document.getElementById('resultArea2').innerHTML = "";
+	document.getElementById('resultArea1').innerHTML = "";
 	}
-	
+
+// 비밀번호 변경
+// function changePassword() {
+//     const currentPassword = document.getElementById('password1').value;
+//     const newPassword = document.getElementById('newpw').value;
+//     const confirmPassword = document.getElementById('cpassword2').value;
+//
+//
+// 	console.log("currentPassword="+currentPassword);
+// 	console.log("newPassword="+newPassword);
+// 	console.log("confirmPassword="+confirmPassword);
+//     if (newPassword !== confirmPassword) {
+//         alert('새 비밀번호와 확인용 비밀번호가 일치하지 않습니다.');
+//         return;
+//     }
+//
+//     axios.post('/user/changePassword', { currentPassword, newPassword })
+//         .then(response => {
+//             alert('비밀번호가 성공적으로 변경되었습니다.');
+//             location.reload(); // 페이지 새로고침
+//         })
+//         .catch(error => {
+//             console.error('비밀번호 변경 실패:', error);
+//             alert('비밀번호 변경에 실패했습니다. 다시 시도해주세요.');
+//         });
+// }
 function changePassword() {
     const currentPassword = document.getElementById('password1').value;
     const newPassword = document.getElementById('newpw').value;
     const confirmPassword = document.getElementById('cpassword2').value;
-	
-	
-	console.log("currentPassword="+currentPassword);
-	console.log("newPassword="+newPassword);
-	console.log("confirmPassword="+confirmPassword);
+
+    console.log("currentPassword=" + currentPassword);
+    console.log("newPassword=" + newPassword);
+    console.log("confirmPassword=" + confirmPassword);
+
     if (newPassword !== confirmPassword) {
         alert('새 비밀번호와 확인용 비밀번호가 일치하지 않습니다.');
         return;
@@ -70,4 +96,4 @@ function changePassword() {
             console.error('비밀번호 변경 실패:', error);
             alert('비밀번호 변경에 실패했습니다. 다시 시도해주세요.');
         });
-}*/
+}

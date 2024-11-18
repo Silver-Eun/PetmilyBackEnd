@@ -28,8 +28,6 @@ public class RestUserController {
 	UserMapper mapper;
 	PasswordEncoder passwordEncoder;
 
-
-
 	@PostMapping(value="/Login")
 	public ResponseEntity<?> login(HttpServletRequest request, @RequestBody UserDTO dto) {
 	    ResponseEntity<UserDTO> result = null;
@@ -73,10 +71,7 @@ public class RestUserController {
 	    }
 	    return result;
 	}	
-	
 
-
-	
 	@PostMapping(value = "/Signup")
 	public ResponseEntity<String> signup(@RequestBody UserDTO dto) {
 		
@@ -129,37 +124,7 @@ public class RestUserController {
 	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 	    }
 	}
-	
-	
-//	@PostMapping(value="/Findpw")
-//	public ResponseEntity<UserDTO> findUserPw(HttpSession session, @RequestBody UserDTO dto) {
-//	    ResponseEntity<UserDTO> result = null;
-//	    
-//	    String userid = dto.getUser_id(); 
-//	    String useremail = dto.getUser_email(); 
-//	    String foundUserPW = service.foundUserPw(userid, useremail); 
-//	 // 임시 비밀번호 생성 (임의로 설정)
-//	    String temporaryPassword = generateTemporaryPassword();
-//	    
-//	    UserDTO userDTO = new UserDTO();
-//	    if (foundUserPW != null) {
-//	    	// 임시 비밀번호를 DB에 업데이트하거나 사용자의 정보를 찾는 로직 추가
-//
-//	        // 사용자의 이메일로 임시 비밀번호 전송
-//	        emailService.sendTemporaryPasswordEmail(userEmail, temporaryPassword);
-//
-//	        return ResponseEntity.ok("임시 비밀번호가 이메일로 전송되었습니다.");
-//	    
-//	   
-//	    } else {
-//	        // 해당 사용자를 찾을 수 없을 때 처리
-//	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-//	    }
-//	    private String generateTemporaryPassword() {
-//	        // 임시 비밀번호 생성 로직 구현 (랜덤 문자열 생성 등)
-//	        return "temporary123"; // 임시로 고정된 비밀번호 반환
-//	    }
-	
+
 	  private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 	    private static final Random RANDOM = new SecureRandom();
 
@@ -208,10 +173,6 @@ public class RestUserController {
 	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("해당 사용자 정보를 찾을 수 없습니다.");
 	        }
 	    }
-	
-
-
-
 
 	@DeleteMapping(value="/selfDelete/{user_id}")
 	public ResponseEntity<?> delete(@PathVariable("user_id") String userId, UserDTO dto) {
@@ -286,8 +247,7 @@ public class RestUserController {
 	public ResponseEntity<String> checkPassword(@PathVariable("user_id") String user_id, @RequestBody UserDTO dto) {
 		 //입력받은 비밀번호
 		String inputPassword = dto.getUser_password();
-	    
-	  
+
 	    dto.setUser_id(user_id);
 	    
 	    //데이터베이스에서 가져온 비밀번호
@@ -309,6 +269,5 @@ public class RestUserController {
 	        return new ResponseEntity<>("사용자가 존재하지 않습니다", HttpStatus.NOT_FOUND);
 	    }
 	}
-	
 	
 }

@@ -6,11 +6,12 @@ function Joinf() {
 	).then(response => {
 		document.getElementById('resultArea1').innerHTML = response.data;
 	}).catch(err => {
-		alert("** response 실패 => " + err.message);
+		alert("회원가입 페이지 불러오기 실패 => " + err.message);
 	});
 
 	document.getElementById('resultArea1').innerHTML = "";
 }
+
 
 function Join() {
     let formData = new FormData(document.getElementById('joinform'));
@@ -32,8 +33,8 @@ function Join() {
         alert(`** response.data:${response.data}`);
         location.reload(); // 화면 새로고침
     }).catch(err => {
-        if (err.response.status === '502') alert("입력 오류!! 다시하세요");
-        else alert("시스템 오류, 잠시후 다시하세요 => " + err.message);
+        if (err.response.status === 502) alert("입력 오류");
+        else alert("시스템 오류 => " + err.message);
     });
 
     document.getElementById('newPage').innerHTML = "";

@@ -3,20 +3,17 @@
 // CartForm(장바구니, 주문, 주문상세)
 function cartForm() {
 	let resultHtml =
-	`&nbsp;
-	<span class="textlink" onclick="cartInsertf()">CartInsert</span>&nbsp;
-	&nbsp;
-	<span class="textlink" onclick="cartList()">CartList</span>&nbsp;
-	&nbsp;
-	<span class="textlink" onclick="orderProductInsertf()">OrderInsert</span>&nbsp;
-	&nbsp;
-	<span class="textlink" onclick="orderList()">OrderList</span>&nbsp;
-	&nbsp;
-	<span class="textlink" onclick="orderDetailInsertf()">OrderDetailInsert</span>&nbsp;
-	&nbsp;
-	<span class="textlink" onclick="orderDetailList()">OrderDetail</span>&nbsp;
-	&nbsp;
-	<a href="/home">[Home]</a>
+	`<h3>장바구니 주문 주문상세 테이블 관리</h3>
+	<table id="subTable">
+		<tr>
+			<th><a onclick="cartInsertf()">CartInsert</a></th>
+			<th><a onclick="cartList()">CartList</a></th>
+			<th><a onclick="orderProductInsertf()">OrderInsert</a></th>
+			<th><a onclick="orderList()">OrderList</a></th>
+			<th><a onclick="orderDetailInsertf()">OrderDetailInsert</a></th>
+			<th><a onclick="orderDetailList()">OrderDetail</a></th>
+		</tr>
+	</table>
 	`;
 	document.getElementById('newPage').innerHTML = "";
 	document.getElementById('pTableListArea').innerHTML = "";

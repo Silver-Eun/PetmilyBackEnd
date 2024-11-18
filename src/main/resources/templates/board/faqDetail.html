@@ -4,49 +4,45 @@
     <meta charset="UTF-8">
     <title>Petmily Administrator Page</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/style/style.css" />
 </head>
 <body>
-
-<!-- -------------비동기 페이지------------- -->
 <div id="newPage">
     <h2>[자주묻는질문 상세페이지]</h2>
     <button
-            onclick="location.href='faqUpdateForm?faq_id=${requestScope.faq.faq_id}'"
+            th:onclick="|location.href='faqUpdateForm?faq_id=${faq.faq_id}'|"
             id="crud">글수정
     </button>
-    <button id="crud" onclick="top.window.close()">창닫기</button>
+    <button id="crud" th:onclick="top.window.close()">창닫기</button>
     <br> <br>
-    <c:if test="${not empty requestScope.faq}">
+    <div th:if="${faq != null}">
         <table id="boardDetail">
             <tr>
                 <th>글번호</th>
-                <td>${requestScope.faq.faq_id}</td>
+                <td th:text="${faq.faq_id}"></td>
             </tr>
             <tr>
                 <th>글제목</th>
-                <td>${requestScope.faq.faq_title}</td>
+                <td th:text="${faq.faq_title}"></td>
             </tr>
             <tr>
                 <th>글분류</th>
-                <td>${requestScope.faq.question_type}</td>
+                <td th:text="${faq.question_type}"></td>
             </tr>
             <tr>
                 <th>조회수</th>
-                <td>${requestScope.faq.faq_count}</td>
+                <td th:text="${faq.faq_count}"></td>
             </tr>
             <tr>
                 <th>글내용</th>
-                <td>${requestScope.faq.faq_content}</td>
+                <td th:text="${faq.faq_content}"></td>
             </tr>
             <tr>
                 <th>작성일</th>
-                <td>${requestScope.faq.faq_regdate}</td>
+                <td th:text="${faq.faq_regdate}"></td>
             </tr>
         </table>
-    </c:if>
+    </div>
 </div>
-
-<!-- -------------비동기 페이지 끝------------- -->
-
 </body>
 </html>

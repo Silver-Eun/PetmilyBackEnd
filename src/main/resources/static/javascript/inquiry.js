@@ -34,6 +34,8 @@ function inquiryDetail(id) {
 
 // 3) Update Inquiry answer
 function updateInquiryAnswer(id) {
+	event.preventDefault(); // 폼 기본 동작 방지
+
 	let url = "/inquiry/update";
 
 	if (confirm("수정하시겠습니까?")) {

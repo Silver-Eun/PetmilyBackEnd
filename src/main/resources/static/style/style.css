@@ -12,10 +12,10 @@ a:visited {
 }
 
 /* CRUD 버튼 스타일 */
-#crud {
-	text-align: end;
-	padding: 10px 10px;
-}
+/*#crud {*/
+/*	text-align: end;*/
+/*	padding: 10px 10px;*/
+/*}*/
 /* CRUD 버튼 스타일 끝*/
 
 /* 메인페이지 테이블 스타일 */
@@ -46,6 +46,7 @@ a:visited {
 	border: 2px solid;
 	border-collapse: collapse;
 	text-align: center;
+	table-layout:fixed;
 	width: 100%;
 	height: 5%;
 }
@@ -57,7 +58,6 @@ a:visited {
 
 #subTable th {
 	background-color: skyblue;
-	width: 25%;
 	color: white;
 }
 /* 서브페이지 테이블 스타일 끝 */
@@ -99,7 +99,7 @@ a:visited {
 
 /* ------------------------------------------------------------------- */
 /* Product 테이블 스타일 */
-
+#newPage,
 #pTableListArea,
 #resultArea1,
 #resultArea2,
@@ -117,8 +117,6 @@ a:visited {
 #resultArea2 th,
 #insertTableArea th {
 	padding: 5px 5px;
-	background-color: teal;
-	color: white;
 }
 
 #resultArea1 table,

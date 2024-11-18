@@ -32,35 +32,44 @@
 		</th:block>
 	</th:block>
 </table>
-
-<!-- 페이지네이션 -->
-
-<!-- 첫번째 페이지 이동 -->
 <div style="text-align:center;">
-	<th:block th:if="${pageMaker.prev and pageMaker.spageNo > 1}">
-		<a th:attr="onclick='noticePagingList(\'/board/noticePagingList?currPage=1&rowsPerPage=5\')'" >첫번째 페이지</a>&nbsp;
-	</th:block>
-	<th:block th:if="${not (pageMaker.prev and pageMaker.spageNo > 1)}">
-		<font color="Gray">첫번째 페이지&nbsp;&nbsp;&nbsp;</font>
-	</th:block>
+	<!-- 첫 번째 페이지 -->
+	<span th:if="${pageMaker.prev && pageMaker.spageNo > 1}">
+        <a href="javascript:void(0)"
+		   th:attr="data-url='/board/noticePagingList?currPage=1&amp;rowsPerPage=10'"
+		   onclick="noticePagingList(this.getAttribute('data-url'))">첫 번째 페이지</a>&nbsp;
+    </span>
+	<span th:unless="${pageMaker.prev && pageMaker.spageNo > 1}">
+        <span style="color: gray;">첫 번째 페이지&nbsp;&nbsp;&nbsp;</span>
+    </span>
 
-	<!-- 페이징 번호 표시 -->
-	<th:block th:each="i : ${#numbers.sequence(pageMaker.spageNo, pageMaker.epageNo)}">
-		<th:block th:if="${i == pageMaker.cri.currPage}">
-			<font color="Orange" size="5"><b th:text="${i}"></b></font>&nbsp;
-		</th:block>
-		<th:block th:if="${i != pageMaker.cri.currPage}">
-			<a th:attr="onclick='noticePagingList(\'/board/noticePagingList' + ${pageMaker.makeQuery(i)} + '\')'" th:text="${i}"></a>&nbsp;
-		</th:block>
-	</th:block>
+	<!-- 페이지 번호 -->
+	<span th:if="${pageMaker.spageNo > 0 && pageMaker.epageNo > 0}"
+		  th:each="i : ${#numbers.sequence(pageMaker.spageNo, pageMaker.epageNo)}">
+        <span th:if="${i == pageMaker.cri.currPage}">
+            <b style="color: orange; font-size: larger;" th:text="${i}"></b>&nbsp;
+        </span>
+        <a href="javascript:void(0)"
+		   th:if="${i != pageMaker.cri.currPage}"
+		   th:attr="data-url='/board/noticePagingList' + ${pageMaker.makeQuery(i)}"
+		   onclick="noticePagingList(this.getAttribute('data-url'))"
+		   th:text="${i}"></a>&nbsp;
+    </span>
 
-	<!-- 마지막 페이지 이동 -->
-	<th:block th:if="${pageMaker.next and pageMaker.epageNo > 0}">
-		&nbsp; <a th:attr="onclick='noticePagingList(\'/board/noticePagingList' + ${pageMaker.makeQuery(pageMaker.lastPageNo)} + '\')'" >마지막 페이지</a>
-	</th:block>
-	<th:block th:if="${not (pageMaker.next and pageMaker.epageNo > 0)}">
-		<font color="Gray">&nbsp;&nbsp;마지막 페이지</font>
-	</th:block>
+	<!-- 데이터가 없을 때 -->
+	<span th:unless="${pageMaker.spageNo > 0 && pageMaker.epageNo > 0}">
+        <b style="color: gray;">0</b>
+    </span>
+
+	<!-- 마지막 페이지 -->
+	<span th:if="${pageMaker.next && pageMaker.epageNo > 0}">
+        &nbsp;<a href="javascript:void(0)"
+				 th:attr="data-url='/board/noticePagingList' + ${pageMaker.makeQuery(pageMaker.lastPageNo)}"
+				 onclick="noticePagingList(this.getAttribute('data-url'))">마지막 페이지</a>
+    </span>
+	<span th:unless="${pageMaker.next && pageMaker.epageNo > 0}">
+        <span style="color: gray;">&nbsp;&nbsp;마지막 페이지</span>
+    </span>
 </div>
 </body>
 </html>

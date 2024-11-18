@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping(value = "/board", method = { RequestMethod.GET, RequestMethod.POST })
+@RequestMapping(value = "board", method = { RequestMethod.GET, RequestMethod.POST })
 @AllArgsConstructor
 public class BoardController {
 

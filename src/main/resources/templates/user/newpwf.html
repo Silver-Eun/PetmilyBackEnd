@@ -6,21 +6,14 @@
     <script src="/javascript/findpw.js"></script>
 </head>
 <body>
-<b>=> 새로운 Password를 입력하세요</b><br><br>
-<div>
-    <label for="password1">현재 비밀번호:</label>
-    <input type="password" id="password1" name="currentPassword">
-</div>
-<div>
-    <label for="newpw">새 비밀번호:</label>
-    <input type="password" id="newpw" name="newPassword">
-</div>
-<div>
-    <label for="cpassword2">새 비밀번호 확인:</label>
-    <input type="password" id="cpassword2" name="confirmPassword">
-</div>
-<div>
-    <span class="textlink" onclick="changePassword()">비밀번호 변경</span>
-</div>
+<form action="/user/changePassword" method="POST">
+    <label for="currentPassword">현재 비밀번호:</label>
+    <input type="password" id="currentPassword" name="currentPassword" required>
+
+    <label for="newPassword">새 비밀번호:</label>
+    <input type="password" id="newPassword" name="newPassword" required>
+    <button type="submit">비밀번호 변경</button>
+</form>
+
 </body>
 </html>

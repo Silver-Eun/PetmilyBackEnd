@@ -7,6 +7,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,7 @@ import java.io.IOException;
 public class UserController {
 
     UserService service;
+    PasswordEncoder passwordEncoder;
 
     @GetMapping(value = "/Loginf")
     public String Loginf(Model model) {
@@ -46,58 +48,107 @@ public class UserController {
     }
 
     // => password 만 수정
-    @PostMapping(value = "/changePassword")
-    public String changePassword(HttpServletRequest request, Model model, UserDTO dto) {
+//    @PostMapping(value = "/changePassword")
+//    public String changePassword(HttpServletRequest request, Model model, UserDTO dto) {
+//
+//        log.info("** update 성공 **");
+//        model.addAttribute("banana", dto);
+//        if (service.update(dto) > 0) {
+//            log.info("** update 성공 **");
+//        } else {
+//            log.info("** update 실패 **");
+//        }
+//
+//        return "/home";
+//    }
 
-        log.info("** update 성공 **");
-        model.addAttribute("banana", dto);
-        if (service.update(dto) > 0) {
-            log.info("** update 성공 **");
-        } else {
-            log.info("** update 실패 **");
-        }
-
-        return "/home";
-    }
+//    @PostMapping(value = "/Login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<?> login(HttpSession session, @RequestBody UserDTO dto) {
+//        ResponseEntity<UserDTO> result = null;
+//
+//        String password = dto.getUser_password();
+//
+//        // 2) service 처리
+//        dto = service.selectOne(dto);
+//        log.info("dto =" + dto);
+//        log.info("password =" + password);
+//        log.info("dto.getUser_id =" + dto.getUser_id());
+//        if (dto != null && password.equals(dto.getUser_password())) {
+//            session.setAttribute("loginID", dto.getUser_id());
+//            session.setAttribute("loginPassword", dto.getUser_password());
+//            session.setAttribute("loginName", dto.getUser_name());
+//            final UserDTO userDTO = UserDTO.builder()
+//                    .user_id(dto.getUser_id())
+//                    .user_password(dto.getUser_password())
+//                    .build();
+//
+//            result = ResponseEntity.status(HttpStatus.OK).body(userDTO);
+//            log.info("** login HttpStatus.OK => " + HttpStatus.OK);
+//        } else {
+//            result = ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+//            log.info("** login HttpStatus.UNAUTHORIZED => " + HttpStatus.UNAUTHORIZED);
+//        }
+//        return result;
+//    }
 
     @PostMapping(value = "/Login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> login(HttpSession session, @RequestBody UserDTO dto) {
-        ResponseEntity<UserDTO> result = null;
+        try {
+            // 입력된 비밀번호
+            String inputPassword = dto.getUser_password();
 
-        String password = dto.getUser_password();
+            // DB에서 유저 정보 가져오기
+            UserDTO storedUser = service.selectOne(dto);
 
-        // 2) service 처리
-        dto = service.selectOne(dto);
-        log.info("dto =" + dto);
-        log.info("password =" + password);
-        log.info("dto.getUser_id =" + dto.getUser_id());
-        if (dto != null && password.equals(dto.getUser_password())) {
-            session.setAttribute("loginID", dto.getUser_id());
-            session.setAttribute("loginPassword", dto.getUser_password());
-            session.setAttribute("loginName", dto.getUser_name());
-            final UserDTO userDTO = UserDTO.builder()
-                    .user_id(dto.getUser_id())
-                    .user_password(dto.getUser_password())
-                    .build();
+            if (storedUser != null && passwordEncoder.matches(inputPassword, storedUser.getUser_password())) {
+                // 세션에 로그인 정보 저장
+                session.setAttribute("loginID", storedUser.getUser_id());
+                session.setAttribute("loginName", storedUser.getUser_name());
 
-            result = ResponseEntity.status(HttpStatus.OK).body(userDTO);
-            log.info("** login HttpStatus.OK => " + HttpStatus.OK);
-        } else {
-            result = ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-            log.info("** login HttpStatus.UNAUTHORIZED => " + HttpStatus.UNAUTHORIZED);
+                // 성공 응답 생성
+                UserDTO responseDto = UserDTO.builder()
+                        .user_id(storedUser.getUser_id())
+                        .user_name(storedUser.getUser_name())
+                        .build();
+
+                return ResponseEntity.status(HttpStatus.OK).body(responseDto);
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("아이디 또는 비밀번호가 잘못되었습니다.");
+            }
+        } catch (Exception e) {
+            log.error("** 로그인 중 오류 발생: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("시스템 오류 발생! 잠시 후 다시 시도하세요.");
         }
-        return result;
     }
+
 
     @GetMapping(value = "/Joinf")
     public void Joinf() {
         // viewName 생략 -> 요청명이 viewName 이 됨
     }
 
+//    @PostMapping(value = "/join")
+//    public ResponseEntity<String> join(UserDTO dto) {
+//        try {
+//            // Service 처리
+//            if (service.insert(dto) > 0) {
+//                return ResponseEntity.status(HttpStatus.OK).body("회원가입 성공");
+//            } else {
+//                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("회원가입 실패 다시 시도하세요");
+//            }
+//        } catch (Exception e) {
+//            log.error("** 회원가입 중 에러 발생: " + e.getMessage());
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("시스템 오류 발생! 잠시 후 다시 시도하세요");
+//        }
+//    }
+
     @PostMapping(value = "/join")
     public ResponseEntity<String> join(UserDTO dto) {
         try {
-            // Service 처리
+            // 비밀번호 암호화
+            String encodedPassword = passwordEncoder.encode(dto.getUser_password());
+            dto.setUser_password(encodedPassword);
+
             if (service.insert(dto) > 0) {
                 return ResponseEntity.status(HttpStatus.OK).body("회원가입 성공");
             } else {
@@ -108,6 +159,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("시스템 오류 발생! 잠시 후 다시 시도하세요");
         }
     }
+
 
     @GetMapping(value = "/Findidf")
     public void Findidf() {
@@ -197,4 +249,50 @@ public class UserController {
             return new ResponseEntity<String>("** 삭제 실패, Data_NotFound **", HttpStatus.BAD_GATEWAY);
         }
     }
+
+    // 비밀번호 변경
+//    @PostMapping(value = "/changePassword")
+//    public String changePassword(HttpServletRequest request, Model model,
+//                                 @RequestParam String currentPassword,
+//                                 @RequestParam String newPassword) {
+//
+//        log.info("** 비밀번호 변경 요청 **");
+//
+//        // 현재 로그인된 사용자 정보 가져오기
+//        HttpSession session = request.getSession();
+//        String userId = (String) session.getAttribute("loginID");  // 로그인된 사용자 ID 가져오기
+//
+//        if (userId == null) {
+//            log.error("사용자 미로그인 상태입니다.");
+//            return "redirect:/user/Loginf";  // 로그인 페이지로 리디렉션
+//        }
+//
+//        // 사용자 정보 조회
+//        UserDTO user = service.selectOne(UserDTO.builder().user_id(userId).build());
+//
+//        if (user == null) {
+//            log.error("사용자 정보 조회 실패");
+//            return "redirect:/user/Loginf";  // 사용자 정보가 없으면 로그인 페이지로 리디렉션
+//        }
+//
+//        // 입력된 현재 비밀번호와 저장된 비밀번호 비교
+//        if (!passwordEncoder.matches(currentPassword, user.getUser_password())) {
+//            log.error("현재 비밀번호 불일치");
+//            return "redirect:/user/Updatef/" + userId + "?error=currentPasswordMismatch";  // 비밀번호 불일치 처리
+//        }
+//
+//        // 새 비밀번호 암호화
+//        String encodedNewPassword = passwordEncoder.encode(newPassword);
+//        user.setUser_password(encodedNewPassword);  // 새로운 비밀번호 설정
+//
+//        // 비밀번호 업데이트 처리
+//        int updateResult = service.update(user);
+//        if (updateResult > 0) {
+//            log.info("비밀번호 변경 성공");
+//            return "redirect:/" ;
+//        } else {
+//            log.error("비밀번호 변경 실패");
+//            return "redirect:/" ;
+//        }
+//    }
 }

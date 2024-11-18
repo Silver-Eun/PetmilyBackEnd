@@ -1,6 +1,9 @@
+"use strict"
+
 function boardForm() {
     let resultHtml =
         `
+        <h3>공지사항 문의 리뷰 FAQ 테이블 관리</h3>
         <table id="subTable">
             <tr>
                 <th><a onclick="noticePagingList('/board/noticePagingList')">Notice</a></th>

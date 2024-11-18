@@ -8,11 +8,16 @@ function pTableListf(){
 	document.getElementById('newPage').innerHTML="";
 	
 	let resultHtml =
-	`<h3>상품 및 이벤트 테이블 관리</h3>
-	&nbsp;<a onclick="pmProductf()">PROMOTION_PRODUCT</a>&nbsp;
-	&nbsp;<a onclick="productf()">PRODUCT</a>&nbsp;
-	&nbsp;<a onclick="pImagef()">PRODUCT_IMAGE</a>&nbsp;
-	&nbsp;<a onclick="eventf()">EVENT</a>&nbsp;
+	`
+	<h3>상품 및 이벤트 테이블 관리</h3>
+	<table id="subTable">
+		<tr>
+			<th><a onclick="pmProductf()">PROMOTION_PRODUCT</a></th>
+			<th><a onclick="productf()">PRODUCT</a></th>
+			<th><a onclick="pImagef()">PRODUCT_IMAGE</a></th>
+			<th><a onclick="eventf()">EVENT</a></th>
+		</tr>
+	</table>
 	`;
 	document.getElementById('newPage').innerHTML="";
 	document.getElementById('pTableListArea').innerHTML=resultHtml;
