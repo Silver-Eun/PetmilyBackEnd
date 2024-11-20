@@ -2,6 +2,7 @@ package com.petmily.controller;
 
 import com.petmily.domain.UserDTO;
 import com.petmily.service.UserService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @Controller
 @RequestMapping("user")
@@ -60,35 +62,6 @@ public class UserController {
 //        }
 //
 //        return "/home";
-//    }
-
-//    @PostMapping(value = "/Login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<?> login(HttpSession session, @RequestBody UserDTO dto) {
-//        ResponseEntity<UserDTO> result = null;
-//
-//        String password = dto.getUser_password();
-//
-//        // 2) service 처리
-//        dto = service.selectOne(dto);
-//        log.info("dto =" + dto);
-//        log.info("password =" + password);
-//        log.info("dto.getUser_id =" + dto.getUser_id());
-//        if (dto != null && password.equals(dto.getUser_password())) {
-//            session.setAttribute("loginID", dto.getUser_id());
-//            session.setAttribute("loginPassword", dto.getUser_password());
-//            session.setAttribute("loginName", dto.getUser_name());
-//            final UserDTO userDTO = UserDTO.builder()
-//                    .user_id(dto.getUser_id())
-//                    .user_password(dto.getUser_password())
-//                    .build();
-//
-//            result = ResponseEntity.status(HttpStatus.OK).body(userDTO);
-//            log.info("** login HttpStatus.OK => " + HttpStatus.OK);
-//        } else {
-//            result = ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-//            log.info("** login HttpStatus.UNAUTHORIZED => " + HttpStatus.UNAUTHORIZED);
-//        }
-//        return result;
 //    }
 
     @PostMapping(value = "/Login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -224,15 +197,27 @@ public class UserController {
     }
 
     @PostMapping(value = "/Userupdate")
-    public String UserUpdate(HttpServletRequest request,
-                             UserDTO dto, Model model) throws IOException {
+    public String UserUpdate(HttpServletRequest request, UserDTO dto,
+                             Model model, HttpServletResponse response) throws IOException {
         // => 처리결과에 따른 화면 출력을 위해서 dto 의 값을 Attribute에 보관
         log.info("** update 성공 **");
         model.addAttribute("banana", dto);
         if (service.update(dto) > 0) {
             log.info("** update 성공 **");
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>");
+            out.println("alert('회원정보 수정 성공');");
+            out.println("</script>");
+            out.close();
         } else {
             log.info("** update 실패 **");
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>");
+            out.println("alert('회원정보 수정 실패');");
+            out.println("</script>");
+            out.close();
         }
 
         return "home";
