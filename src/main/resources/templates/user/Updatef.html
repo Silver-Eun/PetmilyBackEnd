@@ -12,67 +12,87 @@
     <table>
         <tr height="40">
             <th bgcolor="skyblue">I D</th>
-            <td><input type="text" name="user_id" id="id"
+            <td>
+                <input type="text" name="user_id" id="id"
                        placeholder="영어, 10글자이내" size="20"
-                       th:value="${banana.user_id}" readOnly> <br> <span
-                    id="iMessage" class="eMessage"></span></td>
+                       th:value="${banana.user_id}" readOnly> <br>
+                <span id="iMessage" class="eMessage"></span>
+            </td>
         </tr>
         <tr height="40">
             <th bgcolor="skyblue">Password</th>
-            <td><input type="password" name="user_password" id="password"
+            <td>
+                <input type="password" name="user_password" id="password"
                        placeholder="영어, 숫자, 특수문자" size="20"
-                       th:value="${banana.user_password}" readonly><br> <span
-                    id="pMessage" class="eMessage"></span></td>
+                       th:value="${banana.user_password}" readonly><br>
+                <span id="pMessage" class="eMessage"></span>
+            </td>
         </tr>
         <tr height="40">
             <th bgcolor="skyblue">Pw 확인</th>
-            <td><input type="password" id="password2" placeholder="재입력 확인"><br>
-                <span id="p2Message" class="eMessage"></span></td>
+            <td>
+                <input type="password" id="password2" placeholder="재입력 확인"><br>
+                <span id="p2Message" class="eMessage"></span>
+            </td>
         </tr>
         <tr height="40">
             <th bgcolor="skyblue">Name</th>
-            <td><input type="text" name="user_name" id="name"
+            <td>
+                <input type="text" name="user_name" id="name"
                        placeholder="한글 또는 영어" size="20"
-                       th:value="${banana.user_name}"><br> <span
-                    id="nMessage" class="eMessage"></span></td>
+                       th:value="${banana.user_name}"><br>
+                <span id="nMessage" class="eMessage"></span>
+            </td>
         </tr>
         <tr height="40">
             <th bgcolor="skyblue">email</th>
-            <td><input type="text" name="user_email" id="email" size="20"
+            <td>
+                <input type="text" name="user_email" id="email" size="20"
                        th:value="${banana.user_email}"><br>
-                <span id="nMessage" class="eMessage"></span></td>
+                <span id="nameMessage" class="eMessage"></span>
+            </td>
         </tr>
 
         <tr height="40">
             <th bgcolor="skyblue">Birthday</th>
-            <td><input type="date" name="user_birthday" id="birthday"
+            <td>
+                <input type="date" name="user_birthday" id="birthday"
                        size="20" th:value="${banana.user_birthday}"><br>
-                <span id="bMessage" class="eMessage"></span></td>
+                <span id="bMessage" class="eMessage"></span>
+            </td>
         </tr>
         <tr height="40">
             <th bgcolor="skyblue">phone</th>
             <td>
                 <input type="text" class="number" name="user_phone" size="20"
                        th:value="${banana.user_phone}"/>
+                <span id="aMessage" class="eMessage"></span>
             </td>
         </tr>
         <tr height="40">
             <th bgcolor="skyblue">zipcode</th>
-            <td><input type="text" name="zipcode" id="zipcode"
-                       placeholder="우편변호" size="20"><br>
-                <span id="nMessage" class="eMessage"></span></td>
+            <td>
+                <input type="text" name="zipcode" id="zipcode"
+                       placeholder="우편변호" size="20"
+                       th:value="${banana.zipcode}"/><br>
+                <span id="aMessage" class="eMessage"></span>
+            </td>
         </tr>
         <tr height="40">
             <th bgcolor="skyblue">addr</th>
-            <td><input type="text" name="addr" id="addr" placeholder="주소"
-                       size="20"><br>
-                <span id="nMessage" class="eMessage"></span></td>
+            <td>
+                <input type="text" name="addr" id="addr" placeholder="주소"
+                       size="20" th:value="${banana.addr}"/><br>
+                <span id="nMessage" class="eMessage"></span>
+            </td>
         </tr>
         <tr height="40">
             <th bgcolor="skyblue">addr_detail</th>
-            <td><input type="text" name="addr_detail" id="addr_detail"
-                       placeholder="상세주소" size="20"><br>
-                <span id="nMessage" class="eMessage"></span></td>
+            <td>
+                <input type="text" name="addr_detail" id="addr_detail"
+                       placeholder="상세주소" size="20" th:value="${banana.addr_detail}"/><br>
+                <span id="nMessage" class="eMessage"></span>
+            </td>
         </tr>
         <tr height="40">
             <th bgcolor="skyblue"></th>
