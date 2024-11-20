@@ -39,7 +39,7 @@ public class UserController {
 
         session.invalidate();
         rttr.addFlashAttribute("message", "로그아웃 성공");
-        return "redirect:/home";
+        return "redirect:home";
     } //logout
 
     @GetMapping(value = "/newpwf")
@@ -235,7 +235,7 @@ public class UserController {
             log.info("** update 실패 **");
         }
 
-        return "/home";
+        return "home";
     } //Update
 
     @DeleteMapping("/UserDelete/{ii}")
