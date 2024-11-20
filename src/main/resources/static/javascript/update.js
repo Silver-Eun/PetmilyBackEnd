@@ -1,7 +1,7 @@
 "use strict"
 
 function Userupdate(id) {
-    let url = "/user/Updatef/" + id;
+    let url = "user/Updatef/" + id;
 
     axios.get(url)
         .then(response => {
