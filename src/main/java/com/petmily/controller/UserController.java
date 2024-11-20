@@ -197,31 +197,29 @@ public class UserController {
     }
 
     @PostMapping(value = "/Userupdate")
-    public String UserUpdate(HttpServletRequest request, UserDTO dto,
-                             Model model, HttpServletResponse response) throws IOException {
-        // => 처리결과에 따른 화면 출력을 위해서 dto 의 값을 Attribute에 보관
-        log.info("** update 성공 **");
-        model.addAttribute("banana", dto);
+    public void UserUpdate(HttpServletRequest request, UserDTO dto,
+                           HttpServletResponse response) throws IOException {
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+
         if (service.update(dto) > 0) {
             log.info("** update 성공 **");
-            response.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = response.getWriter();
             out.println("<script>");
             out.println("alert('회원정보 수정 성공');");
+            // home 페이지로 이동
+            out.println("location.href='/home';");
             out.println("</script>");
-            out.close();
         } else {
             log.info("** update 실패 **");
-            response.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = response.getWriter();
             out.println("<script>");
             out.println("alert('회원정보 수정 실패');");
+            // home 페이지로 이동
+            out.println("location.href='/home';");
             out.println("</script>");
-            out.close();
         }
+        out.close();
+    }
 
-        return "home";
-    } //Update
 
     @DeleteMapping("/UserDelete/{ii}")
     public ResponseEntity<?> pmpDelete(@PathVariable("ii") String id, UserDTO dto) {
