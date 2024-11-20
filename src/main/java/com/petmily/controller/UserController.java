@@ -220,7 +220,7 @@ public class UserController {
         dto.setUser_id(id);
         model.addAttribute("banana", service.selectOne(dto));
         log.info("**update 성공 **");
-        return "/user/Updatef";
+        return "user/Updatef";
     }
 
     @PostMapping(value = "/Userupdate")
