@@ -1,6 +1,6 @@
 spring:
   application:
-    name: petmilyFinalFinalRealFinal
+    name: petmilyReal
   # DB 설정
   datasource:
     url: jdbc:mysql://${DB_URL}:${DB_PORT}/${DB_NAME}
@@ -22,7 +22,6 @@ spring:
     cache : false
   # 타임리프 경로 설정
     prefix : classpath:/templates/
-
   # JPA 설정
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect

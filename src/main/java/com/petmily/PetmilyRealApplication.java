@@ -5,11 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
-public class PetmilyFinalFinalRealFinalApplication {
+public class PetmilyRealApplication {
 
     public static void main(String[] args) {
 
-        SpringApplication.run(PetmilyFinalFinalRealFinalApplication.class, args);
+        SpringApplication.run(PetmilyRealApplication.class, args);
     }
 
 }
