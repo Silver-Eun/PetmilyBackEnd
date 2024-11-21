@@ -19,7 +19,7 @@ public class Web implements WebMvcConfigurer {
 		registry.addMapping("/**")
 				.allowedOrigins("https://petmilyreal.netlify.app") // Netlify 도메인
 				.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-				.allowCredentials(true);
+				.allowCredentials(true)
+				.allowedHeaders("*");
 	}
-
 }
