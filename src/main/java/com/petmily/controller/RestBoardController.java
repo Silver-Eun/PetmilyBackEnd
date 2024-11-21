@@ -20,13 +20,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@org.springframework.web.bind.annotation.RestController
-@AllArgsConstructor
+@RestController
 @Log4j2
 public class RestBoardController {
-	BoardService boardService;
-	ProductService pservice;
-	EmailService emailService;
+	private final BoardService boardService;
+	private final ProductService pservice;
+	private final EmailService emailService;
+
+	public RestBoardController(BoardService boardService, ProductService pservice, EmailService emailService) {
+		this.boardService = boardService;
+		this.pservice = pservice;
+		this.emailService = emailService;
+	}
 
 	@GetMapping(value = "/notice/list")
 	public ResponseEntity<?> noticeList(SearchDTO searchDTO) {

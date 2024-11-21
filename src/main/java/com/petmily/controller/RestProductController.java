@@ -19,13 +19,20 @@ import java.util.List;
 @RestController
 @RequestMapping("/rsproduct")
 @Log4j2
-@AllArgsConstructor
 public class RestProductController {
 
-	PromotionProductService pmpservice;
-	ProductService pservice;
-	ProductImageService piservice;
-	EventService eservice;
+	private final PromotionProductService pmpservice;
+	private final ProductService pservice;
+	private final ProductImageService piservice;
+	private final EventService eservice;
+
+	public RestProductController(PromotionProductService pmpservice, ProductService pservice,
+								 ProductImageService piservice, EventService eservice) {
+		this.pmpservice = pmpservice;
+		this.pservice = pservice;
+		this.piservice = piservice;
+		this.eservice = eservice;
+	}
 
 	@GetMapping("/checkdata")
 	// => React Connect Test

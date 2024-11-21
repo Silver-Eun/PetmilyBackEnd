@@ -29,7 +29,6 @@ function Join() {
     axios.post(url, formData, {
         headers: { "Content-Type": "multipart/form-data" }
     }).then(response => {
-    
         alert(`** response.data:${response.data}`);
         location.reload(); // 화면 새로고침
     }).catch(err => {

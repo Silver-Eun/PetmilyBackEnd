@@ -17,15 +17,20 @@ import java.util.List;
 @RestController
 @RequestMapping("/rscart")
 @Log4j2
-@AllArgsConstructor
 public class RestCartController {
 
-	CartService cservice;
-	OrderProductService opservice;
-	OrderDetailService odservice;
-	UserService uservice;
-	ProductService pservice;
-	BoardService boardService;
+	private final CartService cservice;
+	private final OrderProductService opservice;
+	private final OrderDetailService odservice;
+	private final ProductService pservice;
+
+	public RestCartController(CartService cservice, OrderProductService opservice,
+							  OrderDetailService odservice, ProductService pservice) {
+		this.cservice = cservice;
+		this.opservice = opservice;
+		this.odservice = odservice;
+		this.pservice = pservice;
+	}
 
 	@GetMapping("/cartList")
 	// => React Connect Test

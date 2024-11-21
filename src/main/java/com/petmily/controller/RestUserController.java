@@ -23,10 +23,19 @@ import java.util.Random;
 @Log4j2
 public class RestUserController {
 
-	UserService service;
-	EmailService eservice;
-	UserMapper mapper;
-	PasswordEncoder passwordEncoder;
+	private final UserService service;
+	private final EmailService eservice;
+	private final UserMapper mapper;
+	private final PasswordEncoder passwordEncoder;
+
+	// 생성자 주입
+	public RestUserController(UserService service, EmailService eservice,
+							  UserMapper mapper, PasswordEncoder passwordEncoder) {
+		this.service = service;
+		this.eservice = eservice;
+		this.mapper = mapper;
+		this.passwordEncoder = passwordEncoder;
+	}
 
 	@PostMapping(value="/Login")
 	public ResponseEntity<?> login(HttpServletRequest request, @RequestBody UserDTO dto) {
