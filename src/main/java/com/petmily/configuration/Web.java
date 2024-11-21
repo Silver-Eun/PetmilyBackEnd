@@ -18,7 +18,7 @@ public class Web implements WebMvcConfigurer {
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")
 				.allowedOrigins("https://petmilyreal.netlify.app") // Netlify 도메인
-				.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+				.allowedMethods("GET", "POST", "PUT", "OPTIONS")
 				.allowCredentials(true)
 				.allowedHeaders("*");
 	}
