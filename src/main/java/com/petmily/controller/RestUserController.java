@@ -62,17 +62,17 @@ public class RestUserController {
 	        HttpSession session = request.getSession();
 	        session.setAttribute("loginID", dto.getUser_id());
 	        session.setAttribute("loginName", dto.getUser_name());
-
-			// ResponseCookie를 사용하여 SameSite 속성 설정
-			ResponseCookie cookie = ResponseCookie.from("JSESSIONID", session.getId())
-					.path("/")
-					.httpOnly(true)
-					.secure(true)  // HTTPS 환경에서만 전송
-					.sameSite("None")  // SameSite=None
-					.build();
-
-			// 응답 헤더에 쿠키 추가
-			response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+//
+//			// ResponseCookie를 사용하여 SameSite 속성 설정
+//			ResponseCookie cookie = ResponseCookie.from("JSESSIONID", session.getId())
+//					.path("/")
+//					.httpOnly(true)
+//					.secure(true)  // HTTPS 환경에서만 전송
+//					.sameSite("None")  // SameSite=None
+//					.build();
+//
+//			// 응답 헤더에 쿠키 추가
+//			response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
 
 	        final UserDTO userDTO = UserDTO.builder()
 	            .user_id(dto.getUser_id())
@@ -87,7 +87,8 @@ public class RestUserController {
 
 	        result = ResponseEntity.status(HttpStatus.OK).body(userDTO);
 	        log.info("** login HttpStatus.OK => " + HttpStatus.OK);
-	    } else {
+			log.info("Logged in user: " + session.getAttribute("loggedInUser"));
+		} else {
 	        result = ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
 	        log.info("** login HttpStatus.UNAUTHORIZED => " + HttpStatus.UNAUTHORIZED);
 	    }
