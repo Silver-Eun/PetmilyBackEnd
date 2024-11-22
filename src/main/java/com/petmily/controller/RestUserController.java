@@ -63,6 +63,15 @@ public class RestUserController {
 			session.setAttribute("loginID", dto.getUser_id());  // 세션에 로그인 정보 저장
 			session.setAttribute("loginName", dto.getUser_name());
 
+			// 세션 쿠키 생성
+			ResponseCookie cookie = ResponseCookie.from("JSESSIONID", session.getId())
+					.path("/")
+					.httpOnly(true)
+					.secure(true) // HTTPS 환경에서만 전송
+					.sameSite("None")  // SameSite=None
+					.build();
+			response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+
 			// 로그인된 사용자 정보를 ResponseBody에 담아서 반환
 			final UserDTO userDTO = UserDTO.builder()
 					.user_id(dto.getUser_id())

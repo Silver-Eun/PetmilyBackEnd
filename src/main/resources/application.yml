@@ -26,6 +26,15 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
 
+# 세션
+server:
+  servlet:
+     session:
+       # 세션 타임아웃 설정 (30분)
+       timeout : 30m
+       # 세션 지속 설정
+       persistent : true
+
 # mybatis 설정
 mybatis:
   type-aliases-package: com.petmily.mapperInterface
