@@ -5,9 +5,11 @@ import com.petmily.domain.UserDTO;
 import com.petmily.mapperInterface.UserMapper;
 import com.petmily.service.EmailService;
 import com.petmily.service.UserService;
-import lombok.AllArgsConstructor;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,7 +40,7 @@ public class RestUserController {
 	}
 
 	@PostMapping(value="/Login")
-	public ResponseEntity<?> login(HttpServletRequest request, @RequestBody UserDTO dto) {
+	public ResponseEntity<?> login(HttpServletRequest request, HttpServletResponse response, @RequestBody UserDTO dto) {
 	    ResponseEntity<UserDTO> result = null;
 
 	    String id = dto.getUser_id();
@@ -53,11 +55,25 @@ public class RestUserController {
 	    // DB에 저장된 암호화된 비밀번호
 	    String encryptedPassword = dto.getUser_password();
 
+	    // 클라이언트에서 받은 비밀번호를 암호화
+	    String encodedPassword = passwordEncoder.encode(password);
+
 	    if ((dto != null && id.equals(dto.getUser_id()) && passwordEncoder.matches(password, encryptedPassword))) {
 	        HttpSession session = request.getSession();
 	        session.setAttribute("loginID", dto.getUser_id());
 	        session.setAttribute("loginName", dto.getUser_name());
-			log.info("Session ID: " + session.getId());
+
+			// ResponseCookie를 사용하여 SameSite 속성 설정
+			ResponseCookie cookie = ResponseCookie.from("JSESSIONID", session.getId())
+					.path("/")
+					.httpOnly(true)
+					.secure(true)  // HTTPS 환경에서만 전송
+					.sameSite("None")  // SameSite=None
+					.build();
+
+			// 응답 헤더에 쿠키 추가
+			response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+
 	        final UserDTO userDTO = UserDTO.builder()
 	            .user_id(dto.getUser_id())
 	            .user_name(dto.getUser_name())
