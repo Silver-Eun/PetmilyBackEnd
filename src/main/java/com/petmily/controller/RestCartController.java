@@ -86,24 +86,28 @@ public class RestCartController {
 	// ** 리액트 홈 장바구니 추가 Post
 	@PostMapping(value = "/cartInsertP/{jj}")
 	public ResponseEntity<?> cartInsertP(HttpSession session, @PathVariable("jj") int product_id) {
-	    try {
-	        // 세션에서 로그인 아이디를 가져오기
-	        String user_id = (String) session.getAttribute("loginID");
-	        
-	        // user_id null
-	        if (user_id == null) {
-	            return new ResponseEntity<String>("로그인 해주세요.", HttpStatus.UNAUTHORIZED);
-	        }
+		try {
+			// 세션에서 로그인 객체 가져오기
+			UserDTO loggedInUser = (UserDTO) session.getAttribute("loggedInUser");
 
-	        // 세션에서 가져온 로그인 아이디와 상품 ID를 사용하여 처리
-	        cservice.insertP(user_id, product_id);
+			// 로그인 정보 확인
+			if (loggedInUser == null) {
+				return new ResponseEntity<String>("로그인 해주세요.", HttpStatus.UNAUTHORIZED);
+			}
 
-	        return new ResponseEntity<String>("Success", HttpStatus.OK);
-	    } catch (Exception e) {
-	        log.error("Error in cartInsertP", e);
-	        return new ResponseEntity<String>("Error occurred", HttpStatus.INTERNAL_SERVER_ERROR);
-	    }
+			// user_id 추출
+			String user_id = loggedInUser.getUser_id();
+
+			// 세션에서 가져온 로그인 아이디와 상품 ID를 사용하여 처리
+			cservice.insertP(user_id, product_id);
+
+			return new ResponseEntity<String>("Success", HttpStatus.OK);
+		} catch (Exception e) {
+			log.error("Error in cartInsertP", e);
+			return new ResponseEntity<String>("Error occurred", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
+
 	
 	// 리액트 장바구니 수량 Up 아이콘 Post
 	@PostMapping(value = "/cartCntUp/{jj}")
