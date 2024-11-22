@@ -47,20 +47,17 @@ public class RestUserController {
 	    // 2) service 처리
 	    dto = service.selectOne(dto);
 	    log.info("dto =" + dto);
-	    log.info("password =" + password);
 	    log.info("dto.getUser_id =" + dto.getUser_id());
 	    log.info("dto.getUser_name ="+dto.getUser_name());
 	    
 	    // DB에 저장된 암호화된 비밀번호
 	    String encryptedPassword = dto.getUser_password();
 
-	    // 클라이언트에서 받은 비밀번호를 암호화
-	    String encodedPassword = passwordEncoder.encode(password);
-
 	    if ((dto != null && id.equals(dto.getUser_id()) && passwordEncoder.matches(password, encryptedPassword))) {
-	        HttpSession session = request.getSession(); // 세션 가져오기
+	        HttpSession session = request.getSession();
 	        session.setAttribute("loginID", dto.getUser_id());
 	        session.setAttribute("loginName", dto.getUser_name());
+			log.info("Session ID: " + session.getId());
 	        final UserDTO userDTO = UserDTO.builder()
 	            .user_id(dto.getUser_id())
 	            .user_name(dto.getUser_name())
