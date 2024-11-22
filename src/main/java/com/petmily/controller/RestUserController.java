@@ -39,61 +39,51 @@ public class RestUserController {
 		this.passwordEncoder = passwordEncoder;
 	}
 
-	@PostMapping(value="/Login")
+	@PostMapping(value = "/Login")
 	public ResponseEntity<?> login(HttpServletRequest request, HttpServletResponse response, @RequestBody UserDTO dto) {
-	    ResponseEntity<UserDTO> result = null;
+		ResponseEntity<UserDTO> result = null;
 
-	    String id = dto.getUser_id();
-	    String password = dto.getUser_password(); 
+		String id = dto.getUser_id();
+		String password = dto.getUser_password();
 
-	    // 2) service 처리
-	    dto = service.selectOne(dto);
-	    log.info("dto =" + dto);
-	    log.info("dto.getUser_id =" + dto.getUser_id());
-	    log.info("dto.getUser_name ="+dto.getUser_name());
-	    
-	    // DB에 저장된 암호화된 비밀번호
-	    String encryptedPassword = dto.getUser_password();
+		// 2) 서비스 처리
+		dto = service.selectOne(dto);
+		log.info("dto =" + dto);
+		log.info("dto.getUser_id =" + dto.getUser_id());
+		log.info("dto.getUser_name =" + dto.getUser_name());
 
-	    // 클라이언트에서 받은 비밀번호를 암호화
-	    String encodedPassword = passwordEncoder.encode(password);
+		// DB에 저장된 암호화된 비밀번호
+		String encryptedPassword = dto.getUser_password();
 
-	    if ((dto != null && id.equals(dto.getUser_id()) && passwordEncoder.matches(password, encryptedPassword))) {
-	        HttpSession session = request.getSession();
-	        session.setAttribute("loginID", dto.getUser_id());
-	        session.setAttribute("loginName", dto.getUser_name());
-//
-//			// ResponseCookie를 사용하여 SameSite 속성 설정
-//			ResponseCookie cookie = ResponseCookie.from("JSESSIONID", session.getId())
-//					.path("/")
-//					.httpOnly(true)
-//					.secure(true)  // HTTPS 환경에서만 전송
-//					.sameSite("None")  // SameSite=None
-//					.build();
-//
-//			// 응답 헤더에 쿠키 추가
-//			response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+		// 클라이언트에서 받은 비밀번호를 암호화
+		String encodedPassword = passwordEncoder.encode(password);
 
-	        final UserDTO userDTO = UserDTO.builder()
-	            .user_id(dto.getUser_id())
-	            .user_name(dto.getUser_name())
-	            .user_email(dto.getUser_email())
-	            .user_phone(dto.getUser_phone())
-	            .user_birthday(dto.getUser_birthday())
-	            .zipcode(dto.getZipcode())
-	            .addr(dto.getAddr())
-	            .addr_detail(dto.getAddr_detail())
-	            .build();
+		if (dto != null && id.equals(dto.getUser_id()) && passwordEncoder.matches(password, encryptedPassword)) {
+			HttpSession session = request.getSession(); // 세션 가져오기
+			session.setAttribute("loginID", dto.getUser_id());  // 세션에 로그인 정보 저장
+			session.setAttribute("loginName", dto.getUser_name());
 
-	        result = ResponseEntity.status(HttpStatus.OK).body(userDTO);
-	        log.info("** login HttpStatus.OK => " + HttpStatus.OK);
-			log.info("Logged in user: " + session.getAttribute("loggedInUser"));
+			// 로그인된 사용자 정보를 ResponseBody에 담아서 반환
+			final UserDTO userDTO = UserDTO.builder()
+					.user_id(dto.getUser_id())
+					.user_name(dto.getUser_name())
+					.user_email(dto.getUser_email())
+					.user_phone(dto.getUser_phone())
+					.user_birthday(dto.getUser_birthday())
+					.zipcode(dto.getZipcode())
+					.addr(dto.getAddr())
+					.addr_detail(dto.getAddr_detail())
+					.build();
+
+			result = ResponseEntity.status(HttpStatus.OK).body(userDTO);  // 로그인 성공
+			log.info("** login HttpStatus.OK => " + HttpStatus.OK);
 		} else {
-	        result = ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-	        log.info("** login HttpStatus.UNAUTHORIZED => " + HttpStatus.UNAUTHORIZED);
-	    }
-	    return result;
-	}	
+			result = ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);  // 로그인 실패
+			log.info("** login HttpStatus.UNAUTHORIZED => " + HttpStatus.UNAUTHORIZED);
+		}
+		return result;
+	}
+
 
 	@PostMapping(value = "/Signup")
 	public ResponseEntity<String> signup(@RequestBody UserDTO dto) {
