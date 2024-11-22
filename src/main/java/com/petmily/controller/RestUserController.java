@@ -77,6 +77,9 @@ public class RestUserController {
 
 			result = ResponseEntity.status(HttpStatus.OK).body(userDTO);  // 로그인 성공
 			log.info("** login HttpStatus.OK => " + HttpStatus.OK);
+
+			log.info("Session loginID: " + session.getAttribute("loginID"));
+			log.info("Session loginName: " + session.getAttribute("loginName"));
 		} else {
 			result = ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);  // 로그인 실패
 			log.info("** login HttpStatus.UNAUTHORIZED => " + HttpStatus.UNAUTHORIZED);
