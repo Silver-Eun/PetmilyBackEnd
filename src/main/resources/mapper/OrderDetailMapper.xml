@@ -37,24 +37,7 @@
 		update order_detail set order_key=#{order_key}, delivery_status=#{delivery_status}
 		where order_key=#{order_key}
 	</update>
-	
-	<!-- ** Board_SearchCri_Paging 
-	=> ver02_MySql
-		-> 검색조건: title에 Spring이 포함된 글목록
-		select * from board
-		where title LIKE '%Spring%'
-		order by root desc, step asc
-		limit #{sno}, #{rowsPerPage}
-	=> 해결
-		-> title : cri의 searchType 컬럼 -> ${searchType}
-		-> '%Spring%' : cri의 keyword 
-						-> % + #{keyword} + %
-						-> MySql 문법은 불편 : CONCAT('%',#{keyword},'%')
-						-> Mybatis 구문이 편리
-	=> search SQL 
-		-> % 기호의 문자열 연결 처리
-		-> LIKE 조건문		
-	--> 
+
 	<sql id="search">
 		<!-- 1) CONCAT('%',#{keyword},'%') 처리 -->
 		<if test="keyword!=null">
@@ -82,10 +65,7 @@
 		select count(*) from order_detail
 			where ( order_detail_key >0 <include refid="search"></include>
 	</select>
-	
-	<!-- ** Board_Cri_Paging ********************************
-		=> ver01_MySql
-			limit a, b ( a개 제외하고 a+1 부터 b개 )  적용 -->
+
 	<select id="bcriList" resultType="com.petmily.domain.OrderDetailDTO">
 		select * from order_detail
 		order by order_detail_key asc
@@ -94,5 +74,4 @@
 	<select id="criTotalCount" resultType="int">
 		select count(*) from order_detail
 	</select>
-	<!-- ******************************************************* -->
 </mapper>  

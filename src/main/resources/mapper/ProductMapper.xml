@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.petmily.mapperInterface.ProductMapper">
-	
-	<!-- <select id="selectOne" resultType="com.petmily.domain.ProductDTO">
-		SELECT * FROM PRODUCT WHERE product_id=#{product_id}
-	</select> -->
-	
-	<!-- <select id="selectList" resultType="com.petmily.domain.ProductDTO">
-		select * from PRODUCT
-	</select> -->
-	
 	<select id="selectOne" resultType="com.petmily.domain.ProductDTO">
 		select p.*, pmp.promotion_image, pmp.promotion_discount, count(r.product_id) as review_cnt
 		from product as p
@@ -17,12 +8,6 @@
 		left join review as r on p.product_id = r.product_id
 		where p.product_id = #{product_id}
 		group by p.product_id
-		
-		<!-- SELECT p.*, pmp.promotion_image, pmp.promotion_discount
-		FROM PRODUCT as p
-		JOIN PROMOTION_PRODUCT as pmp
-		ON p.promotion_id = pmp.promotion_id
-		WHERE p.product_id = #{product_id} -->
 	</select>
 	
 	<select id="selectList" resultType="com.petmily.domain.ProductDTO">
@@ -31,11 +16,6 @@
 		join promotion_product as pmp on p.promotion_id = pmp.promotion_id
 		left join review as r on p.product_id = r.product_id
 		group by p.product_id
-		
-		<!-- SELECT p.*, pmp.promotion_image, pmp.promotion_discount
-		FROM PRODUCT as p
-		JOIN PROMOTION_PRODUCT as pmp
-		ON p.promotion_id = pmp.promotion_id -->
 	</select>
 	
 	<select id="selectPromotionList" resultType="com.petmily.domain.ProductDTO">

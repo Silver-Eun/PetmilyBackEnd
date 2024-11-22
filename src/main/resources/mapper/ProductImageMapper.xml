@@ -60,19 +60,10 @@
 			where ( pimage_id>0 <include refid="search"></include>
 			ORDER BY pimage_id DESC
 			limit #{sno}, #{rowsPerPage}
-		
-		<!-- SELECT pi.*, p.product_name
-	    FROM PRODUCT_IMAGE AS pi
-	    JOIN PRODUCT AS p
-	    ON p.product_id = pi.product_id
-	    WHERE ( pi.pimage_id>0 <include refid="search"></include>
-		ORDER BY pi.pimage_id DESC
-		limit #{sno}, #{rowsPerPage} -->
 	</select>
 	
 	<select id="searchTotalCount" resultType="int">
 		select count(*) from product_image
 			where ( pimage_id>0 <include refid="search"></include>
 	</select>
-	
 </mapper>

@@ -363,15 +363,4 @@
 	<select id="getReviewTest" resultType="com.petmily.domain.ReviewDTO">
 		SELECT * FROM review WHERE ORDER_KEY = #{order_key} AND PRODUCT_ID = #{product_id}
 	</select>
-
 </mapper>
-
-
-
-
-
-
-
-
-
-

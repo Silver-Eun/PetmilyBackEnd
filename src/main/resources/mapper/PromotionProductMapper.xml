@@ -33,5 +33,4 @@
 	<delete id="delete">
 		DELETE FROM promotion_product WHERE promotion_id=#{promotion_id}
 	</delete>
-	
 </mapper>

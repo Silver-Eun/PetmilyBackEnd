@@ -3,10 +3,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.petmily.mapperInterface.CartMapper">
 
-	<!-- 1. selectList -->
-<!-- 	<select id="selectList" resultType="com.petmily.domain.CartDTO"> -->
-<!-- 		select * from cart order by user_id asc -->
-<!-- 	</select> -->
 	<select id="selectList" resultType="com.petmily.domain.CartDTO">
 		SELECT c.user_id, c.product_id, c.product_cnt, p.product_name, p.product_price, p.product_mainimagepath, pp.promotion_discount
 		FROM cart c
@@ -55,24 +51,7 @@
 		update cart set product_cnt=product_cnt-1
 		where user_id = #{param1} and product_id = #{param2}
 	</update>
-	
-	<!-- ** Board_SearchCri_Paging 
-	=> ver02_MySql
-		-> 검색조건: title에 Spring이 포함된 글목록
-		select * from board
-		where title LIKE '%Spring%'
-		order by root desc, step asc
-		limit #{sno}, #{rowsPerPage}
-	=> 해결
-		-> title : cri의 searchType 컬럼 -> ${searchType}
-		-> '%Spring%' : cri의 keyword 
-						-> % + #{keyword} + %
-						-> MySql 문법은 불편 : CONCAT('%',#{keyword},'%')
-						-> Mybatis 구문이 편리
-	=> search SQL 
-		-> % 기호의 문자열 연결 처리
-		-> LIKE 조건문		
-	--> 
+
 	<sql id="search">
 		<!-- 1) CONCAT('%',#{keyword},'%') 처리 -->
 		<if test="keyword!=null">
@@ -100,10 +79,7 @@
 		select count(*) from cart
 			where ( product_id >0 <include refid="search"></include>
 	</select>
-	
-	<!-- ** Board_Cri_Paging ********************************
-		=> ver01_MySql
-			limit a, b ( a개 제외하고 a+1 부터 b개 )  적용 -->
+
 	<select id="bcriList" resultType="com.petmily.domain.CartDTO">
 		select * from cart
 		order by user_id asc
@@ -115,19 +91,19 @@
 	
 	<!-- MyPage************************************************* -->
 	<select id="getInquiryList" resultType="com.petmily.domain.InquiryDTO">
-	    SELECT INQUIRY.*, 
+	    SELECT inquiry.*, 
 	    (SELECT P.PRODUCT_NAME 
-	     FROM PRODUCT P 
-	     WHERE P.PRODUCT_ID = INQUIRY.PRODUCT_ID) AS PRODUCT_NAME
-	    FROM INQUIRY
+	     FROM product P 
+	     WHERE P.PRODUCT_ID = inquiry.PRODUCT_ID) AS PRODUCT_NAME
+	    FROM inquiry
 	    WHERE inquiry_WRITER = #{param2}
 	    ORDER BY INQUIRY_REGDATE DESC;
 	</select>
 	
 	<select id="getReviewList" resultType="com.petmily.domain.ReviewDTO">
-		SELECT REVIEW.*, P.PRODUCT_NAME, P.PRODUCT_MAINIMAGEPATH
-	    FROM REVIEW
-	    LEFT JOIN PRODUCT P ON P.PRODUCT_ID = REVIEW.PRODUCT_ID
+		SELECT review.*, P.PRODUCT_NAME, P.PRODUCT_MAINIMAGEPATH
+	    FROM review
+	    LEFT JOIN product P ON P.PRODUCT_ID = review.PRODUCT_ID
 		WHERE REVIEW_WRITER= #{review_writer}
 		ORDER BY REVIEW_REGDATE DESC;
 	</select>

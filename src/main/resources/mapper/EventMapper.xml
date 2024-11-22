@@ -25,5 +25,4 @@
 	<delete id="delete">
 		delete from event where event_id=#{event_id}
 	</delete>
-	
 </mapper>
