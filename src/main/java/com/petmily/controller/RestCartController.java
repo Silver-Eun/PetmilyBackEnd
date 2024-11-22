@@ -32,9 +32,11 @@ public class RestCartController {
 		this.pservice = pservice;
 	}
 
-	@GetMapping("/cartList")
 	// => React Connect Test
+	@GetMapping("/cartList")
 	public ResponseEntity<List<CartDTO>> cartList(HttpSession session) {
+		log.info("Session loginID: " + session.getAttribute("loginID"));
+		log.info("Session loginName: " + session.getAttribute("loginName"));
 		String user_id = (String) session.getAttribute("loginID");
 		
 		// 세션이 비어있으면 실행하지 않고 403 Forbidden 응답 반환
