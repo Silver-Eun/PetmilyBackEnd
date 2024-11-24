@@ -34,6 +34,8 @@ server:
        timeout : 30m
        # 세션 지속 설정
        persistent : true
+  # http, https 프록시
+  forward-headers-strategy: framework
 
 # mybatis 설정
 mybatis:

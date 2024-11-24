@@ -329,8 +329,12 @@
 		UPDATE faq SET FAQ_COUNT = FAQ_COUNT + 1 WHERE FAQ_ID = #{faq_id}
 	</update>
 
+	<!-- 동명이인 방지 -->
 	<select id ="getEmail" resultType="com.petmily.domain.UserDTO">
-		SELECT * FROM user WHERE USER_NAME = #{inquiry_writer}
+		SELECT * FROM user WHERE user_id = (
+			SELECT user_id
+			FROM user
+			WHERE user_name = #{inquiry_writer})
 	</select>
 
 	<select id="getProductByUser" resultType="com.petmily.domain.OrderProductByUserDTO">

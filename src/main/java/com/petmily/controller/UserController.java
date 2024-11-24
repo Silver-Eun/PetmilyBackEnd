@@ -100,21 +100,6 @@ public class UserController {
         // viewName 생략 -> 요청명이 viewName 이 됨
     }
 
-//    @PostMapping(value = "/join")
-//    public ResponseEntity<String> join(UserDTO dto) {
-//        try {
-//            // Service 처리
-//            if (service.insert(dto) > 0) {
-//                return ResponseEntity.status(HttpStatus.OK).body("회원가입 성공");
-//            } else {
-//                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("회원가입 실패 다시 시도하세요");
-//            }
-//        } catch (Exception e) {
-//            log.error("** 회원가입 중 에러 발생: " + e.getMessage());
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("시스템 오류 발생! 잠시 후 다시 시도하세요");
-//        }
-//    }
-
     @PostMapping(value = "/join")
     public ResponseEntity<String> join(UserDTO dto) {
         try {
@@ -168,7 +153,6 @@ public class UserController {
         String useremail = dto.getUser_email();
         String foundUserPW = service.foundUserPw(userid, useremail); // 해당 메서드로 사용자 아이디 찾기
 
-
         log.info("dto =" + dto);
         log.info("id =" + userid);
         log.info("useremail =" + useremail);
@@ -185,7 +169,6 @@ public class UserController {
     @GetMapping("/UserList")
     public void userList(Model model) {
         model.addAttribute("banana", service.selectList());
-
     }
 
     @GetMapping("/Updatef/{ii}")
