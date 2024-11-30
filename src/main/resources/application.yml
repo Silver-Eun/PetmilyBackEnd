@@ -3,9 +3,12 @@ spring:
     name: petmilyReal
   # DB 설정
   datasource:
-    url: jdbc:mysql://${DB_URL}:${DB_PORT}/${DB_NAME}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+#    url: jdbc:mysql://${DB_URL}:${DB_PORT}/${DB_NAME}
+#    username: ${DB_USERNAME}
+#    password: ${DB_PASSWORD}
+    url: jdbc:mysql://svc.sel5.cloudtype.app:30204/petmily
+    username: root
+    password: mysql
     driver-class-name: com.mysql.cj.jdbc.Driver
     # DB 연결 타임아웃 30초 설정
     hikari:

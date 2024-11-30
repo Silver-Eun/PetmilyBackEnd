@@ -38,10 +38,9 @@ function pmProductf() {
 	axios.get(
 		url
 	).then(response => {
-		console.log("** pmProductf response 성공 **");
 		document.getElementById('resultArea1').innerHTML=response.data;
 	}).catch(err => {
-		alert("** pmProductf response 실패 => " + err.message);
+		alert("response 실패 : " + err.message);
 	});
 	
 	document.getElementById('insertTableArea').innerHTML="";
@@ -67,10 +66,9 @@ function productf(url) {
 	axios.get(
 		myurl
 	).then(response => {
-		console.log("** productf response 성공 **");
 		document.getElementById('resultArea1').innerHTML=response.data;
 	}).catch(err => {
-		alert("** productf response 실패 => " + err.message);
+		alert("response 실패 : " + err.message);
 	});
 	
 	document.getElementById('insertTableArea').innerHTML="";
@@ -96,10 +94,9 @@ function pImagef(url) {
 	axios.get(
 		myurl
 	).then(response => {
-		console.log("** pImagef response 성공 **");
 		document.getElementById('resultArea1').innerHTML=response.data;
 	}).catch(err => {
-		alert("** pImagef response 실패 => " + err.message);
+		alert("response 실패 : " + err.message);
 	});
 	
 	document.getElementById('insertTableArea').innerHTML="";
@@ -118,10 +115,9 @@ function eventf() {
 	axios.get(
 		url
 	).then(response => {
-		console.log("** eventf response 성공 **");
 		document.getElementById('resultArea1').innerHTML=response.data;
 	}).catch(err => {
-		alert("** eventf response 실패 => " + err.message);
+		alert("response 실패 : " + err.message);
 	});
 	
 	document.getElementById('insertTableArea').innerHTML="";
@@ -140,10 +136,9 @@ function showImages(id) {
 	axios.get(
 		url
 	).then(response => {
-		console.log("** showImages response 성공 **");
 		document.getElementById('resultArea1').innerHTML=response.data;
 	}).catch(err => {
-		alert("** showImages response 실패 => " + err.message);
+		alert("response 실패 : " + err.message);
 	});
 	
 	document.getElementById('insertTableArea').innerHTML="";
@@ -153,7 +148,7 @@ function showImages(id) {
 function searchPDB() {
     let searchType = document.getElementById('searchType').value;
     let keyword = document.getElementById('keyword').value;
-    let url = 'product/productList?currPage=1&searchType=' + searchType + '&keyword=' + keyword;
+    let url = 'api/product/productList?currPage=1&searchType=' + searchType + '&keyword=' + keyword;
     
     productf(url);
 }
@@ -161,13 +156,13 @@ function searchPDB() {
 function searchPIDB() {
     let searchType = document.getElementById('searchType').value;
     let keyword = document.getElementById('keyword').value;
-    let url = 'product/pImageList?currPage=1&searchType=' + searchType + '&keyword=' + keyword;
+    let url = 'api/product/pImageList?currPage=1&searchType=' + searchType + '&keyword=' + keyword;
 
     pImagef(url);
 }
 
 function keywordClear() {
-    if (document.getElementById('searchType').value=='all') {
+    if (document.getElementById('searchType').value==='all') {
         document.getElementById('keyword').value='';
     }   
 }

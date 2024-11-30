@@ -2,7 +2,7 @@
 
 function UserList() {
 
-    let url = "/user/UserList";
+    let url = "user/UserList";
     $.ajax({
         type: 'Get',
         url: url,
@@ -17,12 +17,12 @@ function UserList() {
 }
 
 function UserDelete(id) {
-    let url = "/user/UserDelete/" + id;
+    let url = "/api/user/UserDelete/" + id;
     axios.delete(url).then(response => {
-        alert("** 삭제 성공 => " + response.data);
+        alert("삭제 성공 : " + response.data);
         UserList()
     }).catch(err => {
-        alert("시스템 오류, 잠시 후 다시하세요 => " + err.message);
+        alert("시스템 오류 : " + err.message);
     });
 
 

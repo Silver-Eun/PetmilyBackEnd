@@ -24,7 +24,7 @@ function cartForm() {
 
 // CartList(장바구니)
 function cartList() {
-	let url = "/cart/cartList";
+	let url = "cart/cartList";
 	axios.get(url
 	).then(response => {
 		document.getElementById('resultArea2').innerHTML = response.data;
@@ -37,12 +37,12 @@ function cartList() {
 
 // CartInsert(장바구니 추가페이지) Get
 function cartInsertf() {
-	let url = "/cart/cartInsert";
+	let url = "cart/cartInsert";
 	axios.get(url
 	).then(response => {
 		document.getElementById('resultArea2').innerHTML = response.data;
 	}).catch(err => {
-		alert("** response 실패 => " + err.message);
+		alert("response 실패 : " + err.message);
 	});
 
 	document.getElementById('resultArea2').innerHTML = "";
@@ -55,7 +55,7 @@ function cartInsert() {
 	let formData = new FormData(document.getElementById('cartform'));
 	
 	// axios 요청
-	let url="cart/cartInsertP";
+	let url="/api/cart/cartInsertP";
 	
 	axios.post(url, formData,
 				{headers:{"Content-Type":"multipart/form-data"}
@@ -64,7 +64,7 @@ function cartInsert() {
 				// 장바구니 리스트로 이동
 				cartList();
 	}).catch( err => {
-				if ( err.response.status=='502' ) alert("입력 오류");
+				if ( err.response.status === 502 ) alert("입력 오류");
 				else alert("시스템 오류 : => " + err.message);
 	});
 	
@@ -73,7 +73,7 @@ function cartInsert() {
 
 // cartDelete(장바구니 삭제)
 function cDelete(user_id, product_id) {
-	let url = "/cart/cdelete/" + user_id + "/" + product_id;
+	let url = "/api/cart/cdelete/" + user_id + "/" + product_id;
 	axios.delete(url).then(response => {
 		alert(response.data);
 		// 장바구니 리스트로 이동
@@ -86,7 +86,7 @@ function cDelete(user_id, product_id) {
 
 // pagination
 function cartPageList(a) {
-	let url = "/cart/cartList" + a;
+	let url = "/api/cart/cartList" + a;
 	axios.get(url
 	).then(response => {
 		document.getElementById('resultArea2').innerHTML = response.data;

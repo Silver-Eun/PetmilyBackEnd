@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rscart")
+@RequestMapping("/api/rscart")
 @Log4j2
 public class RestCartController {
 

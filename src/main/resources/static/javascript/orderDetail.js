@@ -2,25 +2,25 @@
 
 // OrderDetail(주문상세내역)
 function orderDetailList() {
-	let url = "/cart/orderDetail";
+	let url = "cart/orderDetail";
 	axios.get(url
 	).then(response => {
 		document.getElementById('resultArea2').innerHTML = response.data;
 	}).catch(err => {
-		alert("** response 실패 => " + err.message);
+		alert("response 실패 : " + err.message);
 	});
 
 	document.getElementById('resultArea2').innerHTML = "";
 }
 
-// OrderDetailInsert(주문상세 추가페이지) Get
+// OrderDetailInsert(주문상세 추가페이지)
 function orderDetailInsertf() {
-	let url = "/cart/orderDetailInsert";
+	let url = "cart/orderDetailInsert";
 	axios.get(url
 	).then(response => {
 		document.getElementById('resultArea2').innerHTML = response.data;
 	}).catch(err => {
-		alert("** response 실패 => " + err.message);
+		alert("response 실패 : " + err.message);
 	});
 
 	document.getElementById('resultArea2').innerHTML = "";
@@ -33,17 +33,17 @@ function orderDetailInsert() {
 	let formData = new FormData(document.getElementById('orderdetailform'));
 	
 	// axios 요청
-	let url="cart/orderDetailInsertP";
+	let url="/api/cart/orderDetailInsertP";
 	
 	axios.post(url, formData,
 				{headers:{"Content-Type":"multipart/form-data"}
 	}).then( response => {
-				alert(`** response.data:${response.data}`);
+				alert(`response.data : ${response.data}`);
 				// 주문상세내역 리스트로 이동
 				orderDetailList();
 	}).catch( err => {
-				if ( err.response.status=='502' ) alert("~~ 입력 오류!! 다시하세요 ~~");  				
-				else alert("~~ 시스템 오류, 잠시후 다시하세요 => " + err.message);
+				if ( err.response.status === 502 ) alert("입력 오류");
+				else alert("시스템 오류 : " + err.message);
 	});
 	
 	document.getElementById('resultArea2').innerHTML="";
@@ -51,12 +51,12 @@ function orderDetailInsert() {
 
 // OrderDetailDetail(주문상세 세부내역)
 function odDetail(order_detail_key) {
-	let url = "/cart/oddetail?jCode=U&order_detail_key=" + order_detail_key;
+	let url = "cart/oddetail?jCode=U&order_detail_key=" + order_detail_key;
 	axios.get(url
 	).then(response => {
 		document.getElementById('resultArea2').innerHTML = response.data;
 	}).catch(err => {
-		alert("** response 실패 => " + err.message);
+		alert("response 실패 : " + err.message);
 	});
 
 	document.getElementById('resultArea2').innerHTML = "";
@@ -69,7 +69,7 @@ function orderDetailUpdate() {
 	let formData = new FormData(document.getElementById('orderdetailUpdateform'));
 	
 	// axios 요청
-	let url="cart/orderDetailUpdateP";
+	let url="/api/cart/orderDetailUpdateP";
 	
 	axios.post(url, formData,
 				{headers:{"Content-Type":"multipart/form-data"}
@@ -78,8 +78,8 @@ function orderDetailUpdate() {
 				// 주문상세내역 리스트로 이동
 				orderDetailList();
 	}).catch( err => {
-				if ( err.response.status=='502' ) alert("~~ 입력 오류!! 다시하세요 ~~");  				
-				else alert("~~ 시스템 오류, 잠시후 다시하세요 => " + err.message);
+				if ( err.response.status===502 ) alert("입력 오류");
+				else alert("시스템 오류 : " + err.message);
 	});
 	
 	document.getElementById('resultArea2').innerHTML="";
@@ -87,25 +87,25 @@ function orderDetailUpdate() {
 
 // delete(주문상세 삭제)
 function odDelete(order_key) {
-	let url = "/cart/oddelete/" + order_key;
+	let url = "/api/cart/oddelete/" + order_key;
 	axios.delete(url).then(response => {
 		alert(response.data);
 		// 주문상세내역 리스트로 이동
 		orderDetailList();
 	}).catch(err => {
-		if (err.response.status == '502') alert(err.response.data);
-		else alert("~~ 시스템 오류, 잠시후 다시하세요 => " + err.message);
+		if (err.response.status === 502) alert(err.response.data);
+		else alert("시스템 오류 : " + err.message);
 	});
 }
 
 // pagination
 function orderDetailPageList(a) {
-	let url = "/cart/orderDetail" + a;
+	let url = "/api/cart/orderDetail" + a;
 	axios.get(url
 	).then(response => {
 		document.getElementById('resultArea2').innerHTML = response.data;
 	}).catch(err => {
-		alert("** response 실패 => " + err.message);
+		alert("response 실패 : " + err.message);
 	});
 
 	document.getElementById('resultArea2').innerHTML = "";

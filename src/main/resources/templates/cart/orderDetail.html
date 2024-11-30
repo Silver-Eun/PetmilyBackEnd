@@ -25,10 +25,10 @@
 	<tr th:each="s : ${banana}">
 		<td th:text="${s.order_detail_key}"></td>
 		<td>
-                <span class="textlink" th:attr="data-order-detail-key=${s.order_detail_key}"
-					  onclick="odDetail(this.dataset.orderDetailKey)">
-                    <span th:text="${s.order_key}"></span>
-                </span>
+			<span class="textlink" th:attr="data-order-detail-key=${s.order_detail_key}"
+				  onclick="odDetail(this.dataset.orderDetailKey)">
+				<span th:text="${s.order_key}"></span>
+			</span>
 		</td>
 		<td th:text="${s.product_id}"></td>
 		<td th:text="${s.product_cnt}"></td>

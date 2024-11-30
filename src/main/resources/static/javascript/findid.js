@@ -2,10 +2,9 @@
 
 function findidf() {
 
-	let url="/user/Findidf";
+	let url="user/Findidf";
 		axios.get(url
 	).then(response => {
-
 		document.getElementById('resultArea1').innerHTML = response.data;
 	}).catch(err => {
 		alert("아이디 찾기 불러오기 실패 " + err.message);
@@ -14,7 +13,7 @@ function findidf() {
 	document.getElementById('resultArea2').innerHTML = "";
 }
 function findid() {
-    let url = "/user/findid";
+    let url = "/api/user/findid";
     const data = {
         user_name: document.getElementById('name').value,
         user_email: document.getElementById('email').value

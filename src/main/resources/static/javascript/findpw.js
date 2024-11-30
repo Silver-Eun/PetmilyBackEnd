@@ -1,7 +1,7 @@
 "use strict"
 
 function findpwf() {
-	let url="/user/Findpwf";
+	let url="user/Findpwf";
 		axios.get(url
 	).then(response => {
 		document.getElementById('resultArea1').innerHTML = response.data;
@@ -13,7 +13,7 @@ function findpwf() {
 	}
 
 function findpw() {
-    let url = "/user/findpw";
+    let url = "/api/user/findpw";
     const data = {
         user_id: document.getElementById('id').value,
         user_email: document.getElementById('email').value
@@ -36,10 +36,9 @@ function findpw() {
 // 비밀번호 찾기
 function newpwf() {
 
-	let url="/user/newpwf";
+	let url="user/newpwf";
 		axios.get(url
 	).then(response => {
-
 		document.getElementById('resultArea1').innerHTML = response.data;
 	}).catch(err => {
 		alert("** response 실패 => " + err.message);

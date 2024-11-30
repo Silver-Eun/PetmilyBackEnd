@@ -25,7 +25,7 @@ import java.io.File;
 import java.io.IOException;
 
 @Controller
-@RequestMapping("product")
+@RequestMapping("api/product")
 @Log4j2
 @AllArgsConstructor
 public class ProductController {
@@ -79,7 +79,7 @@ public class ProductController {
             log.info("** pmpinsert 실패 **");
         }
 
-        return "redirect:/home";
+        return "redirect:/api/home";
     } // pmpinsert
 
     @GetMapping("/pmpUpdateForm/{ii}")
@@ -121,7 +121,7 @@ public class ProductController {
             log.info("** pmpupdate 실패 **");
         }
 
-        return "redirect:/home";
+        return "redirect:/api/home";
     } // pmpUpdate
 
     @DeleteMapping("/pmpDelete/{ii}")
@@ -129,10 +129,10 @@ public class ProductController {
         dto.setPromotion_id(id);
         if (pmpservice.delete(dto) > 0) {
             log.info("** pmpdelete HttpStatus.OK => " + HttpStatus.OK);
-            return new ResponseEntity<String>("** 삭제 성공 **", HttpStatus.OK);
+            return new ResponseEntity<String>("삭제 성공", HttpStatus.OK);
         } else {
             log.info("** pmpdelete HttpStatus.BAD_GATEWAY => " + HttpStatus.BAD_GATEWAY);
-            return new ResponseEntity<String>("** 삭제 실패, Data_NotFound **", HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<String>("삭제 실패", HttpStatus.BAD_GATEWAY);
         }
     }
 
@@ -209,7 +209,7 @@ public class ProductController {
             log.info("** pinsert 실패 **");
         }
 
-        return "redirect:/home";
+        return "redirect:/api/home";
     } // pinsert
 
     @GetMapping("/pUpdateForm/{ii}")
@@ -275,7 +275,7 @@ public class ProductController {
             log.info("** pupdate 실패 **");
         }
 
-        return "redirect:/home";
+        return "redirect:/api/home";
     } // pUpdate
 
     @DeleteMapping("/pDelete/{ii}")
@@ -347,7 +347,7 @@ public class ProductController {
             log.info("** piinsert 실패 **");
         }
 
-        return "redirect:/home";
+        return "redirect:/api/home";
     } // piinsert
 
     @GetMapping("/piUpdateForm/{ii}")
@@ -389,7 +389,7 @@ public class ProductController {
             log.info("** piupdate 실패 **");
         }
 
-        return "redirect:/home";
+        return "redirect:/api/home";
     } // piUpdate
 
     @DeleteMapping("/piDelete/{ii}")
@@ -448,7 +448,7 @@ public class ProductController {
             log.info("** einsert 실패 **");
         }
 
-        return "redirect:/home";
+        return "redirect:/api/home";
     } // einsert
 
     @GetMapping("/eUpdateForm/{ii}")
@@ -489,7 +489,7 @@ public class ProductController {
             log.info("** eupdate 실패 **");
         }
 
-        return "redirect:/home";
+        return "redirect:/api/home";
     } // eUpdate
 
     @DeleteMapping("/eDelete/{ii}")

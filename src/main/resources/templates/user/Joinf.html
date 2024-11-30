@@ -8,7 +8,7 @@
     <script src="/javascript/join.js"></script>
 </head>
 <body>
-<form action="join" method="Post" enctype="multipart/form-data"
+<form action="/api/user/join" method="Post" enctype="multipart/form-data"
       id="joinform">
     <table>
         <tr height="40">
@@ -59,7 +59,7 @@
         </tr>
         <tr height="40">
             <th bgcolor="skyblue"></th>
-            <td><button class="textlink" onclick="Join()">가입</button> &nbsp;&nbsp;
+            <td><button class="textlink" type="button" onclick="Join()">가입</button> &nbsp;&nbsp;
                 <input type="reset" value="취소">&nbsp;&nbsp;
             </td>
         </tr>

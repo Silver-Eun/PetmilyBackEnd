@@ -21,7 +21,7 @@ import java.security.SecureRandom;
 import java.util.Random;
 
 @RestController
-@RequestMapping("/rsuser")
+@RequestMapping("/api/rsuser")
 @Log4j2
 public class RestUserController {
 

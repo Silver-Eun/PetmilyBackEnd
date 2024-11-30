@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rsproduct")
+@RequestMapping("/api/rsproduct")
 @Log4j2
 public class RestProductController {
 

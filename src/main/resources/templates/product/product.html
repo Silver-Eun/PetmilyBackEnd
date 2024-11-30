@@ -66,7 +66,7 @@
 <!-- Pagination -->
 <div style="text-align:center;">
     <!-- First Page -->
-    <a th:attr="onclick='productf(\'/product/productList?currPage=1&rowsPerPage=' + ${pageMaker.cri.rowsPerPage} + '\')'">FP</a>&nbsp;
+    <a th:attr="onclick='productf(\'/api/product/productList?currPage=1&rowsPerPage=' + ${pageMaker.cri.rowsPerPage} + '\')'">FP</a>&nbsp;
 
     <!-- Page Numbers -->
     <span th:each="i : ${#numbers.sequence(pageMaker.spageNo, pageMaker.epageNo)}">
@@ -74,12 +74,12 @@
             <font color="Orange" size="5"><b th:text="${i}">Page</b></font>&nbsp;
         </span>
         <a th:if="${i != pageMaker.cri.currPage}"
-           th:attr="onclick='productf(\'/product/productList' + ${pageMaker.makeQuery(i)} + '\')'"
+           th:attr="onclick='productf(\'/api/product/productList' + ${pageMaker.makeQuery(i)} + '\')'"
            th:text="${i}">Page</a>&nbsp;
     </span>
 
     <!-- Last Page -->
-    <a th:attr="onclick='productf(\'/product/productList?currPage=' + ${pageMaker.lastPageNo} + '&rowsPerPage=' + ${pageMaker.cri.rowsPerPage} + '\')'">LP</a>
+    <a th:attr="onclick='productf(\'/api/product/productList?currPage=' + ${pageMaker.lastPageNo} + '&rowsPerPage=' + ${pageMaker.cri.rowsPerPage} + '\')'">LP</a>
 </div>
 
 <hr>

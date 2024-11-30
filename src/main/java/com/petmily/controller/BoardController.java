@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping(value = "board", method = { RequestMethod.GET, RequestMethod.POST })
+@RequestMapping(value = "api/board", method = { RequestMethod.GET, RequestMethod.POST })
 @AllArgsConstructor
 public class BoardController {
 
@@ -27,13 +27,15 @@ public class BoardController {
 	
 	// Notice Paging List
 	@GetMapping(value = "/noticePagingList")
-	public void noticePagingList(Model model, Criteria cri, PageMaker pageMaker) {
+	public String noticePagingList(Model model, Criteria cri, PageMaker pageMaker) {
 		cri.setSnoEno();
 		model.addAttribute("notice", boardService.getNoticePagedList(cri));
 
 		pageMaker.setCri(cri);
 		pageMaker.setTotalRowsCount(boardService.noticeTotalCount());
 		model.addAttribute("pageMaker", pageMaker);
+
+		return "board/noticePagingList";
 	}
 	// --------------------SHOW NOTICE LIST END--------------------
 
@@ -42,13 +44,15 @@ public class BoardController {
 	
 	// Inquiry Paging List
 		@GetMapping(value = "/inquiryPagingList")
-		public void inquiryPagingList(Model model, Criteria cri, PageMaker pageMaker) {
+		public String inquiryPagingList(Model model, Criteria cri, PageMaker pageMaker) {
 			cri.setSnoEno();
 			model.addAttribute("inquiry", boardService.getInquiryPagedList(cri));
 
 			pageMaker.setCri(cri);
 			pageMaker.setTotalRowsCount(boardService.inquiryTotalCount());
 			model.addAttribute("pageMaker", pageMaker);
+
+			return "board/inquiryPagingList";
 		}
 	// --------------------SHOW INQUIRY LIST END--------------------
 
@@ -57,13 +61,15 @@ public class BoardController {
 
 	// Review Paging List
 	@GetMapping(value = "/reviewPagingList")
-	public void reviewPagingList(Model model, Criteria cri, PageMaker pageMaker) {
+	public String reviewPagingList(Model model, Criteria cri, PageMaker pageMaker) {
 		cri.setSnoEno();
 		model.addAttribute("review", boardService.getReviewPagedList(cri));
 
 		pageMaker.setCri(cri);
 		pageMaker.setTotalRowsCount(boardService.reviewTotalCount());
 		model.addAttribute("pageMaker", pageMaker);
+
+		return "board/reviewPagingList";
 	}
 	// --------------------SHOW REVIEW LIST END--------------------	
 	
@@ -72,13 +78,15 @@ public class BoardController {
 
 	// Faq Paging List
 		@GetMapping(value = "/faqPagingList")
-		public void faqPagingList(Model model, Criteria cri, PageMaker pageMaker) {
+		public String faqPagingList(Model model, Criteria cri, PageMaker pageMaker) {
 			cri.setSnoEno();
 			model.addAttribute("faq", boardService.getFaqPagedList(cri));
 
 			pageMaker.setCri(cri);
 			pageMaker.setTotalRowsCount(boardService.faqTotalCount());
 			model.addAttribute("pageMaker", pageMaker);
+
+			return "board/faqPagingList";
 		}
 	// --------------------SHOW REVIEW LIST END--------------------	
 
@@ -86,14 +94,19 @@ public class BoardController {
 
 	// Notice Detail
 	@GetMapping(value = "/noticeDetail")
-	public void selectNotice(Model model, NoticeDTO dto) {
+	public String selectNotice(Model model, NoticeDTO dto) {
+
 		model.addAttribute("notice", boardService.getNotice(dto));
+
+		return "board/noticeDetail";
 	}
 
 	// Notice UPDATE FORM
 	@GetMapping(value = "/noticeUpdateForm")
-	public void updateNotice(Model model, NoticeDTO dto) {
+	public String updateNotice(Model model, NoticeDTO dto) {
 		model.addAttribute("notice", boardService.getNotice(dto));
+
+		return "board/noticeUpdateForm";
 	}
 
 	// Notice UPDATE
@@ -113,7 +126,9 @@ public class BoardController {
 
 	// Notice INSERT FORM
 	@GetMapping(value = "/noticeInsertForm")
-	public void noticeInsert() {
+	public String noticeInsert() {
+
+		return "board/noticeInsertForm";
 	}
 
 	// Notice INSERT
@@ -138,14 +153,20 @@ public class BoardController {
 
 	// Inquiry Detail
 	@GetMapping(value = "/inquiryDetail")
-	public void selectInquiry(Model model, InquiryDTO dto) {
+	public String selectInquiry(Model model, InquiryDTO dto) {
+
 		model.addAttribute("inquiry", boardService.getInquiry(dto));
+
+		return "board/inquiryDetail";
 	}
 
 	// Inquiry UPDATE FORM
 	@GetMapping(value = "/inquiryUpdateForm")
-	public void updateInquiry(Model model, InquiryDTO dto) {
+	public String updateInquiry(Model model, InquiryDTO dto) {
+
 		model.addAttribute("inquiry", boardService.getInquiry(dto));
+
+		return "board/inquiryUpdateForm";
 	}
 
 	// --------------------INQUIRY CRUD END--------------------
@@ -154,19 +175,27 @@ public class BoardController {
 
 	// Faq Detail
 	@GetMapping(value = "/faqDetail")
-	public void selectFaq(Model model, FaqDTO dto) {
+	public String selectFaq(Model model, FaqDTO dto) {
+
 		model.addAttribute("faq", boardService.getFaq(dto));
+
+		return "board/faqDetail";
 	}
 
 	// Faq UPDATE FORM
 	@GetMapping(value = "/faqUpdateForm")
-	public void updateFaq(Model model, FaqDTO dto) {
+	public String updateFaq(Model model, FaqDTO dto) {
+
 		model.addAttribute("faq", boardService.getFaq(dto));
+
+		return "board/faqUpdateForm";
 	}
 
 	// Faq INSERT FORM
 	@GetMapping(value = "/faqInsertForm")
-	public void faqInsert() {
+	public String faqInsert() {
+
+		return "board/faqInsertForm";
 	}
 
 	// --------------------FAQ CRUD END--------------------
@@ -175,15 +204,20 @@ public class BoardController {
 
 	// Review Detail
 	@GetMapping(value = "/reviewDetail")
-	public void selectReview(Model model, ReviewDTO dto) {
+	public String selectReview(Model model, ReviewDTO dto) {
 		model.addAttribute("review", boardService.getReview(dto));
 		model.addAttribute("reply", boardService.getReplyList(dto));
+
+		return "board/reviewDetail";
 	}
 
 	// Review UPDATE FORM
 	@GetMapping(value = "/reviewUpdateForm")
-	public void updateReview(Model model, ReviewDTO dto) {
+	public String updateReview(Model model, ReviewDTO dto) {
+
 		model.addAttribute("review", boardService.getReview(dto));
+
+		return "board/reviewUpdateForm";
 	}
 
 	// --------------------REVIEW CRUD END--------------------

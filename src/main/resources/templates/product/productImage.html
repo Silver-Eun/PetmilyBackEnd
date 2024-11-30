@@ -51,7 +51,7 @@
 <!-- Pagination -->
 <div style="text-align:center;">
     <!-- First Page -->
-    <a th:href="@{/product/pImageList(currPage=1, rowsPerPage=${pageMaker.cri.rowsPerPage})}">FP</a>&nbsp;
+    <a th:href="@{/api/product/pImageList(currPage=1, rowsPerPage=${pageMaker.cri.rowsPerPage})}">FP</a>&nbsp;
 
     <!-- Page Numbers -->
     <span th:each="i : ${#numbers.sequence(pageMaker.spageNo, pageMaker.epageNo)}">
@@ -59,12 +59,12 @@
                 <font color="Orange" size="5"><b th:text="${i}"></b></font>&nbsp;
             </span>
             <a th:if="${i != pageMaker.cri.currPage}"
-               th:href="@{/product/pImageList} + ${pageMaker.makeQuery(i)}"
+               th:href="@{/api/product/pImageList} + ${pageMaker.makeQuery(i)}"
                th:text="${i}"></a>&nbsp;
         </span>
 
     <!-- Last Page -->
-    <a th:href="@{/product/pImageList(currPage=${pageMaker.lastPageNo}, rowsPerPage=${pageMaker.cri.rowsPerPage})}">LP</a>
+    <a th:href="@{/api/product/pImageList(currPage=${pageMaker.lastPageNo}, rowsPerPage=${pageMaker.cri.rowsPerPage})}">LP</a>
 </div>
 <hr>
 </body>

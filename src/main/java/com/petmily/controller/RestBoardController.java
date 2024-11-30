@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/api")
 @Log4j2
 public class RestBoardController {
 	private final BoardService boardService;

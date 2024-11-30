@@ -11,7 +11,7 @@
     <button id="crud" onclick="history.back()">뒤로</button>
     <button id="crud" onclick="top.window.close()">창닫기</button>
     <br><br>
-    <form action="/board/noticeUpdate" method="post" id="update"
+    <form action="/api/board/noticeUpdate" method="post" id="update"
           onsubmit="return confirm('수정하시겠습니까?');">
         <table id="boardDetail">
             <tr th:if="${notice != null}">

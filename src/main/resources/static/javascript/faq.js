@@ -2,7 +2,7 @@
 
 // ) Delete faq and reload list page
 function faqDelete(id) {
-	let url = "faq/delete/" + id;
+	let url = "/api/faq/delete/" + id;
 
 	if (confirm("삭제하시겠습니까?")) {
 		axios.delete(
@@ -32,7 +32,7 @@ function faqDetail(id) {
 }
 
 function updateFaq(id) {
-	let url = "/faq/update";
+	let url = "/api/faq/update";
 
 	if (confirm("수정하시겠습니까?")) {
 		axios({
@@ -50,7 +50,7 @@ function updateFaq(id) {
 		}).then(response => {
 			alert(`자주묻는질문 수정 완료되었습니다.`);
 			window.close();
-			faqPagingList('/board/faqPagingList'); // 목록 새로고침
+			faqPagingList('board/faqPagingList'); // 목록 새로고침
 		}).catch(error => {
 			console.error(`에러 응답 = ${error.response},
 			error status = ${error.response.status},
@@ -58,10 +58,6 @@ function updateFaq(id) {
 		});
 	}
 }
-
-
-
-
 
 // 4) Insert Faq Form
 function faqInsertForm() {
@@ -79,7 +75,7 @@ function faqInsertForm() {
 
 // 5) Insert Faq
 function faqInsert() {
-	let url = "/faq/insert";
+	let url = "/api/faq/insert";
 
 	if (confirm("작성하시겠습니까?")) {
 		const questionType = document.getElementById('question_type').value;

@@ -1,7 +1,7 @@
 "use strict"
 
 function Loginf() {
-    let url = "/user/Loginf";
+    let url = "user/Loginf";
     axios.get(url
     ).then(response => {
         document.getElementById('resultArea1').innerHTML = response.data;
@@ -13,7 +13,7 @@ function Loginf() {
 }
 
 function Login() {
-    let url = "/user/Login";
+    let url = "/api/user/Login";
 
     const data = {
         user_id: document.getElementById('id').value,
@@ -39,7 +39,7 @@ function Login() {
 }
 
 function userLogout() {
-    let url = "/user/logout";
+    let url = "/api/user/logout";
     axios.get(url)
         .then(response => {
             alert('로그아웃 되었습니다.');

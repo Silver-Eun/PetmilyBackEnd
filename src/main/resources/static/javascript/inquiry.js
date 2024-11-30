@@ -9,7 +9,7 @@ function inquiryDelete(id) {
 			url
 		).then(response => {
 			alert(`상품문의가 삭제 완료되었습니다.`);
-			inquiryPagingList('/board/inquiryPagingList'); // 목록 새로고침
+			inquiryPagingList('board/inquiryPagingList'); // 목록 새로고침
 		}).catch(error => {
 			console.error(`에러 응답 = ${error.response},
 			error status = ${error.response.status},
@@ -21,13 +21,13 @@ function inquiryDelete(id) {
 
 // 2) Detail Inquiry
 function inquiryDetail(id) {
-	const popup = window.open('/board/inquiryDetail?inquiry_id=' + id, 'popup',
+	const popup = window.open('board/inquiryDetail?inquiry_id=' + id, 'popup',
 		'width=600, height=400');
 
 	const checkPopupClosed = setInterval(function () {
 		if (popup.closed) {
 			clearInterval(checkPopupClosed);
-			inquiryPagingList('/board/inquiryPagingList'); // 목록 새로고침
+			inquiryPagingList('board/inquiryPagingList'); // 목록 새로고침
 		}
 	}, 1000); // 1초마다 확인
 }
@@ -36,7 +36,7 @@ function inquiryDetail(id) {
 function updateInquiryAnswer(id) {
 	event.preventDefault(); // 폼 기본 동작 방지
 
-	let url = "/inquiry/update";
+	let url = "/api/inquiry/update";
 
 	if (confirm("수정하시겠습니까?")) {
 		axios({
@@ -52,7 +52,7 @@ function updateInquiryAnswer(id) {
 		}).then(response => {
 			alert(`답변 수정 완료되었습니다.`);
 			window.close();
-			inquiryPagingList('/board/inquiryPagingList'); // 목록 새로고침
+			inquiryPagingList('board/inquiryPagingList'); // 목록 새로고침
 		}).catch(error => {
 			console.error(`에러 응답 = ${error.response},
 			error status = ${error.response.status},

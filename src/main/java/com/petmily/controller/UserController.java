@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @Controller
-@RequestMapping("user")
+@RequestMapping("api/user")
 @Log4j2
 @AllArgsConstructor
 public class UserController {
@@ -41,12 +41,12 @@ public class UserController {
 
         session.invalidate();
         rttr.addFlashAttribute("message", "로그아웃 성공");
-        return "redirect:/home";
+        return "redirect:/api/home";
     } //logout
 
     @GetMapping(value = "/newpwf")
-    public void newpwf() {
-        // viewName 생략
+    public String newpwf() {
+        return "user/newpwf";
     }
 
     // => password 만 수정
@@ -96,8 +96,8 @@ public class UserController {
 
 
     @GetMapping(value = "/Joinf")
-    public void Joinf() {
-        // viewName 생략 -> 요청명이 viewName 이 됨
+    public String Joinf() {
+        return "user/Joinf";
     }
 
     @PostMapping(value = "/join")
@@ -114,13 +114,15 @@ public class UserController {
             }
         } catch (Exception e) {
             log.error("** 회원가입 중 에러 발생: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("시스템 오류 발생! 잠시 후 다시 시도하세요");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("시스템 오류 발생");
         }
     }
 
 
     @GetMapping(value = "/Findidf")
-    public void Findidf() {
+    public String Findidf() {
+
+        return "user/Findidf";
     }
 
     @PostMapping("/findid")
@@ -142,7 +144,9 @@ public class UserController {
     }
 
     @GetMapping(value = "/Findpwf")
-    public void Findpwf() {
+    public String Findpwf() {
+
+        return "user/Findpwf";
     }
 
     @PostMapping("/findpw")
@@ -167,15 +171,17 @@ public class UserController {
     }
 
     @GetMapping("/UserList")
-    public void userList(Model model) {
+    public String userList(Model model) {
+
         model.addAttribute("banana", service.selectList());
+
+        return "user/UserList";
     }
 
     @GetMapping("/Updatef/{ii}")
     public String Updatef(@PathVariable("ii") String id, UserDTO dto, Model model) {
         dto.setUser_id(id);
         model.addAttribute("banana", service.selectOne(dto));
-        log.info("**update 성공 **");
         return "user/Updatef";
     }
 
@@ -190,14 +196,14 @@ public class UserController {
             out.println("<script>");
             out.println("alert('회원정보 수정 성공');");
             // home 페이지로 이동
-            out.println("location.href='/home';");
+            out.println("location.href='/api/home';");
             out.println("</script>");
         } else {
             log.info("** update 실패 **");
             out.println("<script>");
             out.println("alert('회원정보 수정 실패');");
             // home 페이지로 이동
-            out.println("location.href='/home';");
+            out.println("location.href='/api/home';");
             out.println("</script>");
         }
         out.close();

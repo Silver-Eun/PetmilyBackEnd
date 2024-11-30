@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("/cart")
+@RequestMapping("api/cart")
 @Log4j2
 @AllArgsConstructor
 public class CartController {
@@ -36,9 +36,9 @@ public class CartController {
 //		log.info("** CartList 성공 **");
 //	}
 	
-	// ** 주문내역 목록 페이지네이션
+	// ** 장바구니 목록 페이지
 	@GetMapping("/cartList")
-	public void cartList(Model model, SearchCriteria cri, PageMaker pageMaker) {
+	public String cartList(Model model, SearchCriteria cri, PageMaker pageMaker) {
 		// 1) Criteria 처리
 		cri.setSnoEno();
 		
@@ -51,12 +51,14 @@ public class CartController {
 		// => ver01: 전체 rows 갯수
 		//    ver02: 검색조건에 해당하는  rows 갯수
 		model.addAttribute("pageMaker", pageMaker);
+
+		return "cart/cartList";
 	}
 
-	// ** CartInert(장바구니 추가) Get
+	// ** CartInert(장바구니 추가 페이지)
 	@GetMapping(value = "/cartInsert")
-	public void cartInsert() {
-		// viewName 생략
+	public String cartInsert() {
+		return "cart/cartInsert";
 	}
 	
 	@PostMapping("/cartJoin")
@@ -82,14 +84,14 @@ public class CartController {
 	}
 	
 	// ** cdetail(장바구니 세부내역)
-	@GetMapping(value ="/cdetail")
-	public String cdetail(HttpServletRequest request, Model model, CartDTO dto) {
-		model.addAttribute("apple", cservice.selectOne(dto));
-		
-		if ( "U".equals(request.getParameter("jCode")) )
-			 return "cart/cartUpdate";
-		else return "cart/cartDetail";
-	}
+//	@GetMapping(value ="/cdetail")
+//	public String cdetail(HttpServletRequest request, Model model, CartDTO dto) {
+//		model.addAttribute("apple", cservice.selectOne(dto));
+//
+//		if ( "U".equals(request.getParameter("jCode")) )
+//			 return "cart/cartUpdate";
+//		else return "cart/cartDetail";
+//	}
 	
 	// ** cdelete(장바구니 상품 삭제)
 	@DeleteMapping("/cdelete/{ii}/{jj}")
@@ -99,10 +101,10 @@ public class CartController {
 		dto.setProduct_id(product_id);
 		if (cservice.delete(dto) > 0) {
 			log.info("** cdelete HttpStatus.OK => " + HttpStatus.OK);
-			return new ResponseEntity<String>("** 삭제 성공 **", HttpStatus.OK);
+			return new ResponseEntity<String>("삭제 성공", HttpStatus.OK);
 		} else {
 			log.info("** cdelete HttpStatus.BAD_GATEWAY => " + HttpStatus.BAD_GATEWAY);
-			return new ResponseEntity<String>("** 삭제 실패, Data_NotFound **", HttpStatus.BAD_GATEWAY);
+			return new ResponseEntity<String>("삭제 실패", HttpStatus.BAD_GATEWAY);
 		}
 	}
 
@@ -115,9 +117,9 @@ public class CartController {
 //		log.info("** OrderProductList 성공 **");
 //	}
 	
-	// ** 주문내역 목록 페이지네이션
+	// ** 주문내역 목록 페이지
 	@GetMapping("/orderProduct")
-	public void orderProductList(Model model, SearchCriteria cri, PageMaker pageMaker) {
+	public String orderProductList(Model model, SearchCriteria cri, PageMaker pageMaker) {
 		// 1) Criteria 처리
 		cri.setSnoEno();
 		
@@ -130,12 +132,15 @@ public class CartController {
 		// => ver01: 전체 rows 갯수
 		//    ver02: 검색조건에 해당하는  rows 갯수
 		model.addAttribute("pageMaker", pageMaker);
+
+		return "cart/orderProduct";
 	}
 	
-	// ** OrderProductInsert(주문내역 추가) Get
+	// ** OrderProductInsert(주문내역 추가 페이지)
 	@GetMapping(value = "/orderProductInsert")
-	public void orderProductInsert() {
-		// viewName 생략
+	public String orderProductInsert() {
+
+		return "cart/orderProductInsert";
 	}
 	
 	// ** orderProductInsert(주문내역 추가) Post
@@ -175,7 +180,7 @@ public class CartController {
 		return result;
 	}
 
-	// ** opdetail(주문내역 세부내역)
+	// ** opdetail(주문내역 세부내역 페이지)
 	@GetMapping(value ="/opdetail")
 	public String opdetail(HttpServletRequest request, Model model, OrderProductDTO dto) {
 		model.addAttribute("apple", opservice.selectOne(dto));
@@ -247,7 +252,7 @@ public class CartController {
 	
 	// ** 주문내역 목록 페이지네이션
 	@GetMapping("/orderDetail")
-	public void orderDetailList(Model model, SearchCriteria cri, PageMaker pageMaker) {
+	public String orderDetailList(Model model, SearchCriteria cri, PageMaker pageMaker) {
 		// 1) Criteria 처리
 		cri.setSnoEno();
 		
@@ -260,12 +265,15 @@ public class CartController {
 		// => ver01: 전체 rows 갯수
 		//    ver02: 검색조건에 해당하는  rows 갯수
 		model.addAttribute("pageMaker", pageMaker);
+
+		return "cart/orderDetail";
 	}
 	
-	// ** OrderDetailInsert(주문상세내역 추가) Get
+	// ** OrderDetailInsert(주문상세내역 추가 페이지)
 	@GetMapping(value = "/orderDetailInsert")
-	public void orderDetailInsert() {
-		// viewName 생략
+	public String orderDetailInsert() {
+
+		return "cart/orderDetailInsert";
 	}
 	
 	// ** orderDetailInsert(주문상세내역 추가) Post
@@ -305,7 +313,7 @@ public class CartController {
 		return result;
 	}
 	
-	// ** oddetail(주문상세내역 세부내역)
+	// ** oddetail(주문상세내역 세부내역 페이지)
 	@GetMapping(value ="/oddetail")
 	public String oddetail(HttpServletRequest request, Model model, OrderDetailDTO dto) {
 		model.addAttribute("apple", odservice.selectOne(dto));
