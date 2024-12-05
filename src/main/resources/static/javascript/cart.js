@@ -6,12 +6,12 @@ function cartForm() {
 	`<h3>장바구니 주문 주문상세 테이블 관리</h3>
 	<table id="subTable">
 		<tr>
-			<th><a onclick="cartInsertf()">CartInsert</a></th>
-			<th><a onclick="cartList()">CartList</a></th>
-			<th><a onclick="orderProductInsertf()">OrderInsert</a></th>
-			<th><a onclick="orderList()">OrderList</a></th>
-			<th><a onclick="orderDetailInsertf()">OrderDetailInsert</a></th>
-			<th><a onclick="orderDetailList()">OrderDetail</a></th>
+			<th><a onclick="cartInsertf()">장바구니추가</a></th>
+			<th><a onclick="cartList()">장바구니목록</a></th>
+			<th><a onclick="orderProductInsertf()">주문추가</a></th>
+			<th><a onclick="orderList()">주문목록</a></th>
+			<th><a onclick="orderDetailInsertf()">주문상세추가</a></th>
+			<th><a onclick="orderDetailList()">주문상세목록</a></th>
 		</tr>
 	</table>
 	`;

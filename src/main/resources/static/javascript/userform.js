@@ -18,19 +18,19 @@ function userForm() {
 
     // 로그인 상태가 아닌 경우, 로그인 버튼 추가
     if (!loginID) {
-        resultHtml += `<th><a onclick="Loginf()">Login</a></th>`;
+        resultHtml += `<th><a onclick="Loginf()">로그인</a></th>`;
     }
 
     resultHtml +=
         `
-        <th><a onclick="Joinf()">Join</a></th>
-        <th><a onclick="UserList()">userList</a></th>
+        <th><a onclick="Joinf()">회원가입</a></th>
+        <th><a onclick="UserList()">회원목록</a></th>
         `;
 
     // 로그인 상태일 경우, 로그아웃 및 비밀번호 변경 추가
     if (loginID) {
         resultHtml +=
-            `<th><a onclick="userLogout()">Logout</a></th>
+            `<th><a onclick="userLogout()">로그아웃</a></th>
 <!--            <th><a onclick="newpwf()">ChangePW</a></th>-->
             `;
     }

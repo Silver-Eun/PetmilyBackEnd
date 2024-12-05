@@ -12,10 +12,10 @@ function pTableListf(){
 	<h3>상품 및 이벤트 테이블 관리</h3>
 	<table id="subTable">
 		<tr>
-			<th><a onclick="pmProductf()">PROMOTION_PRODUCT</a></th>
-			<th><a onclick="productf()">PRODUCT</a></th>
-			<th><a onclick="pImagef()">PRODUCT_IMAGE</a></th>
-			<th><a onclick="eventf()">EVENT</a></th>
+			<th><a onclick="pmProductf()">프로모션 상품</a></th>
+			<th><a onclick="productf()">상품</a></th>
+			<th><a onclick="pImagef()">프로모션 이미지</a></th>
+			<th><a onclick="eventf()">이벤트</a></th>
 		</tr>
 	</table>
 	`;
