@@ -74,7 +74,7 @@ function orderDetailUpdate() {
 	axios.post(url, formData,
 				{headers:{"Content-Type":"multipart/form-data"}
 	}).then( response => {
-				alert(`** response.data:${response.data}`);
+				alert(`${response.data}`);
 				// 주문상세내역 리스트로 이동
 				orderDetailList();
 	}).catch( err => {
