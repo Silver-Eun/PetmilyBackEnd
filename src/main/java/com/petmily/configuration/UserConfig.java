@@ -16,7 +16,7 @@ public class UserConfig  {
 	public PasswordEncoder getPasswordEncord() {
 		return new BCryptPasswordEncoder();
 	}
-	 @Bean
+	 	@Bean
 	    public JavaMailSender javaMailSender() {
 	        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 	        mailSender.setHost("smtp.gmail.com");
