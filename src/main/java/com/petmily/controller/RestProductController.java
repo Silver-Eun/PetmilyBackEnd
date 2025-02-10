@@ -6,6 +6,7 @@ import com.petmily.service.ProductImageService;
 import com.petmily.service.ProductService;
 import com.petmily.service.PromotionProductService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/rsproduct")
 @Log4j2
+@RequiredArgsConstructor
 public class RestProductController {
 
 	private final PromotionProductService pmpservice;
@@ -26,26 +28,12 @@ public class RestProductController {
 	private final ProductImageService piservice;
 	private final EventService eservice;
 
-	public RestProductController(PromotionProductService pmpservice, ProductService pservice,
-								 ProductImageService piservice, EventService eservice) {
-		this.pmpservice = pmpservice;
-		this.pservice = pservice;
-		this.piservice = piservice;
-		this.eservice = eservice;
-	}
 
 	@GetMapping("/checkdata")
-	// => React Connect Test
 	public String hello() {
 		log.info("** React Connect Test 중 **");
 		return "~~~ SpringBoot & React 안녕 !!!~~~";
 	} //checkdata
-	
-//	@GetMapping("/productList")
-//    public ResponseEntity<List<ProductDTO>> productList() {
-//        List<ProductDTO> productList = pservice.selectList();
-//        return new ResponseEntity<>(productList, HttpStatus.OK);
-//    } //productList
 	
 	@GetMapping("/productDetail/{id}")
     public ResponseEntity<ProductDTO> productDetail(@PathVariable("id") int id, ProductDTO dto) {

@@ -90,7 +90,7 @@ public class UserController {
             }
         } catch (Exception e) {
             log.error("** 로그인 중 오류 발생: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("시스템 오류 발생! 잠시 후 다시 시도하세요.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("시스템 오류 발생");
         }
     }
 

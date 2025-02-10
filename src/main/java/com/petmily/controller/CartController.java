@@ -29,13 +29,6 @@ public class CartController {
 	OrderProductService opservice;
 	OrderDetailService odservice;
 
-	// ** CartList(회원별 장바구니 리스트)
-//	@GetMapping("/cartList")
-//	public void cartList(Model model) {
-//		model.addAttribute("banana", cservice.selectList());
-//		log.info("** CartList 성공 **");
-//	}
-	
 	// ** 장바구니 목록 페이지
 	@GetMapping("/cartList")
 	public String cartList(Model model, SearchCriteria cri, PageMaker pageMaker) {
@@ -83,16 +76,6 @@ public class CartController {
 		return result;
 	}
 	
-	// ** cdetail(장바구니 세부내역)
-//	@GetMapping(value ="/cdetail")
-//	public String cdetail(HttpServletRequest request, Model model, CartDTO dto) {
-//		model.addAttribute("apple", cservice.selectOne(dto));
-//
-//		if ( "U".equals(request.getParameter("jCode")) )
-//			 return "cart/cartUpdate";
-//		else return "cart/cartDetail";
-//	}
-	
 	// ** cdelete(장바구니 상품 삭제)
 	@DeleteMapping("/cdelete/{ii}/{jj}")
 	public ResponseEntity<?> cdelete(@PathVariable("ii") String user_id, @PathVariable("jj") int product_id,
@@ -109,13 +92,6 @@ public class CartController {
 	}
 
 // ====================================================
-
-	// ** OrderProductList(회원별 주문리스트)
-//	@GetMapping("/orderProduct")
-//	public void orderProductList(Model model) {
-//		model.addAttribute("banana", opservice.selectList());
-//		log.info("** OrderProductList 성공 **");
-//	}
 	
 	// ** 주문내역 목록 페이지
 	@GetMapping("/orderProduct")
@@ -242,13 +218,6 @@ public class CartController {
 	}
 
 // ====================================================
-
-	// ** OrderDetailList(회원별 주문상세리스트)
-//	@GetMapping("/orderDetail")
-//	public void orderDetailList(Model model) {
-//		model.addAttribute("banana", odservice.selectList());
-//		log.info("** OrderDetailList 성공 **");
-//	}
 	
 	// ** 주문내역 목록 페이지네이션
 	@GetMapping("/orderDetail")
