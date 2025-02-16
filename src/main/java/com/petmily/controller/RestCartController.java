@@ -2,7 +2,6 @@ package com.petmily.controller;
 
 import com.petmily.domain.*;
 import com.petmily.service.*;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.json.simple.JSONArray;
