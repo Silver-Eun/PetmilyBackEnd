@@ -68,7 +68,12 @@
 - **프론트엔드 배포**
   - 프론트엔드는 Netlify에 배포
 ---
-
+### 🔄 트러블 슈팅 및 성능 최적화 (2026.03.26) 
+- **백엔드 서버 콜드 스타트(Cold Start) 문제 해결**
+  - **이슈:** Cloudtype 무료 티어 특성상 일정 시간 미사용 시 서버가 Sleep 상태로 전환되어, 초기 접속시 프론트엔드 이미지 렌더링이 1초 이상 지연되는 현상 발생
+  - **해결:** 서버 부하를 주지 않는 가벼운 **Health Check 전용 API(`/api/health`)**를 추가 구현하고, **UptimeRobot**을 연동하여 5분 주기로 호출하도록 자동화
+  - **결과:** 백엔드 서버가 24시간 상시 가동(Wake) 상태를 유지하게 되어 이미지 로딩 지연 해결
+---
 ### 📎 배포 링크  
 - **Petmily**: [https://petmilyreal.netlify.app/](https://petmilyreal.netlify.app/)  
 - **Petmily 관리자페이지**: [https://port-0-petmilyreal-1272llwrbm1kq.sel5.cloudtype.app/api/home](https://port-0-petmilyreal-1272llwrbm1kq.sel5.cloudtype.app/api/home)
